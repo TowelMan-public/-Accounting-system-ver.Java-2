@@ -10,10 +10,10 @@
 	<body>
 		<h1>簡易的な会計システム♪</h1>
 		<h2>ログイン</h2>
-		<a th:if="${loginError}" th:text="${error}" />
+		<div th:if="${loginError}" th:text="${error}" ></div>
 		<form th:action="@{/login}" method="post" action="#" th:object="${LoginForm}"> 
-			<div class="input_label">ユーザーID：<input type="text" name="userId" /></div> <div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" /"><br>
-			<div class="input_label">パスワード：<input type="password" name="password" /></div> <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" /><br>
+			<div class="input_label">ユーザーID：<input type="text" name="userId" /></div> <div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" ></div><br>
+			<div class="input_label">パスワード：<input type="password" name="password" /></div> <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div><br>
 			<p><input type="submit" value="ログイン" /></p>
 		</form>
 	</body>
