@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>簡易的な会計システム♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" th:href="@{style.css}">y
+	</head>
+	<body>
+		<h1>簡易的な会計システム♪</h1>
+		<ul class="menu_outer">
+		    <li class="menu_inner"><a href="@{/home}">ホーム</a></li>
+		    <li class="menu_inner"><a href="@{/insert}">登録</a></li>
+		    <li class="menu_inner"><a href="@{/select}">検索</a></li>
+		    <li class="menu_inner"><a href="@{/configuration}">設定</a></li>
+		</ul>
+		<main>
+			<h2 th:if="${haveItemType}" th:text="${itemTypeName} + 'の検索結果' " />
+			<table border="1">
+	  			<tr>
+	  				<td th:if="${haveDateType}" th:text="${dateType}" />
+	  				<td th:if="${haveItemType}" th:text="${itemTypeName}" />
+	  				<td>金額</td>
+	  			</tr>
+	  			<tr th:each="result : ${ResultForm}" th:object="${result}">
+			     	<td th:text="*{date}"></td>
+			     	<td th:text="*{item}"></td>
+			     	<td th:text="*{money}"></td>
+	  			</tr>
+	  		</table>
+		</main>
+	</body>
+</html>

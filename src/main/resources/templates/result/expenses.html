@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>簡易的な会計システム♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" th:href="@{style.css}">y
+	</head>
+	<body>
+		<h1>簡易的な会計システム♪</h1>
+		<ul class="menu_outer">
+		    <li class="menu_inner"><a href="@{/home}">ホーム</a></li>
+		    <li class="menu_inner"><a href="@{/insert}">登録</a></li>
+		    <li class="menu_inner"><a href="@{/select}">検索</a></li>
+		    <li class="menu_inner"><a href="@{/configuration}">設定</a></li>
+		</ul>
+		<main>
+			<h2>経費の検索結果</h2>
+			<table border="1">
+	  			<tr>
+	  				<td>番号</td>
+	  				<td>件名</td>
+	  				<td>日付</td>
+	  				<td>項目</td>
+	  				<td>金額</td>
+	  			</tr>
+	  			<tr th:each="result : ${ResultForm}" th:object="${result}">
+	  				<td th:text="*{number}"></td>
+	  				<td th:text="*{subject}"></td>
+			     	<td th:text="*{date}"></td>
+			     	<td th:text="*{expenses}"></td>
+			     	<td th:text="*{money}"></td>
+	  			</tr>
+	  		</table>
+	  		
+	  		<h2>削除</h2>
+	  		<form th:action="@{/configuration/user/delete}" method="post" action="#" th:object="${IdForm}"> 
+				<div>ID：<input type="text" name="id"/></div> <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" /><br>
+				<input type="submit" value="削除" />
+			</form>
+			
+			<h2>変更フォーム</h2>
+			<form th:action="@{/insert/expenses/insert}" method="post" action="#" th:object="${expensesForm}"> 
+				<div>ID：<input type="text" name="name" /></div> <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" /><br>
+				<div>経費の項目ID：<input type="idStr" name="name" /></div> <div th:if="${#fields.hasErrors('idStr')}" th:errors="*{idStr}" /><br>
+				<div>日付：<input type="text" name="date" /></div> <div th:if="${#fields.hasErrors('date')}" th:errors="*{date}" /"><br>
+				<div>金額：<input type="text" name="money" /></div> <div th:if="${#fields.hasErrors('money')}" th:errors="*{ramoneyte}" /"><br>
+				<div>件名（省略可）：<input type="text" name="subject" /></div> <div th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" /"><br>
+				<p><input type="submit" value="登録" /></p>
+			</form>
+		</main>
+	</body>
+</html>

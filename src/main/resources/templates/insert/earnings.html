@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>簡易的な会計システム♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" th:href="@{style.css}">y
+	</head>
+	<body>
+		<h1>簡易的な会計システム♪</h1>
+		<ul class="menu_outer">
+		    <li class="menu_inner"><a href="@{/home}">ホーム</a></li>
+		    <li class="menu_inner"><a href="@{/insert}">登録</a></li>
+		    <li class="menu_inner"><a href="@{/select}">検索</a></li>
+		    <li class="menu_inner"><a href="@{/configuration}">設定</a></li>
+		</ul>
+		<main>
+			<h2>売上の登録フォーム</h2>
+			<form th:action="@{/insert/earnings/insert}" method="post" action="#" th:object="${earningsForm}"> 
+				<div>日付：<input type="text" name="date" /></div> <div th:if="${#fields.hasErrors('date')}" th:errors="*{date}" /><br>
+				<div>会社ID：<input type="text" name="company" /></div> <div th:if="${#fields.hasErrors('company')}" th:errors="*{company}" /><br>
+				<div>金額：<input type="text" name="money" /></div> <div th:if="${#fields.hasErrors('money')}" th:errors="*{money}" /><br>
+				<div>個人名（省略可）：<input type="text" name="personName" /></div> <div th:if="${#fields.hasErrors('personName')}" th:errors="*{personName}" /><br>
+				<div>件名（省略可）：<input type="text" name="subject" /></div> <div th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" /><br>
+				<p><input type="submit" value="登録" /></p>
+			</form>
+		</main>
+	</body>
+</html>

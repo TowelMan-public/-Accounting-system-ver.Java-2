@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>簡易的な会計システム♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" th:href="@{style.css}">
+	</head>
+	<body>
+		<h1>簡易的な会計システム♪</h1>
+		<ul class="menu_outer">
+		    <li class="menu_inner"><a href="@{/home}">ホーム</a></li>
+		    <li class="menu_inner"><a href="@{/insert}">登録</a></li>
+		    <li class="menu_inner"><a href="@{/select}">検索</a></li>
+		    <li class="menu_inner"><a href="@{/configuration}">設定</a></li>
+		</ul>
+		<main>
+			<h2>検索</h2>
+			
+			<ul>
+				<li><a th:href="@{select/expensesItem}">経費の項目</a></li>
+				<li><a th:href="@{select/expenses}">経費</a></li>
+				<li><a th:href="@{select/company}">会社</a></li>
+				<li><a th:href="@{select/eanings}">売上</a></li>
+				<li><a th:href="@{select/revenue}">収入</a></li>
+				<li><a th:href="@{select/unrevenue}">未収入</a></li>
+				<li><a th:href="@{select/consumptionTax}">消費税</a></li>
+				<li><a th:href="@{select/incomeTax}">所得税</a></li>
+				<li><a th:href="@{select/income}">所得</a></li>
+				<li><a th:href="@{select/netIncome}">純利益</a></li>
+			</ul>
+		</main>
+	</body>
+</html>

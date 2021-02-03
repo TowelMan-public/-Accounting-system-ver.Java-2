@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>簡易的な会計システム♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" th:href="@{style.css}">
+	</head>
+	<body>
+		<h1>簡易的な会計システム♪</h1>
+		<ul class="menu_outer">
+		    <li class="menu_inner"><a href="@{/home}">ホーム</a></li>
+		    <li class="menu_inner"><a href="@{/insert}">登録</a></li>
+		    <li class="menu_inner"><a href="@{/select}">検索</a></li>
+		    <li class="menu_inner"><a href="@{/configuration}">設定</a></li>
+		</ul>
+		<main>
+			<h2>ユーザーの新規登録の結果</h2>
+			<p>
+				あなたはユーザー登録に<div th:if="${isSuccess}" th:text="成功" /><div th:unless="${isSuccess}" th:text="失敗" />しました。
+				<div th:if="${isSuccess}">
+					<br>あなたが登録したユーザーのIDは「<div th:text="${id}">」になりました。
+				</dic>
+			</p>
+		</main>
+	</body>
+</html>

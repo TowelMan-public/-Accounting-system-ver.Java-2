@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>簡易的な会計システム♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" th:href="@{style.css}">
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+	<body>
+		<h1>簡易的な会計システム♪</h1>
+		<ul class="menu_outer">
+		    <li class="menu_inner"><a href="@{/home}">ホーム</a></li>
+		    <li class="menu_inner"><a href="@{/insert}">登録</a></li>
+		    <li class="menu_inner"><a href="@{/select}">検索</a></li>
+		    <li class="menu_inner"><a href="@{/configuration}">設定</a></li>
+		</ul>
+		<main>
+			<h2>ホーム</h2>
+			<p>
+				ようこそ<div th:text="${companyName}"></div>の<div th:text="${userName}"></div>様！
+			</p>
+			<h3>今月</h3>
+			<div class="infomation">
+				<p>
+					<div>売り上げ（掛け売り）</div>
+					<div th:text="${earningsMonth}"></div><br>
+				</p>
+				<p>
+					<div>経費</div>
+					<div th:text="${expensesMonth}"></div><br>
+				</p>
+				<p>
+					<div>純利益</div>
+					<div th:text="${netIncomeRateMonth}"></div><br>
+				</p>
+			</div>
+			<h3>今年</h3>
+			<div class="infomation">
+				<p>
+					<div>売り上げ（掛け売り）</div>
+					<div th:text="${earningsYear}"></div><br>
+				</p>
+				<p>
+					<div>経費</div>
+					<div th:text="${expensesYear}"></div><br>
+				</p>
+				<p>
+					<div>純利益</div>
+					<div th:text="${netIncomeRateYear}"></div><br>
+				</p>
+			</div>
+		</main>
+	</body>
+</html>

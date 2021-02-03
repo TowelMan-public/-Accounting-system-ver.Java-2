@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>簡易的な会計システム♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" th:href="@{style.css}">
+	</head>
+	<body>
+		<h1>簡易的な会計システム♪</h1>
+		<ul class="menu_outer">
+		    <li class="menu_inner"><a href="@{/home}">ホーム</a></li>
+		    <li class="menu_inner"><a href="@{/insert}">登録</a></li>
+		    <li class="menu_inner"><a href="@{/select}">検索</a></li>
+		    <li class="menu_inner"><a href="@{/configuration}">設定</a></li>
+		</ul>
+		<main>
+			<h2>設定</h2>
+			<form th:action="@{/configuration/tax}" method="post" action="#" th:object="${salesTaxRateForm}"> 
+				<div>消費税率：<input type="text" name="salesTaxRate" /></div> <div th:if="${#fields.hasErrors('salesTaxRate')}" th:errors="*{salesTaxRate}" /><br>
+				<input type="submit" value="反映" />
+			</form><br>
+			
+			<h3>会社名と会社ID</h3>
+			<form th:action="@{/configuration/company}" method="post" action="#" th:object="${companyConfigurationForm}"> 
+				<div>名前：<input type="text" name="companyName" th:text="${companyName}" /></div> <div th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}" /><br>
+				<div>ID：<div th:text="${companyId}"></div>
+				<input type="submit" value="反映" />
+			</form>
+			
+			<h3>ユーザー管理<h3>
+			<a th:href="@{makeNewUser}">ユーザーの新規登録</a><br><br>
+			
+			<table border="1">
+	  			<tr>
+	  				<td>ID</td>
+	  				<td>名前</td>
+	  				<td>権限</td>
+	  			</tr>
+	  			<tr th:each="user : ${companyUserForm}" th:object="${user}">
+	  				<td th:text="*{userId}"></td>
+			     	<td th:text="*{userName}"></td>
+			     	<td th:text="*{userAuthority}"></td>
+	  			</tr>
+	  		</table>
+			
+			<h4>ユーザー変更</h4>
+			<form th:action="@{/configuration/user/update}" method="post" action="#" th:object="${companyUserForm}"> 
+				<div>ID：<input type="text" name="userId"/></div> <div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" /><br>
+				<div>名前：<input type="text" name="userName" /></div> <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" /><br>
+				<div>権限：<input type="text" name="userAuthority"/></div> <div th:if="${#fields.hasErrors('userAuthority')}" th:errors="*{userAuthority}" /><br>
+				<input type="submit" value="変更" />
+			</form><br>
+			
+			<h4>ユーザー削除</h4>
+			<form th:action="@{/configuration/user/delete}" method="post" action="#" th:object="${IdForm}"> 
+				<div>ID：<input type="text" name="id"/></div> <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" /><br>
+				<input type="submit" value="削除" />
+			</form>
+		</main>
+	</body>
+</html>

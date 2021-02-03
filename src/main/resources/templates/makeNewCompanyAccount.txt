@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>簡易的な会計システム♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" th:href="@{style.css}">
+	</head>
+	<body>
+		<h1>簡易的な会計システム♪</h1>
+		<ul class="menu_outer">
+		    <li class="menu_inner"><a href="@{/home}">ホーム</a></li>
+		    <li class="menu_inner"><a href="@{/insert}">登録</a></li>
+		    <li class="menu_inner"><a href="@{/select}">検索</a></li>
+		    <li class="menu_inner"><a href="@{/configuration}">設定</a></li>
+		</ul>
+		<main>
+			<h2>ユーザーの新規登録</h2>
+			<form th:action="@{/makeNewComanyAccount}" method="post" action="#" th:object="${makeNewComanyAccountForm}"> 
+				<div>会社名：<input type="text" name="companyName" /></div> <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" /><br>
+				<div>ユーザー名：<input type="text" name="userName" /></div> <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" /><br>
+				<div>パスワード：<input type="text" name="password" /></div> <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" /><br>
+				<div>パスワード（もう一度）：<input type="text" name="oneMorePassword" /></div> <div th:if="${#fields.hasErrors('oneMorePassword')}" th:errors="*{oneMorePassword}" /><br>
+				<p><input type="submit" value="ユーザー登録" /></p>
+			</form>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>簡易的な会計システム♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" th:href="@{style.css}">
+	</head>
+	<body>
+		<h1>簡易的な会計システム♪</h1>
+		<ul class="menu_outer">
+		    <li class="menu_inner"><a href="@{/home}">ホーム</a></li>
+		    <li class="menu_inner"><a href="@{/insert}">登録</a></li>
+		    <li class="menu_inner"><a href="@{/select}">検索</a></li>
+		    <li class="menu_inner"><a href="@{/configuration}">設定</a></li>
+		</ul>
+		<main>
+			<h2>経費の項目の検索結果</h2>
+			<table border="1">
+	  			<tr>
+	  				<td>番号</td>
+	  				<td>項目名</td>
+	  				<td>利率</td>
+	  				<td>表示するかしないか</td>
+	  			</tr>
+	  			<tr th:each="result : ${ResultForm}" th:object="${result}">
+	  				<td th:text="*{number}"></td>
+			     	<td th:text="*{name}"></td>
+			     	<td th:text="*{rate}"></td>
+			     	<td th:text="*{effectiveness}"></td>
+	  			</tr>
+	  		</table>
+	  		
+	  		<h2>削除</h2>
+	  		<form th:action="@{/configuration/user/delete}" method="post" action="#" th:object="${IdForm}"> 
+				<div>ID：<input type="text" name="id"/></div> <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" /><br>
+				<input type="submit" value="削除" />
+			</form>
+			
+			<h2>変更フォーム</h2>
+			<form th:action="@{/insert/expensesItem/insert}" method="post" action="#" th:object="${expensesItemForm}"> 
+				<div>ID：<input type="text" name="name" /></div> <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" /><br>
+				<div>経費の項目名：<input type="text" name="name" /></div> <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" /><br>
+				<div>反映率：<input type="text" name="rate" /></div> <div th:if="${#fields.hasErrors('rate')}" th:errors="*{rate}" /"><br>
+				<div>表示するかしないか：<input type="text" name="isDisplay" /></div> <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" /><br>
+				<p><input type="submit" value="変更" /></p>
+			</form>
+		</main>
+	</body>
+</html>
