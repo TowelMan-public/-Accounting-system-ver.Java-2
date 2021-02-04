@@ -7,6 +7,7 @@ public class Form {
 	private Integer companyName;
 	private String authority;
 	private String password;
+	
 	public Integer getUserId() {
 		return userId;
 	}

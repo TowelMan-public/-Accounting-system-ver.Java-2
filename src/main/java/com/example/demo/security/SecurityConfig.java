@@ -40,6 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/makeNewCompanyAccount").permitAll()
                 //上記以外は直リンク禁止
                 .anyRequest().authenticated()
+                //さらにマスター権限（MASTER）がないとアクセスできない
+                .antMatchers("/confinguration").hasAuthority(Authority.master)
+                .antMatchers("/makeNewUser").hasAuthority(Authority.master)
+                .antMatchers("/resultMakeNewUser").hasAuthority(Authority.master)
             .and()
             .formLogin()
                 //ログイン処理のパス
@@ -50,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error")
                 //ログイン成功時の遷移先
                 .defaultSuccessUrl("/home",true)
-                //ログイン時のキー：名前
+                //ログイン時のキー：ユーザーID
                 .usernameParameter("userId")
                 //ログイン時のパスワード
                 .passwordParameter("password")
@@ -62,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //パスワードのアルゴリズムをBCryptに設定
     @Bean 
-    public PasswordEncoder passwordEncoder() { 
-        return new BCryptPasswordEncoder(); 
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

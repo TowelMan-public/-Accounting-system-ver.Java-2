@@ -21,7 +21,7 @@ public class SecurityService implements UserDetailsService {
 		if(outPut == null) {
             throw new UsernameNotFoundException(userId + " is not found");
         }
-		return new User(outPut.getUserId().toString(),outPut.getPassword(),AuthorityUtils.createAuthorityList(outPut.getAuthority()));
+		return new UserDetailsImpl(outPut);
 	}
 
 }
