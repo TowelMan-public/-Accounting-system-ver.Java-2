@@ -4,7 +4,7 @@ public class Form {
 	private Integer userId;
 	private String userName;
 	private Integer companyId;
-	private Integer companyName;
+	private String companyName;
 	private String authority;
 	private String password;
 	
@@ -26,10 +26,10 @@ public class Form {
 	public void setCompanyId(Integer companyId) {
 		this.companyId = companyId;
 	}
-	public Integer getCompanyName() {
+	public String getCompanyName() {
 		return companyName;
 	}
-	public void setCompanyName(Integer companyName) {
+	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
 	public String getAuthority() {

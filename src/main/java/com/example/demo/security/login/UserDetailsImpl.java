@@ -38,6 +38,16 @@ public class UserDetailsImpl implements UserDetails {
 		return user.getUserId().toString();
 	}
 	
+	//会社ID取得
+	public String getCompanyId() {
+		return user.getCompanyId().toString();
+	}
+	
+	//会社名取得
+	public String getCompanyName() {
+		return user.getCompanyName();
+	}	
+	
 	//アカウントの有効期限の状態を判定
 	@Override
 	public boolean isAccountNonExpired() {
