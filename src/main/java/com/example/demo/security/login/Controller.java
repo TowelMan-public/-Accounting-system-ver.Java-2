@@ -7,12 +7,12 @@ public class Controller {
 	//ログイン画面の表示
     @GetMapping
     public String showDisplay() {
-        return "login";
+        return "/login";
     }
 
     //ログイン成功時に表示されるデフォルト画面表示
     @PostMapping
     public String showDefaultDisplay() {
-        return "redirect:home";
+        return "redirect:/home";
     }
 }

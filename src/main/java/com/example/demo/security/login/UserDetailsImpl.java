@@ -39,8 +39,8 @@ public class UserDetailsImpl implements UserDetails {
 	}
 	
 	//会社ID取得
-	public String getCompanyId() {
-		return user.getCompanyId().toString();
+	public Integer getCompanyId() {
+		return user.getCompanyId();
 	}
 	
 	//会社名取得
