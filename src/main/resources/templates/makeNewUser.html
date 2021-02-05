@@ -17,7 +17,7 @@
 		</ul>
 		<main>
 			<h2>ユーザーの新規登録</h2>
-			<form th:action="@{/makeNewUser}" method="post" action="#" th:object="${makeNewUserForm}"> 
+			<form th:action="@{/makeNewUser}" method="post" action="#" th:object="${MakeNewUserForm}"> 
 				<div>ユーザー名：<input type="text" name="userName" /></div> <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" /><br>
 				<div>パスワード：<input type="text" name="password" /></div> <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" /><br>
 				<div>パスワード（もう一度）：<input type="text" name="oneMorePassword" /></div> <div th:if="${#fields.hasErrors('oneMorePassword')}" th:errors="*{oneMorePassword}" /><br>

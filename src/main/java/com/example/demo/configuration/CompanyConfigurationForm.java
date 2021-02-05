@@ -1,14 +1,10 @@
 package com.example.demo.configuration;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-
+import javax.validation.constraints.NotBlank;
 import com.example.demo.RegexpMessage;
-import com.example.demo.RegexpPattern;
 
 public class CompanyConfigurationForm {
-	@NotNull(message = RegexpMessage.EMPTY)
-	@Pattern(regexp = RegexpPattern.EMPTY, message = RegexpMessage.EMPTY)
+	@NotBlank(message = RegexpMessage.EMPTY)
 	private String afterCompanyName;
 	//入力ﾁｪｯｸなし
 	private Integer companyId;

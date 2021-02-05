@@ -12,10 +12,8 @@
 		<main>
 			<h2>ユーザーの新規登録の結果</h2>
 			<p>
-				あなたはユーザー登録に<div th:if="${isSuccess}" th:text="成功" /><div th:unless="${isSuccess}" th:text="失敗" />しました。
-				<div th:if="${isSuccess}">
-					<br>あなたが登録したユーザーのIDは「<div th:text="${id}">」になりました。
-				</dic>
+				あなたはユーザー登録に成功しました。<br>
+				あなたが登録したユーザーのIDは「<div th:text="${id}"></div>」になりました。
 			</p>
 			<a th:herf="/login">ログイン画面に戻る</a>>
 		</main>

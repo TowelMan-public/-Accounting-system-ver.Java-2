@@ -1,6 +1,6 @@
 package com.example.demo.configuration;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 import com.example.demo.RegexpMessage;
@@ -10,8 +10,7 @@ public class CompanyUserForm {
 	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)
 	private Integer userId;
 	
-	@NotNull(message = RegexpMessage.EMPTY)
-	@Pattern(regexp = RegexpPattern.EMPTY, message = RegexpMessage.EMPTY)
+	@NotBlank(message = RegexpMessage.EMPTY)
 	private String userName;
 	
 	@Pattern(regexp = RegexpPattern.AUTHORITY, message = RegexpMessage.AUTHORITY)

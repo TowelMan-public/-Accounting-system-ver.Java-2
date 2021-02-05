@@ -22,7 +22,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         //ログインを実際にやる物の設定
-    	auth.userDetailsService(userDetailsService);
+    	auth.userDetailsService(userDetailsService)
+    	.passwordEncoder(passwordEncoder());
     }
 
     @Override
