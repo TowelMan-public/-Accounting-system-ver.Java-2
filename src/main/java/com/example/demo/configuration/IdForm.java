@@ -13,6 +13,10 @@ public class IdForm {
 		return id;
 	}
 
+	public void setId(@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)String id) {
+		this.id = Integer.parseInt(id);
+	}
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}

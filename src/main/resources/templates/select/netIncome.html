@@ -18,12 +18,11 @@
 		<main>
 			<h2>純利益の検索フォーム</h2>
 			<p>金額、日付は「2002/9/2-2002/9/30」、「200-9000」のように入力してください。基本「A-B」とした場合、AからBまでの範囲という意味になります。
-			また、A、Bのどちらか一方だけならその一方を省略してください。また、その月の末日を表す場合、「2002/9/00」と、その年の最後の日を表す場合、「2002/00」
-			とご入力ください。</p>
-			<form th:action="@{/select/netIncome/result}" method="post" action="#" th:object="${Form}"> 
-				<div>会社（名前orID）：<input type="text" name="company" /></div> <div th:if="${#fields.hasErrors('earnings')}" th:errors="*{earnings}" /><br>
-				<div>日付：<input type="text" name="date" /></div> <div th:if="${#fields.hasErrors('earnings')}" th:errors="*{earnings}" /><br>
-				<div>金額：<input type="text" name="money" /></div> <div th:if="${#fields.hasErrors('earnings')}" th:errors="*{earnings}" /><br>
+			また、A、Bのどちらか一方だけならその一方を省略してください。</p>
+			<form th:action="@{/select/netIncome/result}" method="post" action="#" th:object="${RequestForm}"> 
+				<div>会社（名前orID）：<input type="text" name="company" /></div> <div th:if="${#fields.hasErrors('company')}" th:errors="*{company}" /><br>
+				<div>日付：<input type="text" name="date" /></div> <div th:if="${#fields.hasErrors('date')}" th:errors="*{date}" /><br>
+				<div>金額：<input type="text" name="money" /></div> <div th:if="${#fields.hasErrors('money')}" th:errors="*{money}" /><br>
 				<div><input type="checkbox" name="checkDisplayed" th:value="true">表示されている項目のみ</input> </div><br>
 				<div><input type="checkbox" name="checkGroupExpenses" th:value="true">経費ごとにグループ化する</input> </div><br>
 				<div><input type="checkbox" name="checkGroupMonth" th:value="true">月ごとにグループ化する</input> </div><br>

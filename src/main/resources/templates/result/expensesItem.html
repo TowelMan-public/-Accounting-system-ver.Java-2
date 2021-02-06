@@ -25,10 +25,10 @@
 	  				<td>表示するかしないか</td>
 	  			</tr>
 	  			<tr th:each="result : ${ResultForm}" th:object="${result}">
-	  				<td th:text="*{number}"></td>
-			     	<td th:text="*{name}"></td>
+	  				<td th:text="*{expensesNumber}"></td>
+			     	<td th:text="*{expensesName}"></td>
 			     	<td th:text="*{rate}"></td>
-			     	<td th:text="*{effectiveness}"></td>
+			     	<td th:text="*{checkDisplayed}"></td>
 	  			</tr>
 	  		</table>
 	  		

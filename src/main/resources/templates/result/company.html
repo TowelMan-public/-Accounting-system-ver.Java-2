@@ -24,9 +24,9 @@
 	  				<td>有効/無効</td>
 	  			</tr>
 	  			<tr th:each="result : ${ResultForm}" th:object="${result}">
-	  				<td th:text="*{number}"></td>
-			     	<td th:text="*{name}"></td>
-			     	<td th:text="*{effectiveness}"></td>
+	  				<td th:text="*{companyNumber}"></td>
+			     	<td th:text="*{companyName}"></td>
+			     	<td th:text="*{isDisplayed}"></td>
 	  			</tr>
 	  		</table>
 	  		

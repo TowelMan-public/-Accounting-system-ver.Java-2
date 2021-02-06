@@ -16,7 +16,7 @@
 		    <li class="menu_inner"><a href="@{/configuration}">設定</a></li>
 		</ul>
 		<main>
-			<h2 th:if="${haveItemType}" th:text="${itemTypeName} + 'の検索結果' " />
+			<h2 th:text="${selectItemName} + 'の検索結果' " />
 			<table border="1">
 	  			<tr>
 	  				<td th:if="${haveDateType}" th:text="${dateType}" />
@@ -24,8 +24,8 @@
 	  				<td>金額</td>
 	  			</tr>
 	  			<tr th:each="result : ${ResultForm}" th:object="${result}">
-			     	<td th:text="*{date}"></td>
-			     	<td th:text="*{item}"></td>
+			     	<td th:if="${haveDateType}" th:text="*{date}"></td>
+			     	<td th:if="${haveItemType}" th:text="*{item}"></td>
 			     	<td th:text="*{money}"></td>
 	  			</tr>
 	  		</table>

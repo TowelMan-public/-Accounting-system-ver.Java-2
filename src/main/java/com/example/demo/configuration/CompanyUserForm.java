@@ -20,10 +20,14 @@ public class CompanyUserForm {
 		return userId;
 	}
 
+	public void setUserId(@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER) String userId) {
+		this.userId = Integer.parseInt(userId);
+	}
+
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-
+	
 	public String getUserName() {
 		return userName;
 	}

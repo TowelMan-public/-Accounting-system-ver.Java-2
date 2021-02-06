@@ -27,8 +27,8 @@
 	  				<td>件名</td>
 	  			</tr>
 	  			<tr th:each="result : ${ResultForm}" th:object="${result}">
-	  				<td th:text="*{number}"></td>
-			     	<td th:text="*{date}"></td>
+	  				<td th:text="*{earningsNumber}"></td>
+			     	<td th:text="*{earningsDate}"></td>
 			     	<td th:text="*{company}"></td>
 			     	<td th:text="*{money}"></td>
 			     	<td th:text="*{personName}"></td>
