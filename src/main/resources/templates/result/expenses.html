@@ -42,11 +42,11 @@
 			
 			<h2>変更フォーム</h2>
 			<form th:action="@{/insert/expenses/insert}" method="post" action="#" th:object="${expensesForm}"> 
-				<div>ID：<input type="text" name="name" /></div> <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" /><br>
-				<div>経費の項目ID：<input type="idStr" name="name" /></div> <div th:if="${#fields.hasErrors('idStr')}" th:errors="*{idStr}" /><br>
-				<div>日付：<input type="text" name="date" /></div> <div th:if="${#fields.hasErrors('date')}" th:errors="*{date}" /"><br>
+				<div>ID：<input type="text" name="expensesId" /></div> <div th:if="${#fields.hasErrors('expensesId')}" th:errors="*{expensesId}" /><br>
+				<div>経費の項目ID：<input type="text" name="expensesItem" /></div> <div th:if="${#fields.hasErrors('expensesItem')}" th:errors="*{expensesItem}" /><br>
+				<div>日付：<input type="text" name="expensesDate" /></div> <div th:if="${#fields.hasErrors('expensesDate')}" th:errors="*{expensesDate}" /"><br>
 				<div>金額：<input type="text" name="money" /></div> <div th:if="${#fields.hasErrors('money')}" th:errors="*{ramoneyte}" /"><br>
-				<div>件名（省略可）：<input type="text" name="subject" /></div> <div th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" /"><br>
+				<div>件名（省略可）：<input type="text" name="subject" /></div><br>
 				<p><input type="submit" value="登録" /></p>
 			</form>
 		</main>

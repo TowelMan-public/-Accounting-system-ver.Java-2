@@ -46,13 +46,13 @@
 			
 			<h2>変更フォーム</h2>
 			<form th:action="@{/insert/earnings/insert}" method="post" action="#" th:object="${earningsForm}"> 
-				<div>ID：<input type="text" name="id" /></div> <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" /><br>
-				<div>日付：<input type="text" name="date" /></div> <div th:if="${#fields.hasErrors('date')}" th:errors="*{date}" /><br>
+				<div>ID：<input type="text" name="earningsId" /></div> <div th:if="${#fields.hasErrors('earningsId')}" th:errors="*{earningsId}" /><br>
+				<div>日付：<input type="text" name="earningsDate" /></div> <div th:if="${#fields.hasErrors('earningsDate')}" th:errors="*{earningsDate}" /><br>
 				<div>会社ID：<input type="text" name="company" /></div> <div th:if="${#fields.hasErrors('company')}" th:errors="*{company}" /><br>
 				<div>消費税：<input type="text" name="taxRate" /></div> <div th:if="${#fields.hasErrors('taxRate')}" th:errors="*{taxRate}" /><br>
 				<div>金額：<input type="text" name="money" /></div> <div th:if="${#fields.hasErrors('money')}" th:errors="*{money}" /><br>
-				<div>個人名（省略可）：<input type="text" name="personName" /></div> <div th:if="${#fields.hasErrors('personName')}" th:errors="*{personName}" /><br>
-				<div>件名（省略可）：<input type="text" name="subject" /></div> <div th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" /><br>
+				<div>個人名（省略可）：<input type="text" name="personName" /></div><br>
+				<div>件名（省略可）：<input type="text" name="subject" /></div><br>
 				<p><input type="submit" value="登録" /></p>
 			</form>
 		</main>

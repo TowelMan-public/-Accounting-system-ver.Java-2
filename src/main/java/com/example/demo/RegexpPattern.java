@@ -8,6 +8,7 @@ public class RegexpPattern {
 	static final public String EMPTY = "^$";
 	static final public String RATE = "^[0-1]|(0\\.[%d]+)$";
 	static final public String ID_OR_NAME = "^(([%d]+)|([.]*))?$";
+	static final public String ID_OR_ID_AND_NAME = "^(([%d]+)|([%d]+:[.]+))$";
 	static final public String DATE = "^([1-2][0-9]{3})////(0?[1-9]|1[0-2])////(0?[1-9]|[12][0-9]|3[01])$";
 	static final public String RANGE = "^([.]*)-([.]*)$";
 	static final public String RANGE_DATE = "^((" + DATE + ")-(" + DATE + "))|(" + DATE + ")?$";
