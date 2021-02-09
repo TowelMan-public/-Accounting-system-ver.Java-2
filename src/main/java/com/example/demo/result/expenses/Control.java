@@ -60,7 +60,7 @@ public class Control {
 		if (bindingResult.hasErrors())
 			return "redirect:/result/expenses";
 		
-		//各IDが、有効かどうかをチェックする TODO
+		//各IDが、有効かどうかをチェックする
 		if( !verificationMapper.isEnabledExpensesId(user.getCompanyId(), form.getIdToInt())) {//有効でない
 			FieldError error = new FieldError(bindingResult.getObjectName(), "id", Message.ID_ISNOT_ENABLED);
 			bindingResult.addError(error);

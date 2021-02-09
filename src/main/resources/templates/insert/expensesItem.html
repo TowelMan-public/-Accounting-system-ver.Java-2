@@ -5,7 +5,7 @@
 		<title>簡易的な会計システム♪</title>
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="stylesheet" type="text/css" th:href="@{style.css}">y
+		<link rel="stylesheet" type="text/css" th:href="@{style.css}">
 	</head>
 	<body>
 		<h1>簡易的な会計システム♪</h1>
@@ -18,7 +18,7 @@
 		<main>
 			<h2>経費の項目の登録フォーム</h2>
 			<form th:action="@{/insert/expensesItem/insert}" method="post" action="#" th:object="${expensesItemForm}"> 
-				<div>経費の項目名：<input type="text" name="name" /></div> <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" /><br>
+				<div>経費の項目名：<input type="text" name="expensesItemName" /></div> <div th:if="${#fields.hasErrors('expensesItemName')}" th:errors="*{expensesItemName}" /><br>
 				<div>反映率：<input type="text" name="rate" /></div> <div th:if="${#fields.hasErrors('rate')}" th:errors="*{rate}" /"><br>
 				<p><input type="submit" value="登録" /></p>
 			</form>
