@@ -1,12 +1,12 @@
 package com.example.demo.security.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import com.example.demo.RegexpPattern;
 
 @Service
 public class SecurityService implements UserDetailsService {
@@ -17,7 +17,8 @@ public class SecurityService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException { 
 		Form outPut=new Form();
-		outPut = mapper.selectById(userId);
+		if(userId.matches(RegexpPattern.INTEGER))
+			outPut = mapper.selectById(Integer.parseInt(userId));
 		if(outPut == null) {
             throw new UsernameNotFoundException(userId + " is not found");
         }

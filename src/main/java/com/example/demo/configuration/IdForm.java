@@ -7,17 +7,17 @@ import com.example.demo.RegexpPattern;
 
 public class IdForm {
 	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)
-	private Integer id;
+	private String id;
 
 	public Integer getId() {
-		return id;
+		return Integer.parseInt(id);
 	}
 
 	public void setId(@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)String id) {
-		this.id = Integer.parseInt(id);
+		this.id = id;
 	}
 	
 	public void setId(Integer id) {
-		this.id = id;
+		this.id = id.toString();
 	}
 }

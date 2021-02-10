@@ -4,7 +4,7 @@ public class ResultForm {
 	private Integer earningsNumber;
 	private String earningsDate;
 	private String company;
-	private String tax;
+	private Double tax;
 	private Integer money;
 	private String personName;
 	private String subject;
@@ -44,10 +44,10 @@ public class ResultForm {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-	public String getTax() {
+	public Double getTax() {
 		return tax;
 	}
-	public void setTax(String tax) {
+	public void setTax(Double tax) {
 		this.tax = tax;
 	}
 }

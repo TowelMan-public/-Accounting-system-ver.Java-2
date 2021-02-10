@@ -35,7 +35,7 @@ public class UserDetailsImpl implements UserDetails {
 	
 	//ユーザー名取得
 	public String getAccountUserName() {
-		return user.getUserId().toString();
+		return user.getUserName();
 	}
 	
 	//会社ID取得
