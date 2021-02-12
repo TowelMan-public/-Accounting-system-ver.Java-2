@@ -1,11 +1,12 @@
 package com.example.demo.verification;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface VerificationDatabaseMapper {
-	boolean isEnabledCompanyId(int companyAccountId, int id);
-	boolean isEnabledExpensesItemId(int companyAccountId, int id);
-	boolean isEnabledExpensesId(int companyAccountId, int id);
-	boolean isEnabledEarningsId(int companyAccountId, int id);
+	boolean isEnabledCompanyId(@Param("companyAccountId") int companyAccountId, @Param("id") int id);
+	boolean isEnabledExpensesItemId(@Param("companyAccountId") int companyAccountId, @Param("id") int id);
+	boolean isEnabledExpensesId(@Param("companyAccountId") int companyAccountId, @Param("id") int id);
+	boolean isEnabledEarningsId(@Param("companyAccountId") int companyAccountId, @Param("id") int id);
 }

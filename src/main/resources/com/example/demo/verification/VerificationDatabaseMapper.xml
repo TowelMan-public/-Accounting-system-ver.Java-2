@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.verification.VerificationDatabaseMapper">
+	<select id="isEnabledCompanyId" resultType="boolean">
+		
+	</select>
+	<select id="isEnabledExpensesItemId" resultType="boolean">
+		
+	</select>
+	<select id="isEnabledExpensesId" resultType="boolean">
+		
+	</select>
+	<select id="isEnabledEarningsId" resultType="boolean">
+		
+	</select>
+</mapper>
