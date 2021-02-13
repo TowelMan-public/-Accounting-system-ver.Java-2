@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper//TODO
 public interface CandidateDatabaseMapper {
 	//経費の項目の候補を取得する
-	List<CandidateForm> getCandidateExpensesItem(Integer id);
+	List<CandidateForm> getCandidateExpensesItem(Integer companyAccountid);
 	
 	//会社の候補を取得する
-	List<CandidateForm> getCandidateCompany(Integer id);
+	List<CandidateForm> getCandidateCompany(Integer companyAccountid);
 }

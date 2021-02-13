@@ -4,6 +4,61 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.select.netIncome.DatabaseMapper">
 	<select id="selectGroup" resultType="com.example.demo.select.GroupResultForm">
-		
+		SELECT
+			<if test="checkGroupYear">
+				TIME_FORMAT(income_date,"%Y")	AS "groupdate",
+			</if>
+			<if test="checkGroupMonth">
+				TIME_FORMAT(income_date,"m%")	AS "groupdate",
+			</if>
+			SUM(income_money) - (CASE WHEN TRUNCATE(SUM(income_money),-3) > 18000000 THEN (0.4 * TRUNCATE(SUM(income_money),-3) - 2796000) 
+				 WHEN TRUNCATE(SUM(income_money),-3) > 9000000 THEN (0.33 * TRUNCATE(SUM(income_money),-3) - 1536000) 
+				 WHEN TRUNCATE(SUM(income_money),-3) > 6950000 THEN (0.23 * TRUNCATE(SUM(income_money),-3) - 636000) 
+				 WHEN TRUNCATE(SUM(income_money),-3) > 3300000 THEN (0.2 * TRUNCATE(SUM(income_money),-3) - 427500) 
+				 WHEN TRUNCATE(SUM(income_money),-3) > 1950000 THEN (0.1 * TRUNCATE(SUM(income_money),-3) - 97500) 
+				 WHEN SUM(income_money) > SUM(income_money) THEN 0.05 * TRUNCATE(SUM(income_money),-3) 
+				 ELSE 0
+			END )								AS "money"
+		FROM(
+			(SELECT
+				earnings.earnings_date	AS "income_date",
+				earnings.money			AS "income_money"
+			FROM earnings
+				INNER JOIN suppliers ON earnings.suppliers_id = suppliers.id AND earnings.company_id = suppliers.company_id
+			<where>
+				company_id = #{companyAccountId}
+				<if test="earningsName != null">
+					AND suppliers.name LIKE #{earningsName}
+				</if>
+				<if test="earningsId != null">
+					AND earnings.suppliers_id = #{earningsId}
+				</if>
+				<if test="checkDisplayed">
+					AND suppliers.is_displayed = TRUE
+				</if>
+			</where>)
+			UNION ALL 
+			(SELECT
+				expenses.expenses_date,
+				(0 - expenses.money)
+			FROM expenses
+				INNER JOIN expenses_item ON expenses.expenses_item_id = expenses_item.id AND expenses.company_id = expenses_item.company_id
+			<where>
+				company_id = #{companyAccountId}
+				<if test="checkDisplayed">
+					AND suppliers.is_displayed = TRUE
+				</if>
+			</where>
+			)
+		)
+		<where>
+			<if test="earningsDateStart != null">
+				income_date >= #{earningsDateStart}
+			</if>
+			<if test="earningsDateFinish != null">
+				AND #{earningsDateFinish} >= income_date
+			</if>
+		</where>
+		GROUP BY groupdate
 	</select>
 </mapper>

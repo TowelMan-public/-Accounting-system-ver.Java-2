@@ -4,9 +4,106 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.select.expenses.DatabaseMapper">
 	<select id="selectGroup" resultType="com.example.demo.select.GroupResultForm">
-		
+		SELECT 
+			<if test="checkGroupItem">
+				expenses.name			AS "groupitem",
+			</if>
+			<if test="checkGroupYear or checkGroupMonth">
+				base.groupdate		AS "groupdate",
+			</if>
+			base.money				AS="money"
+		FROM(
+			SELECT 
+				<if test="checkGroupItem">
+					id							AS "groupitem_id",
+				</if>
+				<if test="checkGroupYear">
+					TIME_FORMAT(expenses_date,"%Y")	AS "groupdate",
+				</if>
+				<if test="checkGroupMonth">
+					TIME_FORMAT(expenses_date,"m%")	AS "groupdate",
+				</if>
+				SUM(money)								AS "money",
+				company_id
+			FROM expenses
+			<where>
+				company_id = #{companyAccountId}
+				<if test="expensesId != null">
+					AND expenses_item_id = #{expensesId}
+				</if>
+				<if test="subject != null">
+					AND subject = #{subject}
+				</if>
+				<if test="expensesDateStart != null">
+					AND expenses_date >= #{expensesDateStart}
+				</if>
+				<if test="expensesDateFinish != null">
+					AND #{expensesDateFinish} >= expenses_date
+				</if>
+				<if test="moneyStart != null">
+					AND money >= #{moneyStart}
+				</if>
+				<if test="moneyStart != null">
+					AND #{moneyStart} >= money
+				</if>
+			</where>
+			<trim prefix="GROUP BY" suffixOverrides=",">
+				<if test="checkGroupItem">
+					groupitem_id,
+				</if>
+				<if test="checkGroupYear or checkGroupMonth">
+					groupdate
+				</if>
+			</trim>
+		) base
+			INNER JOIN expenses_item ON base.grouoitem_id = expenses_item.id AND base.company_id = expenses_item.company_id
+		<where>
+			<if test="expensesName != null">
+				expenses_item.name LIKE #{expensesName}
+			</if>
+			<if test="expensesId != null">
+				AND expenses_item.id = #{expensesId}
+			</if>
+			<if test="checkDisplayed">
+				AND expenses_item.is_displayed = TRUE
+			</if>
+		</where>
 	</select>
 	<select id="selectList" resultType="com.example.demo.select.expenses.ResultForm">
-		
+		SELECT 
+			expenses.id					AS "expensesNumber",
+			expenses_item.name			AS "expensesItem",
+			expenses.money				AS "money",
+			expenses.expenses_date		AS "expensesDate",
+			expenses.subject			AS "subject"
+		FROM expenses
+			INNER JOIN expenses_item ON expenses.expenses_item_id = expenses_item.id AND expenses.company_id = expenses_item.company_id
+		<where>
+			company_id = #{companyAccountId}
+			<if test="expensesName != null">
+				AND expenses_item.name LIKE #{expensesName}
+			</if>
+			<if test="expensesId != null">
+				AND expenses.expenses_item_id = #{expensesId}
+			</if>
+			<if test="subject != null">
+				AND expenses.subject = #{subject}
+			</if>
+			<if test="expensesDateStart != null">
+				AND expenses.expenses_date >= #{expensesDateStart}
+			</if>
+			<if test="expensesDateFinish != null">
+				AND #{expensesDateFinish} >= expenses.expenses_date
+			</if>
+			<if test="moneyStart != null">
+				AND expenses.money >= #{moneyStart}
+			</if>
+			<if test="moneyStart != null">
+				AND #{moneyStart} >= expenses.money
+			</if>
+			<if test="checkDisplayed">
+				AND expenses_item.is_displayed = TRUE
+			</if>
+		</where>
 	</select>
 </mapper>

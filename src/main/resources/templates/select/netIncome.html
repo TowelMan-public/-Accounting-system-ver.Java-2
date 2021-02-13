@@ -22,10 +22,7 @@
 			<form th:action="@{/select/netIncome/result}" method="post" action="#" th:object="${RequestForm}"> 
 				<div>会社（名前orID）：<input type="text" name="company" /></div> <div th:if="${#fields.hasErrors('company')}" th:errors="*{company}" /><br>
 				<div>日付：<input type="text" name="date" /></div> <div th:if="${#fields.hasErrors('date')}" th:errors="*{date}" /><br>
-				<div>金額：<input type="text" name="money" /></div> <div th:if="${#fields.hasErrors('money')}" th:errors="*{money}" /><br>
 				<div><input type="checkbox" name="checkDisplayed" th:value="true">表示されている項目のみ</input> </div><br>
-				<div><input type="checkbox" name="checkGroupExpenses" th:value="true">経費ごとにグループ化する</input> </div><br>
-				<div><input type="checkbox" name="checkGroupMonth" th:value="true">月ごとにグループ化する</input> </div><br>
 				<div><input type="checkbox" name="checkGroupYear" th:value="true">年ごとにグループ化する</input> </div><br>
 				<p><input type="submit" value="検索" /></p>
 			</form>

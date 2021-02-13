@@ -3,16 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.makeNewCompanyAccount.DatabaseMapper">
-	<select id="getNewCompanyAccountId" resultType="java.lang.Integer">
-		
-	</select>
-	<insert id="insertCompanyAccount">
-		
+	<insert id="getNewCompanyAccountId" useGeneratedKeys="true" keyProperty="companyId">
+		INSERT INTO company() VALUES()
 	</insert>
-	<select id="getNewUserId" resultType="java.lang.Integer">
-		
-	</select>
-	<insert id="insertUser">
-		
+	<insert id="insertCompanyAccount">
+		INSERT INTO company_details(company_id,name) VALUES(#{companyId},#{companyName})
+	</insert>
+	<insert id="insertUser" useGeneratedKeys="true" keyProperty="userid">
+		INSERT INTO users(company_id,name,password,authority) VALUES(#{userName},#{password},#{companyId},#{authority})
 	</insert>
 </mapper>

@@ -40,7 +40,6 @@ public class Control {
 		UserForm newUser = new UserForm(form);
 		newUser.setAuthority(defaultAuthority);
 		newUser.setCompanyId( user.getCompanyId() );
-		newUser.setUserid( mapper.getNewUserId() );
 		mapper.insertUser(newUser);
 		
 		//結果のセット

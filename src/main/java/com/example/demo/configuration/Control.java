@@ -86,11 +86,12 @@ public class Control {
 	}
 
 	@PostMapping("taxRate/update")
-	public String updateTaxRate(@ModelAttribute @Valid ConfigurationTaxRateForm form, BindingResult bindingResult, Model model) {
+	public String updateTaxRate(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid ConfigurationTaxRateForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸでエラーがある場合は、何もしないでこの関数を終わる
 		if (bindingResult.hasErrors())
 			return "redirect:/confingration";
 		
+		form.setCompanyId(user.getCompanyId());
 		mapper.updateConsumptionTaxRate(form);
 		return "redirect:/confingration";
 	}

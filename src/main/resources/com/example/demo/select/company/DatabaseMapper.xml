@@ -4,6 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.select.company.DatabaseMapper">
 	<select id="selectList" resultType="com.example.demo.select.company.ResultForm">
-		
+		SELECT 
+			id			AS "companyNumber",
+			name			AS "companyName",
+			is_displayed	AS "isDisplayed"
+		FROM suppliers
+		<where>
+			company_id = #{companyAccountId}
+			<if test="companyId != null">
+				AND id = #{companyId}
+			</if>
+			<if test="companyName != null">
+				AND name LIKE #{companyName}
+			</if>>
+			<if test="isDisplayed">
+				AND is_displayed = TRUE
+			</if>
+		</where>
 	</select>
 </mapper>

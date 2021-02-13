@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import com.example.demo.RegexpPattern;
 
 public class SelectForm {
-	//company
+	//expenses
 	private String expensesName;
 	private Integer expensesId;
 	//文字列コピーのみ

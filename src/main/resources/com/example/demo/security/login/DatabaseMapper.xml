@@ -4,6 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.security.login.DatabaseMapper">
 	<select id="selectById" resultType="com.example.demo.security.login.Form">
-		
+		SELECT
+			 users.id						AS "userId",
+			 users.name						AS "userName",
+			 users.password,				AS "password"
+			 users.authority,				AS "authority"
+			 company_details.company_id,	AS "companyId"
+			 company_details.name,			AS "companyName"
+		FROM users
+			INNER JOIN company_details USING(company_id)
+		WHERE users.id = #{companyId}
 	</select>
 </mapper>

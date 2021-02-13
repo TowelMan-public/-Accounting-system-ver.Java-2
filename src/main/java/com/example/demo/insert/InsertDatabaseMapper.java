@@ -15,10 +15,7 @@ public interface InsertDatabaseMapper {
 	
 	//売上の登録 earningsIdに自動裁判のIDを取得すること
 	void insertEarnings(EarningsForm form);
-	
-	//売上の登録の後処理（売上の登録をしたら必ず呼ぶ）
-	void afterInsertEarnings(EarningsForm form);
-	
+		
 	//経費の登録
 	void insertExpenses(ExpensesForm form);
 	

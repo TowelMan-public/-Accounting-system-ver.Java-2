@@ -4,15 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.verification.VerificationDatabaseMapper">
 	<select id="isEnabledCompanyId" resultType="boolean">
-		
+		SELECT COUNT(*) > 0
+		FROM suppliers
+		WHERE id = #{id}
 	</select>
 	<select id="isEnabledExpensesItemId" resultType="boolean">
-		
+		SELECT COUNT(*) > 0
+		FROM expenses_item
+		WHERE id = #{id}
 	</select>
 	<select id="isEnabledExpensesId" resultType="boolean">
-		
+		SELECT COUNT(*) > 0
+		FROM expenses
+		WHERE id = #{id}
 	</select>
 	<select id="isEnabledEarningsId" resultType="boolean">
-		
+		SELECT COUNT(*) > 0
+		FROM earnings
+		WHERE id = #{id}
 	</select>
 </mapper>

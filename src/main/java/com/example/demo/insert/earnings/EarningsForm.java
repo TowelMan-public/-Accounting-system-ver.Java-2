@@ -11,7 +11,7 @@ public class EarningsForm {
 	@Pattern(regexp = RegexpPattern.DATE, message = RegexpMessage.DATE)
 	private String earningsDate;
 	@Pattern(regexp = RegexpPattern.ID_OR_ID_AND_NAME, message = RegexpMessage.ID_OR_ID_AND_NAME)//getterがInteger
-	private String cmopany;
+	private String company;
 	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)//getterがInteger
 	private String money;
 	//省略可
@@ -29,17 +29,17 @@ public class EarningsForm {
 	public void setEarningsDate(String earningsDate) {
 		this.earningsDate = earningsDate;
 	}
-	public Integer getCmopany() {
-		if(cmopany.matches(RegexpPattern.ID_AND_NAME)) {//IDと名前がセットで入力されている
+	public Integer getCompany() {
+		if(company.matches(RegexpPattern.ID_AND_NAME)) {//IDと名前がセットで入力されている
 			java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(RegexpPattern.ID_AND_NAME);
-			Matcher matcher = pattern.matcher(cmopany);
+			Matcher matcher = pattern.matcher(company);
 			return Integer.parseInt(matcher.group(1));
 		}else {//IDのみが入力されている
-			return Integer.parseInt(cmopany);
+			return Integer.parseInt(company);
 		}
 	}
-	public void setCmopany(String cmopany) {
-		this.cmopany = cmopany;
+	public void setCompany(String company) {
+		this.company = company;
 	}
 	public Integer getMoney() {
 		return Integer.parseInt(money);

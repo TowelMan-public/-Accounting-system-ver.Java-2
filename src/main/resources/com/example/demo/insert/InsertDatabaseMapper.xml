@@ -4,21 +4,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.insert.InsertDatabaseMapper">
 	<insert id="insertCompany">
-		
+		INSERT INTO suppliers(company_id,name)
+			VALUES(#{companyAccountId},#{companyName})
 	</insert>
 	<insert id="insertEarnings">
-		
-	</insert>
-	<insert id="afterInsertEarnings">
-		
+		INSERT INTO earnings(company_id,suppliers_id,money,earnings_date,subject,person_name)
+			VALUES(#{companyAccountId},#{company},#{money},#{earningsDate},#{subject},#{personName})
 	</insert>
 	<insert id="insertExpenses">
-		
+		INSERT INTO expenses(company_id,expenses_item_id,money,expenses_date,subject)
+			VALUES(#{companyAccountId},#{expensesItem},#{money},#{expensesDate},#{subject})
 	</insert>
-	<insert id="insertRevenue">
-		
-	</insert>
+	<update id="insertRevenue">
+		UPDATE revenue
+		SET money = money + #{money}
+		WHERE eanings_id = #{earningsId}
+	</update>
 	<insert id="insertExpensesItem">
-		
+		INSERT INTO expenses_item(company_id,name,rate) 
+			VALUES(#{companyAccountId},#{expensesItemName},#{rate})
 	</insert>
 </mapper>

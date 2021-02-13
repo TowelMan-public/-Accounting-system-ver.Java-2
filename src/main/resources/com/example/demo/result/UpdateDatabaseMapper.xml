@@ -4,18 +4,48 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.result.UpdateDatabaseMapper">
 	<update id="updateCompany">
-		
+		UPDATE suppliers
+		SET
+			name			=#{companyName}
+			is_displayed	=#{isDisplayed}
+		WHERE	id			= #{companyId}
+			AND	company_id	= #{companyAccountId}
 	</update>
 	<update id="updateExpensesItem">
-		
+		UPDATE expenses_item
+		SET
+			name			=#{expensesItemName}
+			rate			=#{rate}
+			is_displayed	=#{isDisplayed}
+		WHERE	id			= #{expensesItemId}
+			AND	company_id	= #{companyAccountId}
 	</update>
 	<update id="updateExpenses">
-		
+		UPDATE expenses
+		SET
+			expenses_item_id	=#{expensesItem}
+			money				=#{money}
+			expenses_date		=#{expensesDate}
+			subject				=#{subject}
+		WHERE	id			= #{expensesId}
+			AND	company_id	= #{companyAccountId}
 	</update>
 	<update id="updateEarnings">
-		
+		UPDATE earnings
+		SET
+			suppliers_id			=#{company}
+			money					=#{money}
+			consumption_tax_rate	=#{taxRate}
+			earnings_date			=#{earningsDate}
+			subject					=#{subject}
+			person_name				=#{personName}
+		WHERE	id			= #{earningsId}
+			AND	company_id	= #{companyAccountId}
 	</update>
 	<update id="updateRevenue">
-		
+		UPDATE suppliers
+		SET money	=#{money}
+		WHERE	id			= #{earningsId}
+			AND	company_id	= #{companyAccountId}
 	</update>
 </mapper>

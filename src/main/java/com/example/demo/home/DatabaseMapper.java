@@ -10,9 +10,6 @@ public interface DatabaseMapper {
 	//「今月」の経費を取得
 	Integer getEexpensesMonth(int companyId);
 	
-	//「今月」の純利益を取得
-	Integer getNetIncomeRateMonth(int companyId);
-	
 	//「今年」の売上を取得
 	Integer getEarningsYear(int companyId);
 	
@@ -20,5 +17,5 @@ public interface DatabaseMapper {
 	Integer getExpensesYear(int companyId);
 		
 	//「今年」の純利益を取得
-	Integer getNetIncomeRateYear(int companyId);
+	Integer getNetIncomeYear(int companyId);
 }

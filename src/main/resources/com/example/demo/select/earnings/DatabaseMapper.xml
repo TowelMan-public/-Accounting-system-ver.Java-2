@@ -4,9 +4,111 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.select.earnings.DatabaseMapper">
 	<select id="selectGroup" resultType="com.example.demo.select.GroupResultForm">
-		
+		SELECT 
+			<if test="checkGroupItem">
+				suppliers.name			AS "groupitem",
+			</if>
+			<if test="checkGroupYear or checkGroupMonth">
+				base.groupdate		AS "groupdate",
+			</if>
+			base.money				AS="money"
+		FROM(
+			SELECT 
+				<if test="checkGroupItem">
+					id							AS "groupitem_id",
+				</if>
+				<if test="checkGroupYear">
+					TIME_FORMAT(earnings_date,"%Y")	AS "groupdate",
+				</if>
+				<if test="checkGroupMonth">
+					TIME_FORMAT(earnings_date,"m%")	AS "groupdate",
+				</if>
+				SUM(money)								AS "money",
+				company_id
+			FROM earnings
+			<where>
+				company_id = #{companyAccountId}
+				<if test="subject != null">
+					AND subject = #{subject}
+				</if>
+				<if test="person != null">
+					AND person = #{person}
+				</if>
+				<if test="earningsDateStart != null">
+					AND earnings_date >= #{earningsDateStart}
+				</if>
+				<if test="earningsDateFinish != null">
+					AND #{earningsDateFinish} >= earnings_date
+				</if>
+				<if test="moneyStart != null">
+					AND money >= #{moneyStart}
+				</if>
+				<if test="moneyStart != null">
+					AND #{moneyStart} >= money
+				</if>
+			</where>
+			<trim prefix="GROUP BY" suffixOverrides=",">
+				<if test="checkGroupItem">
+					groupitem_id,
+				</if>
+				<if test="checkGroupYear or checkGroupMonth">
+					groupdate
+				</if>
+			</trim>
+		) base
+			INNER JOIN suppliers ON base.grouoitem_id = suppliers.id AND base.company_id = suppliers.company_id
+		<where>
+			<if test="expensesName != null">
+				suppliers.name LIKE #{expensesName}
+			</if>
+			<if test="expensesId != null">
+				AND suppliers.id = #{expensesId}
+			</if>
+			<if test="checkDisplayed">
+				AND suppliers.is_displayed = TRUE
+			</if>
+		</where>
 	</select>
 	<select id="selectList" resultType="com.example.demo.select.base.earnings.ResultForm">
-		
+		SELECT 
+			earnings.id						AS "earningsNumber",
+			suppliers.name					AS "earningsItem",
+			earnings.money					AS "money",
+			earnings.consumption_tax_rate	AS "tax",
+			earnings.earnings_date			AS "earningsDate",
+			earnings.subject				AS "subject",
+			earnings.person_name			AS "personName"
+		FROM earnings
+			INNER JOIN suppliers ON earnings.suppliers_id = suppliers.id AND earnings.company_id = suppliers.company_id
+		<where>
+			company_id = #{companyAccountId}
+			<if test="earningsName != null">
+				AND suppliers.name LIKE #{earningsName}
+			</if>
+			<if test="earningsId != null">
+				AND earnings.suppliers_id = #{earningsId}
+			</if>
+			<if test="subject != null">
+				AND earnings.subject = #{subject}
+			</if>
+			<if test="person != null">
+				AND earnings.person = #{person}
+			</if>
+			<if test="earningsDateStart != null">
+				AND earnings.earnings_date >= #{earningsDateStart}
+			</if>
+			<if test="earningsDateFinish != null">
+				AND #{earningsDateFinish} >= earnings.earnings_date
+			</if>
+			<if test="moneyStart != null">
+				AND earnings.money >= #{moneyStart}
+			</if>
+			<if test="moneyStart != null">
+				AND #{moneyStart} >= earnings.money
+			</if>
+			<if test="checkDisplayed">
+				AND suppliers.is_displayed = TRUE
+			</if>
+		</where>
 	</select>
 </mapper>

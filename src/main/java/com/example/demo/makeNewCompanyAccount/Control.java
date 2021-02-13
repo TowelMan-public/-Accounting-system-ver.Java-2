@@ -38,13 +38,12 @@ public class Control {
 		CompanyAccountForm company = new CompanyAccountForm(form);
 		
 		//会社の登録
-		company.setCompanyId( mapper.getNewCompanyAccountId() );
+		mapper.getNewCompanyAccountId(company);
 		mapper.insertCompanyAccount(company);
 		
 		//ユーザーの登録
 		user.setAuthority(defaultAuthority);
 		user.setCompanyId( company.getCompanyId() );
-		user.setUserid( mapper.getNewUserId() );
 		mapper.insertUser(user);
 		
 		//結果のセット

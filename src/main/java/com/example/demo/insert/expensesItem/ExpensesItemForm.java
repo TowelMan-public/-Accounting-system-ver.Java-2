@@ -10,7 +10,7 @@ public class ExpensesItemForm {
 	@NotBlank(message = RegexpMessage.EMPTY)
 	private String expensesItemName;
 	@Pattern(regexp = RegexpPattern.RATE, message = RegexpMessage.RATE)//getterがDouble
-	private String Rate;
+	private String rate;
 	//CompanyAccountIdを、Controlクラスでセットする
 	private Integer companyAccountId;
 	
@@ -21,10 +21,10 @@ public class ExpensesItemForm {
 		this.expensesItemName = expensesItemName;
 	}
 	public Double getRate() {
-		return Double.parseDouble(Rate);
+		return Double.parseDouble(rate);
 	}
 	public void setRate(String rate) {
-		Rate = rate;
+		this.rate = rate;
 	}
 	public Integer getCompanyAccountId() {
 		return companyAccountId;

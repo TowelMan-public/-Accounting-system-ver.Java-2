@@ -46,7 +46,7 @@ public class Control {
 		form.setCompanyAccountId(user.getCompanyId());
 		
 		//値の有効性をチェック
-		if( !verificationMapper.isEnabledCompanyId(user.getCompanyId(), form.getCmopany())) {//有効でない
+		if( !verificationMapper.isEnabledCompanyId(user.getCompanyId(), form.getCompany())) {//有効でない
 			FieldError error = new FieldError(bindingResult.getObjectName(), "company", Message.ID_ISNOT_ENABLED);
 			bindingResult.addError(error);
 		}
@@ -54,7 +54,6 @@ public class Control {
 		//追加
 		if (!bindingResult.hasErrors()) {//値がすべて有効
 			insertMapper.insertEarnings(form);
-			insertMapper.afterInsertEarnings(form);
 		}
 		return "/insert/earnings";
 	}

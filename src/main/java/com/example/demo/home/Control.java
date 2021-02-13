@@ -24,12 +24,11 @@ public class Control {
 		//「今月」の情報をセット
 		model.addAttribute("earningsMonth", mapper.getEarningsMonth( user.getCompanyId() ) );
 		model.addAttribute("expensesMonth", mapper.getEexpensesMonth( user.getCompanyId() ) );
-		model.addAttribute("netIncomeRateMonth", mapper.getNetIncomeRateMonth( user.getCompanyId() ) );
 		
 		//今年の情報をセット
 		model.addAttribute("earningsYear", mapper.getEarningsYear( user.getCompanyId() ) );
 		model.addAttribute("expensesYear", mapper.getExpensesYear( user.getCompanyId() ) );
-		model.addAttribute("netIncomeRateYear", mapper.getNetIncomeRateYear( user.getCompanyId() ) );
+		model.addAttribute("netIncomeRateYear", mapper.getNetIncomeYear( user.getCompanyId() ) );
 		
 		return "/home";
 	}
