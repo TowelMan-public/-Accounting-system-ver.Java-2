@@ -18,7 +18,7 @@ import com.example.demo.security.login.UserDetailsImpl;
 @RequestMapping("/select/company")
 public class Control {
 	@Autowired
-	DatabaseMapper mapper;
+	SelectCompanyDatabaseMapper mapper;
 	
 	@GetMapping
 	public String showDisplay() {

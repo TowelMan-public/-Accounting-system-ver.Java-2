@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.select.revenue.DatabaseMapper">
+<mapper namespace="com.example.demo.select.revenue.SelectRevenueDatabaseMapper">
 	<select id="selectGroup" resultType="com.example.demo.select.GroupResultForm">
 		SELECT 
 			<if test="checkGroupItem">

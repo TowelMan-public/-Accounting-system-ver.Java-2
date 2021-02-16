@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.security.Authority;
 import com.example.demo.security.login.UserDetailsImpl;
 
-@Controller
+@Controller()
 @RequestMapping("/confingration")
 public class Control {	
 	//定数群
 	private final String isnotEnabledUserMessage = "指定されたユーザーは有効ではありません。もう一回よくご確認ください。";
 	
 	@Autowired
-	DatabaseMapper mapper;
+	ConfigurationDatabaseMapper mapper;
 	
 	@GetMapping
 	public String showDisplay(@AuthenticationPrincipal UserDetailsImpl user, Model model) {

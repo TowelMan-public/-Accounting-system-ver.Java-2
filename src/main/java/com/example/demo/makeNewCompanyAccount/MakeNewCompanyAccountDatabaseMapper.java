@@ -2,8 +2,8 @@ package com.example.demo.makeNewCompanyAccount;
 
 import org.apache.ibatis.annotations.Mapper;
 
-@Mapper//TODO 実装 変えるかもしれない
-public interface DatabaseMapper {
+@Mapper
+public interface MakeNewCompanyAccountDatabaseMapper {
 	//新しい会社IDを取得する
 	void getNewCompanyAccountId(CompanyAccountForm company);
 

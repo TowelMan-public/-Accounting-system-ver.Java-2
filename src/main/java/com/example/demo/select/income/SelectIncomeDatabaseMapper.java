@@ -1,4 +1,4 @@
-package com.example.demo.select.incomeTax;
+package com.example.demo.select.income;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import com.example.demo.select.base.earningsGroup.BaseDatabaseMapper;
 import com.example.demo.select.base.earningsGroup.SelectForm;
 
 @Mapper
-public interface DatabaseMapper extends BaseDatabaseMapper {
+public interface SelectIncomeDatabaseMapper extends BaseDatabaseMapper {
 	//グループ検索
 	@Override
 	List<GroupResultForm> selectGroup(SelectForm form);

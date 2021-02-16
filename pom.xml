@@ -65,6 +65,11 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-el</artifactId>
+		    <scope>test</scope> <!-- (2) -->
+		</dependency>
 	</dependencies>
 
 	<build>

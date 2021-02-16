@@ -2,9 +2,12 @@ package com.example.demo.select.expenses;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.example.demo.select.GroupResultForm;
 
-public interface DatabaseMapper {
+@Mapper
+public interface SelectExpensesDatabaseMapper {
 	//グループ検索
 	List<GroupResultForm> selectGroup(SelectForm form);
 	

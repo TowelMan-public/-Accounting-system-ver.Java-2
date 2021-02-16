@@ -12,7 +12,7 @@ import com.example.demo.RegexpPattern;
 public class SecurityService implements UserDetailsService {
 
 	@Autowired
-	private DatabaseMapper mapper;
+	private LoginDatabaseMapper mapper;
 	
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException { 

@@ -1,4 +1,4 @@
-package com.example.demo.select.espensesItem;
+package com.example.demo.select.expensesItem;
 
 import javax.validation.Valid;
 
@@ -18,7 +18,7 @@ import com.example.demo.security.login.UserDetailsImpl;
 @RequestMapping("/select/expensesItem")
 public class Control {
 	@Autowired
-	DatabaseMapper mapper;
+	SelectExpensesItemDatabaseMapper mapper;
 	
 	@GetMapping
 	public String showDisplay() {

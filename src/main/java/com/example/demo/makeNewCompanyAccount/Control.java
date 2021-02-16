@@ -1,14 +1,17 @@
 package com.example.demo.makeNewCompanyAccount;
 
 import javax.validation.Valid;
+import javax.validation.Validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.security.Authority;
@@ -19,19 +22,24 @@ public class Control {
 	//定数群
 	private final String defaultAuthority = Authority.master;
 	
+	@ModelAttribute
+	  public MakeNewComanyAccountForm setupForm() {
+	    return new MakeNewComanyAccountForm();
+	}
+	
 	@Autowired
-	DatabaseMapper mapper;
+	MakeNewCompanyAccountDatabaseMapper mapper;
 	
 	@GetMapping
 	public String showDisplay(Model model) {
 		return "/makeNewCompanyAccount";
 	}
 	
-	@PostMapping
-	public String insertCompanyAccount(@ModelAttribute @Valid MakeNewComanyAccountForm form, BindingResult bindingResult, Model model) {
+	@PostMapping("make")
+	public String insertCompanyAccount(@Validated MakeNewComanyAccountForm form,BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸでエラーがある場合は、何もしないでこの関数を終わる
 		if (bindingResult.hasErrors())
-			return "redirect:/makeNewCompanyAccount";
+			return "/makeNewCompanyAccount";
 		
 		//各種Formオブジェクト作成
 		UserForm user = new UserForm(form);

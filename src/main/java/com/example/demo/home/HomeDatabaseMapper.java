@@ -2,8 +2,8 @@ package com.example.demo.home;
 
 import org.apache.ibatis.annotations.Mapper;
 
-@Mapper//TODO 実装
-public interface DatabaseMapper {
+@Mapper
+public interface HomeDatabaseMapper {
 	//「今月」の売上を取得
 	Integer getEarningsMonth(int companyId);
 	

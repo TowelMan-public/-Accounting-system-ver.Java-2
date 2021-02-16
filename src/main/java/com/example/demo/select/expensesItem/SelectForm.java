@@ -1,4 +1,4 @@
-package com.example.demo.select.espensesItem;
+package com.example.demo.select.expensesItem;
 
 import com.example.demo.RegexpPattern;
 

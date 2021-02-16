@@ -23,7 +23,7 @@ public class Control {
 	private final String defaultAuthority = Authority.user;
 	
 	@Autowired
-	DatabaseMapper mapper;
+	MakeNewUserDatabaseMapper mapper;
 	
 	@GetMapping
 	public String showDisplay(Model model) {

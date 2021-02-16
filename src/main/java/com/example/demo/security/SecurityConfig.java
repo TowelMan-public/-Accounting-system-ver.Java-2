@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import com.example.demo.security.login.SecurityService;
 
 @EnableWebSecurity
@@ -37,14 +36,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
                 //ログイン不要でアクセス可能に設定
-                .antMatchers("/login").permitAll()
-                .antMatchers("/makeNewCompanyAccount").permitAll()
-                //上記以外は直リンク禁止
-                .anyRequest().authenticated()
+                .antMatchers("/login","/makeNewCompanyAccount").permitAll()
                 //さらにマスター権限（MASTER）がないとアクセスできない
-                .antMatchers("/confinguration").hasAuthority(Authority.master)
-                .antMatchers("/makeNewUser").hasAuthority(Authority.master)
-                .antMatchers("/resultMakeNewUser").hasAuthority(Authority.master)
+                .antMatchers("/confinguration","/makeNewUser","/resultMakeNewUser").hasAuthority(Authority.master)
+                //上記以外は直リンク禁止
+                //.anyRequest().authenticated()
             .and()
             .formLogin()
                 //ログイン処理のパス
@@ -66,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     //パスワードのアルゴリズムをBCryptに設定
-    @Bean 
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }

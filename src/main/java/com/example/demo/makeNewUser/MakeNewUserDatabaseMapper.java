@@ -2,8 +2,8 @@ package com.example.demo.makeNewUser;
 
 import org.apache.ibatis.annotations.Mapper;
 
-@Mapper//TODO 実装 変えるかもしれない
-public interface DatabaseMapper {
+@Mapper
+public interface MakeNewUserDatabaseMapper {
 	//ユーザーを登録する
 	void insertUser(UserForm newUser);
 

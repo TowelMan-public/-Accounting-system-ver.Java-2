@@ -9,7 +9,7 @@ import com.example.demo.select.base.earningsGroup.BaseDatabaseMapper;
 import com.example.demo.select.base.earningsGroup.SelectForm;
 
 @Mapper
-public interface DatabaseMapper extends BaseDatabaseMapper {
+public interface SelectNetIncomeDatabaseMapper extends BaseDatabaseMapper {
 	//グループ検索
 	@Override
 	List<GroupResultForm> selectGroup(SelectForm form);

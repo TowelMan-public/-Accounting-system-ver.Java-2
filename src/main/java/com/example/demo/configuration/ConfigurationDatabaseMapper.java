@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-@Mapper//TODO 実装 変えるかもしれない
-public interface DatabaseMapper {
+@Mapper
+public interface ConfigurationDatabaseMapper {
 	//その会社に設定されている消費税率を取得する
 	Double getConsumptionTax(Integer companyId);
 

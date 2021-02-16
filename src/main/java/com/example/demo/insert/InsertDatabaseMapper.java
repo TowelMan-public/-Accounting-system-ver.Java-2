@@ -8,7 +8,7 @@ import com.example.demo.insert.expenses.ExpensesForm;
 import com.example.demo.insert.expensesItem.ExpensesItemForm;
 import com.example.demo.insert.revenue.RevenueForm;
 
-@Mapper //TODO
+@Mapper
 public interface InsertDatabaseMapper {
 	//会社の登録
 	void insertCompany(CompanyForm form);

@@ -21,7 +21,7 @@ import com.example.demo.select.base.earningsGroup.RequestForm;
 public class Control extends BaseControl{
 	
 	@Autowired
-	DatabaseMapper mapper;
+	SelectNetIncomeDatabaseMapper mapper;
 	
 	@GetMapping
 	public String showDisplay() {

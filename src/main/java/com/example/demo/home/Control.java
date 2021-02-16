@@ -13,7 +13,7 @@ import com.example.demo.security.login.UserDetailsImpl;
 @RequestMapping("/home")
 public class Control {
 	@Autowired
-	DatabaseMapper mapper;
+	HomeDatabaseMapper mapper;
 	
 	@GetMapping
 	public String showDisplay(@AuthenticationPrincipal UserDetailsImpl user, Model model) {
