@@ -18,7 +18,7 @@
 		<main>
 			<h2>経費の登録フォーム</h2>
 			<form th:action="@{/insert/expenses/insert}" method="post" action="#" th:object="${expensesForm}"> 
-				<div>経費の項目ID：<input type="text" name="expensesItem" list="datalist_expensesItem"/>
+				<div>経費の項目ID：<input type="text" name="expensesItem" list="datalist_expensesItem" th:field="*{expensesItem}"/>
 					<datalist id="datalist_expensesItem">
 						<div>もしくはリストから選択</div>
 						<select name="expensesItem" th:each="candidate : ${ExpensesItemCandidate}" th:object="${candidate}">
@@ -26,9 +26,9 @@
 						</select>
 					</datalist>
 				</div> <div th:if="${#fields.hasErrors('expensesItem')}" th:errors="*{expensesItem}" /><br>
-				<div>日付：<input type="text" name="expensesDate" /></div> <div th:if="${#fields.hasErrors('date')}" th:errors="*{date}" /"><br>
-				<div>金額：<input type="text" name="money" /></div> <div th:if="${#fields.hasErrors('money')}" th:errors="*{ramoneyte}" /"><br>
-				<div>件名（省略可）：<input type="text" name="subject" /></div> <div th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" /"><br>
+				<div>日付：<input type="text" name="expensesDate" th:field="*{date}"/></div> <div th:if="${#fields.hasErrors('date')}" th:errors="*{date}" /"><br>
+				<div>金額：<input type="text" name="money" th:field="*{ramoneyte}"/></div> <div th:if="${#fields.hasErrors('money')}" th:errors="*{ramoneyte}" /"><br>
+				<div>件名（省略可）：<input type="text" name="subject" th:field="*{subject}"/></div> <div th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" /"><br>
 				<p><input type="submit" value="登録" /></p>
 			</form>
 		</main>

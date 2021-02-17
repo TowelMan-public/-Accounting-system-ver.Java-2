@@ -33,17 +33,17 @@
 	  		</table>
 	  		
 	  		<h2>削除</h2>
-	  		<form th:action="@{/configuration/user/delete}" method="post" action="#" th:object="${IdForm}"> 
-				<div>ID：<input type="text" name="id"/></div> <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" /><br>
+	  		<form th:action="@{/configuration/user/delete}" method="post" action="#" th:object="${deleteForm}"> 
+				<div>ID：<input type="text" name="id" th:field="*{id}"/></div> <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" /><br>
 				<input type="submit" value="削除" />
 			</form>
 			
 			<h2>変更フォーム</h2>
 			<form th:action="@{/insert/expensesItem/insert}" method="post" action="#" th:object="${expensesItemForm}"> 
-				<div>ID：<input type="text" name="expensesItemId" /></div> <div th:if="${#fields.hasErrors('expensesItemId')}" th:errors="*{expensesItemId}" /><br>
-				<div>経費の項目名：<input type="text" name="expensesItemName" /></div> <div th:if="${#fields.hasErrors('expensesItemName')}" th:errors="*{expensesItemName}" /><br>
-				<div>反映率：<input type="text" name="rate" /></div> <div th:if="${#fields.hasErrors('rate')}" th:errors="*{rate}" /"><br>
-				<div>表示するかしないか：<input type="text" name="isDisplayed" /></div> <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" /><br>
+				<div>ID：<input type="text" name="expensesItemId" th:field="*{expensesItemId}"/></div> <div th:if="${#fields.hasErrors('expensesItemId')}" th:errors="*{expensesItemId}" /><br>
+				<div>経費の項目名：<input type="text" name="expensesItemName" th:field="*{expensesItemName}"/></div> <div th:if="${#fields.hasErrors('expensesItemName')}" th:errors="*{expensesItemName}" /><br>
+				<div>反映率：<input type="text" name="rate" th:field="*{rate}"/></div> <div th:if="${#fields.hasErrors('rate')}" th:errors="*{rate}" /"><br>
+				<div>表示するかしないか：<input type="text" name="isDisplayed" /></div> <br>
 				<p><input type="submit" value="変更" /></p>
 			</form>
 		</main>

@@ -1,13 +1,11 @@
 package com.example.demo.makeNewCompanyAccount;
 
-import java.io.Serializable;
-
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotBlank;
+
 import com.example.demo.RegexpMessage;
 
-public class MakeNewComanyAccountForm implements Serializable {
-	private static final long serialVersionUID = 1860338311534968988L;
-
+public class MakeNewComanyAccountForm {
 	@NotBlank(message = RegexpMessage.EMPTY)
 	private String companyName;
 	
@@ -20,10 +18,10 @@ public class MakeNewComanyAccountForm implements Serializable {
 	@NotBlank(message = RegexpMessage.EMPTY)
 	private String oneMorePassword;
 	
-	//@AssertTrue(message = "2つのパスワードが合致しません。もう一度お確かめください")
-	//public boolean isNotMatchesPassword() {
-		//return (password == null || oneMorePassword == null) || (password.equals(oneMorePassword));
-	//}
+	@AssertTrue(message = "2つのパスワードが合致しません。もう一度お確かめください")
+	public boolean isNotMatchesPassword() {
+		return (password == null || oneMorePassword == null) || (password.equals(oneMorePassword));
+	}
 
 	public String getCompanyName() {
 		return companyName;

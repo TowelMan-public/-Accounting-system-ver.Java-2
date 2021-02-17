@@ -17,8 +17,8 @@
 		</ul>
 		<main>
 			<h2>経費の項目の検索フォーム</h2>
-			<form th:action="@{/select/expenses/result}" method="post" action="#" th:object="${Form}"> 
-				<div>経費の項目（名前orID）：<input type="text" name="expenses" /></div> <div th:if="${#fields.hasErrors('expenses')}" th:errors="*{expenses}" /><br>
+			<form th:action="@{/select/expenses/result}" method="post" action="#" th:object="${requestForm}"> 
+				<div>経費の項目（名前orID）：<input type="text" name="expenses" th:field="*{expenses}"/></div> <div th:if="${#fields.hasErrors('expenses')}" th:errors="*{expenses}" /><br>
 				<div><input type="checkbox" name="checkDisplayed" th:value="true">表示されている項目のみ</input> </div><br>
 				<p><input type="submit" value="検索" /></p>
 			</form>

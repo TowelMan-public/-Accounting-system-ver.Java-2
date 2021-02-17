@@ -31,15 +31,15 @@
 	  		</table>
 	  		
 	  		<h2>削除</h2>
-	  		<form th:action="@{/configuration/user/delete}" method="post" action="#" th:object="${DeleteForm}"> 
-				<div>ID：<input type="text" name="id"/></div> <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" /><br>
+	  		<form th:action="@{/configuration/user/delete}" method="post" action="#" th:object="${deleteForm}"> 
+				<div>ID：<input type="text" name="id" th:field="*{id}"/></div> <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" /><br>
 				<input type="submit" value="削除" />
 			</form>
 			
 			<h2>変更フォーム</h2>
-			<form th:action="@{/insert/company/insert}" method="post" action="#" th:object="${CompanyForm}"> 
-				<div>ID：<input type="text" name="companyId" /></div> <div th:if="${#fields.hasErrors('companyId')}" th:errors="*{companyId}" /><br>
-				<div>会社名：<input type="text" name="companyName" /></div> <div th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}" /><br>
+			<form th:action="@{/insert/company/insert}" method="post" action="#" th:object="${companyForm}"> 
+				<div>ID：<input type="text" name="companyId" th:field="*{companyId}"/></div> <div th:if="${#fields.hasErrors('companyId')}" th:errors="*{companyId}" /><br>
+				<div>会社名：<input type="text" name="companyName" th:field="*{companyName}"/></div> <div th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}" /><br>
 				<div><input type="checkbox" name="isDisplayed" th:value="true">表示する</input> </div><br>
 				<p><input type="submit" value="変更" /></p>
 			</form>

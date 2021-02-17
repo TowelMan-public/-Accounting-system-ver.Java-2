@@ -35,17 +35,17 @@
 	  		</table>
 	  		
 	  		<h2>削除</h2>
-	  		<form th:action="@{/configuration/user/delete}" method="post" action="#" th:object="${IdForm}"> 
-				<div>ID：<input type="text" name="id"/></div> <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" /><br>
+	  		<form th:action="@{/configuration/user/delete}" method="post" action="#" th:object="${deleteForm}"> 
+				<div>ID：<input type="text" name="id" th:field="*{id}"/></div> <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" /><br>
 				<input type="submit" value="削除" />
 			</form>
 			
 			<h2>変更フォーム</h2>
 			<form th:action="@{/insert/expenses/insert}" method="post" action="#" th:object="${expensesForm}"> 
-				<div>ID：<input type="text" name="expensesId" /></div> <div th:if="${#fields.hasErrors('expensesId')}" th:errors="*{expensesId}" /><br>
-				<div>経費の項目ID：<input type="text" name="expensesItem" /></div> <div th:if="${#fields.hasErrors('expensesItem')}" th:errors="*{expensesItem}" /><br>
-				<div>日付：<input type="text" name="expensesDate" /></div> <div th:if="${#fields.hasErrors('expensesDate')}" th:errors="*{expensesDate}" /"><br>
-				<div>金額：<input type="text" name="money" /></div> <div th:if="${#fields.hasErrors('money')}" th:errors="*{ramoneyte}" /"><br>
+				<div>ID：<input type="text" name="expensesId" th:field="*{expensesId}"/></div> <div th:if="${#fields.hasErrors('expensesId')}" th:errors="*{expensesId}" /><br>
+				<div>経費の項目ID：<input type="text" name="expensesItem" th:field="*{expensesItem}"/></div> <div th:if="${#fields.hasErrors('expensesItem')}" th:errors="*{expensesItem}" /><br>
+				<div>日付：<input type="text" name="expensesDate" th:field="*{expensesDate}"/></div> <div th:if="${#fields.hasErrors('expensesDate')}" th:errors="*{expensesDate}" /"><br>
+				<div>金額：<input type="text" name="money" th:field="*{ramoneyte}"/></div> <div th:if="${#fields.hasErrors('money')}" th:errors="*{ramoneyte}" /"><br>
 				<div>件名（省略可）：<input type="text" name="subject" /></div><br>
 				<p><input type="submit" value="登録" /></p>
 			</form>

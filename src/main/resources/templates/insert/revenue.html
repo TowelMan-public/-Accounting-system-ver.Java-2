@@ -18,8 +18,8 @@
 		<main>
 			<h2>収入の登録フォーム</h2>
 			<form th:action="@{/insert/revenue/insert}" method="post" action="#" th:object="${revenueForm}"> 
-				<div>売上ID：<input type="text" name="earningsId" /></div> <div th:if="${#fields.hasErrors('earningsId')}" th:errors="*{earningsId}" /><br>
-				<div>金額：<input type="text" name="money" /></div> <div th:if="${#fields.hasErrors('money')}" th:errors="*{money}" /><br>
+				<div>売上ID：<input type="text" name="earningsId" th:field="*{earningsId}"/></div> <div th:if="${#fields.hasErrors('earningsId')}" th:errors="*{earningsId}" /><br>
+				<div>金額：<input type="text" name="money" th:field="*{money}"/></div> <div th:if="${#fields.hasErrors('money')}" th:errors="*{money}" /><br>
 				<p><input type="submit" value="登録" /></p>
 			</form>
 		</main>

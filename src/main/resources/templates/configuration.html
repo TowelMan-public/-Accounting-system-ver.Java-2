@@ -17,16 +17,16 @@
 		</ul>
 		<main>
 			<h2>設定</h2>
-			<form th:action="@{/configuration/taxRate/update}" method="post" action="#" th:object="${ConfigurationTaxRateForm}">
+			<form th:action="@{/configuration/taxRate/update}" method="post" action="#" th:object="${configurationTaxRateForm}">
 				<div></div>
-				<div>消費税率：<input type="text" name="afterConsumptionTax" th:text="${beforConsumptionTax}" /></div> <div th:if="${#fields.hasErrors('afterConsumptionTax')}" th:errors="*{afterConsumptionTax}" /><br>
+				<div>消費税率：<input type="text" name="afterConsumptionTax" th:text="${beforConsumptionTax}" th:field="*{afterConsumptionTax}"/></div> <div th:if="${#fields.hasErrors('afterConsumptionTax')}" th:errors="*{afterConsumptionTax}" /><br>
 				<input type="submit" value="反映" />
 			</form><br>
 			
 			<h3>会社名と会社ID</h3>
-			<form th:action="@{/configuration/company/update}" method="post" action="#" th:object="${CompanyConfigurationForm}"> 
+			<form th:action="@{/configuration/company/update}" method="post" action="#" th:object="${companyConfigurationForm}"> 
 				<div></div>
-				<div>名前：<input type="text" name="afterCompanyName" th:text="${beforCompanyName}" /></div> <div th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}" /><br>
+				<div>名前：<input type="text" name="afterCompanyName" th:text="${beforCompanyName}" th:field="*{companyName}"/></div> <div th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}" /><br>
 				<div>ID：<div th:text="${companyId}"></div>
 				<input type="submit" value="反映" />
 			</form>
@@ -48,18 +48,18 @@
 	  		</table>
 			
 			<h4>ユーザー変更</h4><div th:if="${isErrorUserUpdate}", th:text="${errorUserUpdate}"></div>>
-			<form th:action="@{/configuration/user/update}" method="post" th:object="${CompanyUserForm}"> 
+			<form th:action="@{/configuration/user/update}" method="post" th:object="${companyUserForm}"> 
 				<div></div>
-				<div>ID：<input type="text" name="userId"/></div> <div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" /><br>
-				<div>名前：<input type="text" name="userName" /></div> <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" /><br>
-				<div>権限：<input type="text" name="userAuthority"/></div> <div th:if="${#fields.hasErrors('userAuthority')}" th:errors="*{userAuthority}" /><br>
+				<div>ID：<input type="text" name="userId" th:field="*{userId}"/></div> <div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" /><br>
+				<div>名前：<input type="text" name="userName" th:field="*{userName}"/></div> <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" /><br>
+				<div>権限：<input type="text" name="userAuthority" th:field="*{userAuthority}"/></div> <div th:if="${#fields.hasErrors('userAuthority')}" th:errors="*{userAuthority}" /><br>
 				<input type="submit" value="変更" />
 			</form><br>
 			
 			<h4>ユーザー削除</h4><div th:if="${isErrorUserDelete}", th:text="${errorUserDelete}"></div>>
 			<form th:action="@{/configuration/user/delete}" method="post" th:object="${IdForm}"> 
 				<div></div>
-				<div>ID：<input type="text" name="id"/></div> <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" /><br>
+				<div>ID：<input type="text" name="id" th:field="*{id}"/></div> <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" /><br>
 				<input type="submit" value="削除" />
 			</form>
 		</main>

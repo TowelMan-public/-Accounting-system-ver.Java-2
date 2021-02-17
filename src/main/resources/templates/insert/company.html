@@ -18,7 +18,7 @@
 		<main>
 			<h2>会社の登録フォーム</h2>
 			<form th:action="@{/insert/company/insert}" method="post" action="#" th:object="${companyForm}"> 
-				<div>会社名：<input type="text" name="companyName" /></div> <div th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}" /><br>
+				<div>会社名：<input type="text" name="companyName" th:field="*{companyName}"/></div> <div th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}" /><br>
 				<p><input type="submit" value="登録" /></p>
 			</form>
 		</main>

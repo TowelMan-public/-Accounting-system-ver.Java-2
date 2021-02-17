@@ -17,8 +17,8 @@
 		</ul>
 		<main>
 			<h2>会社の検索フォーム</h2>
-			<form th:action="@{/select/company/result}" method="post" th:object="${RequestForm}"> 
-				<div>会社（名前orID）：<input type="text" name="company" /></div><div th:if="${#fields.hasErrors('company')}" th:errors="*{company}" ></div>
+			<form th:action="@{/select/company/result}" method="post" th:object="${requestForm}"> 
+				<div>会社（名前orID）：<input type="text" name="company" th:field="*{company}"/></div><div th:if="${#fields.hasErrors('company')}" th:errors="*{company}" ></div>
 				<div><input type="checkbox" name="isDisplayed" th:value="true">表示されている項目のみ</input> </div><br>
 				<p><input type="submit" value="検索" /></p>
 			</form>
