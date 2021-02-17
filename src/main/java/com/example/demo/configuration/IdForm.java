@@ -9,15 +9,15 @@ public class IdForm {
 	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)
 	private String id;
 
-	public Integer getId() {
+	public String getId() {
+		return id;
+	}
+	
+	public Integer getIdToInt() {
 		return Integer.parseInt(id);
 	}
 
-	public void setId(@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)String id) {
+	public void setId(String id) {
 		this.id = id;
-	}
-	
-	public void setId(Integer id) {
-		this.id = id.toString();
 	}
 }

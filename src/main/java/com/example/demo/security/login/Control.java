@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class Control {
 	//ログイン画面の表示
     @GetMapping
-    public String showDisplay() {
+    public String showDisplay(Form form) {
         return "/login";
     }
 
     //ログイン成功時に表示されるデフォルト画面表示
     @PostMapping
-    public String showDefaultDisplay() {
+    public String showDefaultDisplay(Form form) {
         return "redirect:/home";
     }
 }

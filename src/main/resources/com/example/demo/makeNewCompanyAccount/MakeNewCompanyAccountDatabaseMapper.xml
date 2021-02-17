@@ -10,6 +10,6 @@
 		INSERT INTO company_details(company_id,name) VALUES(#{companyId},#{companyName})
 	</insert>
 	<insert id="insertUser" useGeneratedKeys="true" keyProperty="userid">
-		INSERT INTO users(company_id,name,password,authority) VALUES(#{userName},#{password},#{companyId},#{authority})
+		INSERT INTO users(company_id,name,password,authority) VALUES(#{companyId},#{userName},#{password},#{authority})
 	</insert>
 </mapper>

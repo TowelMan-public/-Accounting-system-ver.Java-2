@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.security.Authority;
 import com.example.demo.security.login.UserDetailsImpl;
 
 @Controller
@@ -29,6 +30,9 @@ public class Control {
 		model.addAttribute("earningsYear", mapper.getEarningsYear( user.getCompanyId() ) );
 		model.addAttribute("expensesYear", mapper.getExpensesYear( user.getCompanyId() ) );
 		model.addAttribute("netIncomeRateYear", mapper.getNetIncomeYear( user.getCompanyId() ) );
+		
+		//MASTER権限があるかどうかのセット
+		model.addAttribute("isMASTER", user.getAuthoritie().equals(Authority.master));
 		
 		return "/home";
 	}

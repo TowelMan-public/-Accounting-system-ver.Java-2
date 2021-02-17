@@ -26,7 +26,7 @@
 			<h3>会社名と会社ID</h3>
 			<form th:action="@{/configuration/company/update}" method="post" action="#" th:object="${companyConfigurationForm}"> 
 				<div></div>
-				<div>名前：<input type="text" name="afterCompanyName" th:text="${beforCompanyName}" th:field="*{companyName}"/></div> <div th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}" /><br>
+				<div>名前：<input type="text" name="afterCompanyName" th:text="${beforCompanyName}" th:field="*{afterCompanyName}"/></div> <div th:if="${#fields.hasErrors('afterCompanyName')}" th:errors="*{afterCompanyName}" /><br>
 				<div>ID：<div th:text="${companyId}"></div>
 				<input type="submit" value="反映" />
 			</form>
@@ -40,7 +40,7 @@
 	  				<td>名前</td>
 	  				<td>権限</td>
 	  			</tr>
-	  			<tr th:each="user : ${companyUserForm}" th:object="${user}">
+	  			<tr th:each="user : ${out_companyUserForm}" th:object="${user}">
 	  				<td th:text="*{userId}"></td>
 			     	<td th:text="*{userName}"></td>
 			     	<td th:text="*{userAuthority}"></td>
@@ -57,7 +57,7 @@
 			</form><br>
 			
 			<h4>ユーザー削除</h4><div th:if="${isErrorUserDelete}", th:text="${errorUserDelete}"></div>>
-			<form th:action="@{/configuration/user/delete}" method="post" th:object="${IdForm}"> 
+			<form th:action="@{/configuration/user/delete}" method="post" th:object="${idForm}"> 
 				<div></div>
 				<div>ID：<input type="text" name="id" th:field="*{id}"/></div> <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" /><br>
 				<input type="submit" value="削除" />

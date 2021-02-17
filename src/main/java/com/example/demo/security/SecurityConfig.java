@@ -3,6 +3,7 @@ package com.example.demo.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.example.demo.security.login.SecurityService;
 
+@Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -21,8 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         //ログインを実際にやる物の設定
-    	auth.userDetailsService(userDetailsService)
-    	.passwordEncoder(passwordEncoder());
+    	auth.userDetailsService(userDetailsService);
     }
 
     @Override
@@ -36,11 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
                 //ログイン不要でアクセス可能に設定
-                .antMatchers("/login","/makeNewCompanyAccount").permitAll()
+                .antMatchers("/login","/makeNewCompanyAccount","/makeNewCompanyAccount/make").permitAll()
                 //さらにマスター権限（MASTER）がないとアクセスできない
                 .antMatchers("/confinguration","/makeNewUser","/resultMakeNewUser").hasAuthority(Authority.master)
                 //上記以外は直リンク禁止
-                //.anyRequest().authenticated()
+                .anyRequest().authenticated()
             .and()
             .formLogin()
                 //ログイン処理のパス
@@ -51,10 +52,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error")
                 //ログイン成功時の遷移先
                 .defaultSuccessUrl("/home",true)
-                //ログイン時のキー：ユーザーID
-                .usernameParameter("userId")
-                //ログイン時のパスワード
-                .passwordParameter("password")
+                //ログイン時のキー：ユーザーID テスト時コメントアウトする
+                //.usernameParameter("userId")
+                //ログイン時のパスワード テスト時コメントアウトする
+                //.passwordParameter("password")
             .and()
             .logout()
                 //ログアウト時の遷移先 POSTでアクセス

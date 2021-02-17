@@ -6,24 +6,24 @@
 	<select id="getEarningsMonth" resultType="java.lang.Integer">
 		SELECT SUM(money) FROM earnings
 		WHERE	company_id = #{companyId}
-		AND 	TIME_FORMAT(earnings_date,"m%") = TIME_FORMAT(CURDATE(),"m%")
-		AND		TIME_FORMAT(earnings_date,"Y%") = TIME_FORMAT(CURDATE(),"Y%")
+		AND 	TIME_FORMAT(earnings_date,"%m") = TIME_FORMAT(CURDATE(),"%m")
+		AND		TIME_FORMAT(earnings_date,"%y") = TIME_FORMAT(CURDATE(),"%y")
 	</select>
 	<select id="getEexpensesMonth" resultType="java.lang.Integer">
 		SELECT SUM(money) FROM expenses
 		WHERE	company_id = #{companyId}
-		AND 	TIME_FORMAT(expenses_date,"m%") = TIME_FORMAT(CURDATE(),"m%")
-		AND		TIME_FORMAT(expenses_date,"Y%") = TIME_FORMAT(CURDATE(),"Y%")
+		AND 	TIME_FORMAT(expenses_date,"%m") = TIME_FORMAT(CURDATE(),"%m")
+		AND		TIME_FORMAT(expenses_date,"%y") = TIME_FORMAT(CURDATE(),"%y")
 	</select>
 	<select id="getEarningsYear" resultType="java.lang.Integer">
 		SELECT SUM(money) FROM earnings
 		WHERE	company_id = #{companyId}
-		AND 	TIME_FORMAT(earnings_date,"Y%") = TIME_FORMAT(CURDATE(),"Y%")
+		AND 	TIME_FORMAT(earnings_date,"%y") = TIME_FORMAT(CURDATE(),"%y")
 	</select>
 	<select id="getExpensesYear" resultType="java.lang.Integer">
 		SELECT SUM(money) FROM expenses
 		WHERE	company_id = #{companyId}
-		AND 	TIME_FORMAT(expenses_date,"Y%") = TIME_FORMAT(CURDATE(),"Y%")
+		AND 	TIME_FORMAT(expenses_date,"%y") = TIME_FORMAT(CURDATE(),"%y")
 	</select>
 	<select id="getNetIncomeYear" resultType="java.lang.Integer">
 		SELECT
@@ -36,20 +36,20 @@
 				 ELSE 0
 			END )								AS "money"
 		FROM(
-			(SELECT
+			SELECT
 				earnings.earnings_date	AS "income_date",
 				earnings.money			AS "income_money"
 			FROM earnings
 				INNER JOIN suppliers ON earnings.suppliers_id = suppliers.id AND earnings.company_id = suppliers.company_id
-			WNERE company_id = #{companyAccountId})
+			WHERE suppliers.company_id = #{companyId}
 			UNION ALL 
 			(SELECT
-				expenses.expenses_date,
-				(0 - expenses.money)
+				expenses.expenses_date AS "income_date",
+				(0 - expenses.money) AS "income_date"
 			FROM expenses
 				INNER JOIN expenses_item ON expenses.expenses_item_id = expenses_item.id AND expenses.company_id = expenses_item.company_id
-			WNERE company_id = #{companyAccountId})
-		)
-		WHERE TIME_FORMAT(income_date,"Y%") = TIME_FORMAT(CURDATE(),"Y%")
+			WHERE expenses.company_id = #{companyId})
+		) income
+		WHERE DATE_FORMAT(income_date,"%Y") = DATE_FORMAT(CURDATE(),"%Y");
 	</select>
 </mapper>

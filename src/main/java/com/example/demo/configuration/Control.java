@@ -16,7 +16,7 @@ import com.example.demo.security.Authority;
 import com.example.demo.security.login.UserDetailsImpl;
 
 @Controller()
-@RequestMapping("/confingration")
+@RequestMapping("/confinguration")
 public class Control {	
 	//定数群
 	private final String isnotEnabledUserMessage = "指定されたユーザーは有効ではありません。もう一回よくご確認ください。";
@@ -24,8 +24,28 @@ public class Control {
 	@Autowired
 	ConfigurationDatabaseMapper mapper;
 	
+	@ModelAttribute
+	CompanyUserForm companyUserForm() {
+		return new CompanyUserForm();
+	}
+	
+	@ModelAttribute
+	IdForm idForm() {
+		return new IdForm();
+	}
+	
+	@ModelAttribute
+	ConfigurationTaxRateForm configurationTaxRateForm() {
+		return new ConfigurationTaxRateForm();
+	}
+	
+	@ModelAttribute
+	CompanyConfigurationForm companyConfigurationForm() {
+		return new CompanyConfigurationForm();
+	}
+	
 	@GetMapping
-	public String showDisplay(@AuthenticationPrincipal UserDetailsImpl user, Model model) {
+	public String showDisplay(@AuthenticationPrincipal UserDetailsImpl user,CompanyUserForm form1, Model model) {
 		//現在設定されている消費税率のセット
 		model.addAttribute("beforConsumptionTax",mapper.getConsumptionTax( user.getCompanyId() ));
 		
@@ -36,19 +56,19 @@ public class Control {
 		model.addAttribute("beforCompanyName",user.getCompanyName());
 		
 		//その会社に登録されているユーザーリストのセット
-		model.addAttribute("companyUserForm",mapper.selectUsersByCompanyId( user.getCompanyId() ));
+		model.addAttribute("out_companyUserForm",mapper.selectUsersByCompanyId( user.getCompanyId() ));
 		
-		return "/confingration";
+		return "/confinguration";
 	}
 	
 	@PostMapping("user/update")
 	public String updateUser(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid CompanyUserForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸでエラーがある場合は、何もしないでこの関数を終わる
 		if (bindingResult.hasErrors())
-			return "redirect:/confingration";
+			return "redirect:/confinguration";
 		
 		//有効でないユーザーであればエラーメッセージをセットしてこの関数を終了
-		if(!mapper.isEnabledUser(form.getUserId())) {
+		if(!mapper.isEnabledUser(form.getUserIdToInteger())) {
 			model.addAttribute("isErrorUserUpdate", true);
 			model.addAttribute("errorUserUpdate", isnotEnabledUserMessage);
 		}
@@ -60,17 +80,17 @@ public class Control {
 			model.addAttribute("isErrorUserUpdate", true);
 			model.addAttribute("errorUserUpdate", "この変更は、マスター権限者が無くなってしまうのでできません");
 		}
-		return "redirect:/confingration";
+		return "redirect:/confinguration";
 	}
 
 	@PostMapping("user/delete")
 	public String deleteUser(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid IdForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸでエラーがある場合は、何もしないでこの関数を終わる
 		if (bindingResult.hasErrors())
-			return "redirect:/confingration";
+			return "redirect:/confinguration";
 		
 		//有効でないユーザーであればエラーメッセージをセットしてこの関数を終了
-		if(!mapper.isEnabledUser(form.getId())) {
+		if(!mapper.isEnabledUser(form.getIdToInt())) {
 			model.addAttribute("isErrorUserUpdate", true);
 			model.addAttribute("errorUserDelete", isnotEnabledUserMessage);
 		}
@@ -82,7 +102,7 @@ public class Control {
 			model.addAttribute("isErrorUserDelete", true);
 			model.addAttribute("errorUserDelete", "このユーザーを削除するとマスター権限者が無くなってしまうのでできません");
 		}
-		return "redirect:/confingration";
+		return "redirect:/confinguration";
 	}
 
 	@PostMapping("taxRate/update")
@@ -108,7 +128,7 @@ public class Control {
 	}
 	
 	private boolean enableUpdate(UserDetailsImpl user, CompanyUserForm form) {
-		if(form.getUserAuthority().equals(Authority.user) && mapper.getAuthorityByUserId(form.getUserId()).equals(Authority.master)) {
+		if(form.getUserAuthority().equals(Authority.user) && mapper.getAuthorityByUserId(form.getUserIdToInteger()).equals(Authority.master)) {
 			//削除可能か判定し、削除不可能ならここでfalseを返す
 			if(mapper.getMasterAuthorityCountInCompany(user.getCompanyId()) <= 0)
 				return false;
@@ -117,7 +137,7 @@ public class Control {
 	}
 	
 	private boolean enableDelete(UserDetailsImpl user, IdForm form) {
-		if(mapper.getAuthorityByUserId(form.getId()).equals(Authority.master)) {
+		if(mapper.getAuthorityByUserId(form.getIdToInt()).equals(Authority.master)) {
 			//削除可能か判定し、削除不可能ならここでfalseを返す
 			if(mapper.getMasterAuthorityCountInCompany(user.getCompanyId()) <= 0)
 				return false;

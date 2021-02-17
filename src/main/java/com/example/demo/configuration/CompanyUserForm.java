@@ -8,7 +8,7 @@ import com.example.demo.RegexpPattern;
 
 public class CompanyUserForm {
 	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)
-	private Integer userId;
+	private String userId;
 	
 	@NotBlank(message = RegexpMessage.EMPTY)
 	private String userName;
@@ -16,18 +16,17 @@ public class CompanyUserForm {
 	@Pattern(regexp = RegexpPattern.AUTHORITY, message = RegexpMessage.AUTHORITY)
 	private String userAuthority;
 
-	public Integer getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER) String userId) {
-		this.userId = Integer.parseInt(userId);
-	}
-
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	
+	public Integer getUserIdToInteger() {
+		return Integer.parseInt(userId);
+	}
 	public String getUserName() {
 		return userName;
 	}

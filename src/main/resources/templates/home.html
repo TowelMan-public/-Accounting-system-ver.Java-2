@@ -13,7 +13,7 @@
 		    <li class="menu_inner"><a href="@{/home}">ホーム</a></li>
 		    <li class="menu_inner"><a href="@{/insert}">登録</a></li>
 		    <li class="menu_inner"><a href="@{/select}">検索</a></li>
-		    <li class="menu_inner"><a href="@{/configuration}">設定</a></li>
+		    <li class="menu_inner" th:if="${isMASTER}"><a href="@{/configuration}">設定</a></li>
 		</ul>
 		<main>
 			<h2>ホーム</h2>
