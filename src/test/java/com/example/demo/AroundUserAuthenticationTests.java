@@ -15,30 +15,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @AutoConfigureMockMvc
 @SpringBootTest(classes = AccoutingSytemVer2Application.class)
-class AccoutingSytemVer2ApplicationTests {
+class AroundUserAuthenticationTests {
 
 	//モック
     @Autowired
     private MockMvc mockMvc;
 
-    void loginMaster() throws Exception {
-    	//Master
-        this.mockMvc.perform(formLogin("/login")
-                .user("1")
-                .password("test")).andDo(print())
-	        .andExpect(status().is3xxRedirection())
-	        .andExpect(redirectedUrl("/home"));
-    }
-    
-    void loginUser() throws Exception {
-    	//Master
-        this.mockMvc.perform(formLogin("/login")
-                .user("2")
-                .password("test")).andDo(print())
-	        .andExpect(status().is3xxRedirection())
-	        .andExpect(redirectedUrl("/home"));
-    }
-    
     @Test
     void ログイン出来る() throws Exception {
     	//Master
@@ -47,7 +29,6 @@ class AccoutingSytemVer2ApplicationTests {
                 .password("test")).andDo(print())
 	        .andExpect(status().is3xxRedirection())
 	        .andExpect(redirectedUrl("/home"));
-    	loginUser();
     	//User
         this.mockMvc.perform(formLogin("/login")
                 .user("2")
@@ -131,6 +112,4 @@ class AccoutingSytemVer2ApplicationTests {
 	        .andExpect(status().is3xxRedirection())
 	        .andExpect(redirectedUrl("http://localhost/login"));
     }
-    
-    
 }
