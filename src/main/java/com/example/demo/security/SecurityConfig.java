@@ -53,9 +53,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //ログイン成功時の遷移先
                 .defaultSuccessUrl("/home",true)
                 //ログイン時のキー：ユーザーID テスト時コメントアウトする
-                //.usernameParameter("userId")
+                .usernameParameter("userId")
                 //ログイン時のパスワード テスト時コメントアウトする
-                //.passwordParameter("password")
+                .passwordParameter("password")
             .and()
             .logout()
                 //ログアウト時の遷移先 POSTでアクセス

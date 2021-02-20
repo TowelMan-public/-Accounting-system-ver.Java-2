@@ -16,7 +16,7 @@
 		FROM users
 		WHERE company_id = #{companyId}
 	</select>
-	<select id="isEnabledUser" resultType="boolean">
+	<select id="isEnabledUser" resultType="_boolean">
 		SELECT COUNT(*) > 0
 		FROM users
 		WHERE id = #{userId}
@@ -24,13 +24,13 @@
 	<update id="updateUser">
 		UPDATE users
 		SET
-			name		= #{userName}
+			name		= #{userName},
 			authority	= #{userAuthority}
-		WHER id = #{userId}
+		WHERE id = #{userId}
 	</update>
 	<delete id="deleteUser">
 		DELETE FROM users
-		WHERE id = #{userId}
+		WHERE id = #{id}
 	</delete>
 	<update id="updateConsumptionTaxRate">
 		UPDATE company_details SET default_consumption_tax_rate = #{afterConsumptionTax}

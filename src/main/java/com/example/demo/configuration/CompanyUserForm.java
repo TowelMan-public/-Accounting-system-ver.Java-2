@@ -7,6 +7,16 @@ import com.example.demo.RegexpMessage;
 import com.example.demo.RegexpPattern;
 
 public class CompanyUserForm {
+	public CompanyUserForm(@Pattern(regexp = "^[0-9]+$", message = "整数で入力してください") String userId,
+			@NotBlank(message = "何かしら入力してください（空っぽはだめです）") String userName,
+			@Pattern(regexp = "^(MASTER)|(USER)$", message = "権限は「MASTER」か「USER」でお願いします") String userAuthority) {
+		this.userId = userId;
+		this.userName = userName;
+		this.userAuthority = userAuthority;
+	}
+
+	public CompanyUserForm() {}
+	
 	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)
 	private String userId;
 	

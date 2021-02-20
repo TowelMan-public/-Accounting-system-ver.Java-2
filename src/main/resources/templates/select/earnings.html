@@ -5,15 +5,15 @@
 		<title>簡易的な会計システム♪</title>
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="stylesheet" type="text/css" th:href="@{style.css}">yyy
+		<link rel="stylesheet" type="text/css" th:href="@{/style.css}">yyy
 	</head>
 	<body>
 		<h1>簡易的な会計システム♪</h1>
 		<ul class="menu_outer">
-		    <li class="menu_inner"><a href="@{/home}">ホーム</a></li>
-		    <li class="menu_inner"><a href="@{/insert}">登録</a></li>
-		    <li class="menu_inner"><a href="@{/select}">検索</a></li>
-		    <li class="menu_inner"><a href="@{/configuration}">設定</a></li>
+		    <li class="menu_inner"><a th:href="@{/home}">ホーム</a></li>
+		    <li class="menu_inner"><a th:href="@{/insert}">登録</a></li>
+		    <li class="menu_inner"><a th:href="@{/select}">検索</a></li>
+		    <li class="menu_inner"><a th:href="@{/confinguration}">設定</a></li>
 		</ul>
 		<main>
 			<h2>売上の検索フォーム</h2>

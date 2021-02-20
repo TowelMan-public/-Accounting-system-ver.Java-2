@@ -52,6 +52,11 @@ public class UserDetailsImpl implements UserDetails {
 		return user.getCompanyName();
 	}	
 	
+	//会社名のセット
+	public void setCompanyName(String cmpanyName) {
+		this.user.setCompanyName(cmpanyName);
+	}
+	
 	//アカウントの有効期限の状態を判定
 	@Override
 	public boolean isAccountNonExpired() {

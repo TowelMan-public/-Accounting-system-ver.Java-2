@@ -6,6 +6,12 @@ import com.example.demo.RegexpMessage;
 import com.example.demo.RegexpPattern;
 
 public class IdForm {
+	public IdForm(@Pattern(regexp = "^[0-9]+$", message = "整数で入力してください") String id) {
+		this.id = id;
+	}
+
+	public IdForm() {}
+	
 	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)
 	private String id;
 

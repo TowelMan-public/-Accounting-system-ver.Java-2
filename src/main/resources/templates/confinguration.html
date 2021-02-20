@@ -4,34 +4,27 @@
 	<head>
 		<title>簡易的な会計システム♪</title>
 		<meta charset="utf-8"/>
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="stylesheet" type="text/css" th:href="@{style.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 	</head>
 	<body>
 		<h1>簡易的な会計システム♪</h1>
-		<ul class="menu_outer">
-		    <li class="menu_inner"><a href="@{/home}">ホーム</a></li>
-		    <li class="menu_inner"><a href="@{/insert}">登録</a></li>
-		    <li class="menu_inner"><a href="@{/select}">検索</a></li>
-		    <li class="menu_inner"><a href="@{/configuration}">設定</a></li>
-		</ul>
+		a
 		<main>
 			<h2>設定</h2>
-			<form th:action="@{/configuration/taxRate/update}" method="post" action="#" th:object="${configurationTaxRateForm}">
-				<div></div>
-				<div>消費税率：<input type="text" name="afterConsumptionTax" th:text="${beforConsumptionTax}" th:field="*{afterConsumptionTax}"/></div> <div th:if="${#fields.hasErrors('afterConsumptionTax')}" th:errors="*{afterConsumptionTax}" /><br>
+			<form th:action="@{/confinguration/taxRate/update}" method="post" action="#" th:object="${configurationTaxRateForm}">
+				<div>消費税率：<input type="text" name="afterConsumptionTax" th:field="*{afterConsumptionTax}"/></div> <div th:if="${#fields.hasErrors('afterConsumptionTax')}" th:errors="*{afterConsumptionTax}" /><br>
 				<input type="submit" value="反映" />
 			</form><br>
 			
 			<h3>会社名と会社ID</h3>
-			<form th:action="@{/configuration/company/update}" method="post" action="#" th:object="${companyConfigurationForm}"> 
+			<form th:action="@{/confinguration/company/update}" method="post" action="#" th:object="${companyConfigurationForm}"> 
 				<div></div>
-				<div>名前：<input type="text" name="afterCompanyName" th:text="${beforCompanyName}" th:field="*{afterCompanyName}"/></div> <div th:if="${#fields.hasErrors('afterCompanyName')}" th:errors="*{afterCompanyName}" /><br>
-				<div>ID：<div th:text="${companyId}"></div>
+				<div>名前：<input type="text" name="afterCompanyName" th:field="*{afterCompanyName}"/></div> <div th:if="${#fields.hasErrors('afterCompanyName')}" th:errors="*{afterCompanyName}" /><br>
+				<div>ID：<input type="text" name="companyId" th:field="*{companyId}" readonly/></div> 
 				<input type="submit" value="反映" />
 			</form>
 			
-			<h3>ユーザー管理<h3>
+			<h3>ユーザー管理</h3>
 			<a th:href="@{/makeNewUser}">ユーザーの新規登録</a><br><br>
 			
 			<table border="1">
@@ -47,17 +40,16 @@
 	  			</tr>
 	  		</table>
 			
-			<h4>ユーザー変更</h4><div th:if="${isErrorUserUpdate}", th:text="${errorUserUpdate}"></div>>
-			<form th:action="@{/configuration/user/update}" method="post" th:object="${companyUserForm}"> 
-				<div></div>
+			<h4>ユーザー変更</h4><div th:if="${isErrorUserUpdate}", th:text="${errorUserUpdate}"></div>
+			<form th:action="@{/confinguration/user/update}" method="post" th:object="${companyUserForm}"> 
 				<div>ID：<input type="text" name="userId" th:field="*{userId}"/></div> <div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" /><br>
 				<div>名前：<input type="text" name="userName" th:field="*{userName}"/></div> <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" /><br>
 				<div>権限：<input type="text" name="userAuthority" th:field="*{userAuthority}"/></div> <div th:if="${#fields.hasErrors('userAuthority')}" th:errors="*{userAuthority}" /><br>
 				<input type="submit" value="変更" />
 			</form><br>
 			
-			<h4>ユーザー削除</h4><div th:if="${isErrorUserDelete}", th:text="${errorUserDelete}"></div>>
-			<form th:action="@{/configuration/user/delete}" method="post" th:object="${idForm}"> 
+			<h4>ユーザー削除</h4><div th:if="${isErrorUserDelete}" th:text="${errorUserDelete}"></div>
+			<form th:action="@{/confinguration/user/delete}" method="post" th:object="${idForm}"> 
 				<div></div>
 				<div>ID：<input type="text" name="id" th:field="*{id}"/></div> <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" /><br>
 				<input type="submit" value="削除" />

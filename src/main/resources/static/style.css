@@ -1,12 +1,12 @@
 /*<link rel="stylesheet" type="text/css" th:href="@{style.css}">*/
 
 body{
-	/*全体を横方向に中央ぞろえをする*/
+	/*蜈ｨ菴薙ｒ讓ｪ譁ｹ蜷代↓荳ｭ螟ｮ縺槭ｍ縺医ｒ縺吶ｋ*/
 	text-align: center;
 }
 
-form , .infomation{
-	/*相対的に左寄せする*/
+form , .infomation, table{
+	/*逶ｸ蟇ｾ逧�縺ｫ蟾ｦ蟇�縺帙☆繧�*/
 	width: 80%;
 	margin: 0 auto;
 	max-width: 500px;
@@ -36,13 +36,13 @@ input[type="password"]:focus{
 }
 
 input[type="submit"]{
-	/*中央に*/
+	/*荳ｭ螟ｮ縺ｫ*/
 	width: 80%;
 	margin: 0 auto;
 	max-width: 500px;
 	display: inline-brock;
 	text-align: center;
-	/*デザイン*/
+	/*繝�繧ｶ繧､繝ｳ*/
 	border-radius: 0;   
     background: -moz-linear-gradient(top, #FFF 0%, #EEE);
     background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#EEE));

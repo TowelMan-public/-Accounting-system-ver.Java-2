@@ -45,15 +45,17 @@ public class Control {
 	}
 	
 	@GetMapping
-	public String showDisplay(@AuthenticationPrincipal UserDetailsImpl user,CompanyUserForm form1, Model model) {
+	public String showDisplay(@AuthenticationPrincipal UserDetailsImpl user, Model model) {
 		//現在設定されている消費税率のセット
-		model.addAttribute("beforConsumptionTax",mapper.getConsumptionTax( user.getCompanyId() ));
+		var taxForm = new ConfigurationTaxRateForm();
+		taxForm.setAfterConsumptionTax(mapper.getConsumptionTax(user.getCompanyId()).toString());
+		model.addAttribute("configurationTaxRateForm",taxForm);
 		
-		//会社IDのセット
-		model.addAttribute("companyId",user.getCompanyId());
-		
-		//現在指定されている会社の名前
-		model.addAttribute("beforCompanyName",user.getCompanyName());
+		//会社のなまえとIDのセット
+		var companyForm = new CompanyConfigurationForm();
+		companyForm.setAfterCompanyName(user.getCompanyName());
+		companyForm.setCompanyId(user.getCompanyId());
+		model.addAttribute("companyConfigurationForm",companyForm);
 		
 		//その会社に登録されているユーザーリストのセット
 		model.addAttribute("out_companyUserForm",mapper.selectUsersByCompanyId( user.getCompanyId() ));
@@ -65,12 +67,13 @@ public class Control {
 	public String updateUser(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid CompanyUserForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸでエラーがある場合は、何もしないでこの関数を終わる
 		if (bindingResult.hasErrors())
-			return "redirect:/confinguration";
+			return this.showDisplay(user,model);
 		
 		//有効でないユーザーであればエラーメッセージをセットしてこの関数を終了
 		if(!mapper.isEnabledUser(form.getUserIdToInteger())) {
 			model.addAttribute("isErrorUserUpdate", true);
 			model.addAttribute("errorUserUpdate", isnotEnabledUserMessage);
+			return this.showDisplay(user,model);
 		}
 		
 		//対象のユーザーが変更できるかを判定
@@ -87,12 +90,13 @@ public class Control {
 	public String deleteUser(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid IdForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸでエラーがある場合は、何もしないでこの関数を終わる
 		if (bindingResult.hasErrors())
-			return "redirect:/confinguration";
+			return "/confinguration";
 		
 		//有効でないユーザーであればエラーメッセージをセットしてこの関数を終了
 		if(!mapper.isEnabledUser(form.getIdToInt())) {
 			model.addAttribute("isErrorUserUpdate", true);
 			model.addAttribute("errorUserDelete", isnotEnabledUserMessage);
+			return "/confinguration";
 		}
 		
 		//対象のユーザーが削除できるかを判定
@@ -101,6 +105,7 @@ public class Control {
 		}else {//エラーメッセージ
 			model.addAttribute("isErrorUserDelete", true);
 			model.addAttribute("errorUserDelete", "このユーザーを削除するとマスター権限者が無くなってしまうのでできません");
+			return "/confinguration";
 		}
 		return "redirect:/confinguration";
 	}
@@ -113,18 +118,19 @@ public class Control {
 		
 		form.setCompanyId(user.getCompanyId());
 		mapper.updateConsumptionTaxRate(form);
-		return "redirect:/confingration";
+		return "redirect:/confinguration";
 	}
 	
 	@PostMapping("company/update")
-	public String updateCompany(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid CompanyConfigurationForm form, BindingResult bindingResult) {
+	public String updateCompany(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid CompanyConfigurationForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸでエラーがある場合は、何もしないでこの関数を終わる
 		if (bindingResult.hasErrors())
 			return "redirect:/confingration";
 		
 		form.setCompanyId(user.getCompanyId());
 		mapper.updateCompanyName(form);
-		return "redirect:/confingration";
+		user.setCompanyName(form.getAfterCompanyName());
+		return "redirect:/confinguration";
 	}
 	
 	private boolean enableUpdate(UserDetailsImpl user, CompanyUserForm form) {
