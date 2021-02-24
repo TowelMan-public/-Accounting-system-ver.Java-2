@@ -20,8 +20,8 @@ public class ExpensesItemForm {
 	public void setExpensesItemName(String expensesItemName) {
 		this.expensesItemName = expensesItemName;
 	}
-	public Double getRate() {
-		return Double.parseDouble(rate);
+	public String getRate() {
+		return rate;
 	}
 	public void setRate(String rate) {
 		this.rate = rate;

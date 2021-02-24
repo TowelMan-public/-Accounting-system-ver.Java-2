@@ -8,8 +8,10 @@
 			VALUES(#{companyAccountId},#{companyName})
 	</insert>
 	<insert id="insertEarnings">
-		INSERT INTO earnings(company_id,suppliers_id,money,earnings_date,subject,person_name)
-			VALUES(#{companyAccountId},#{company},#{money},#{earningsDate},#{subject},#{personName})
+		INSERT INTO earnings(company_id,suppliers_id,money,earnings_date,subject,person_name,consumption_tax_rate)
+			VALUES(#{companyAccountId},#{company},#{money},#{earningsDate},#{subject},#{personName},
+				(SELECT default_consumption_tax_rate FROM company_details WHERE company_id = #{companyAccountId})
+			)
 	</insert>
 	<insert id="insertExpenses">
 		INSERT INTO expenses(company_id,expenses_item_id,money,expenses_date,subject)
@@ -18,7 +20,7 @@
 	<update id="insertRevenue">
 		UPDATE revenue
 		SET money = money + #{money}
-		WHERE eanings_id = #{earningsId}
+		WHERE earnings_id = #{earningsId}
 	</update>
 	<insert id="insertExpensesItem">
 		INSERT INTO expenses_item(company_id,name,rate) 

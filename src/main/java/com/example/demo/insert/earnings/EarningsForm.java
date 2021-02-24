@@ -29,20 +29,32 @@ public class EarningsForm {
 	public void setEarningsDate(String earningsDate) {
 		this.earningsDate = earningsDate;
 	}
-	public Integer getCompany() {
-		if(company.matches(RegexpPattern.ID_AND_NAME)) {//IDと名前がセットで入力されている
-			java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(RegexpPattern.ID_AND_NAME);
-			Matcher matcher = pattern.matcher(company);
-			return Integer.parseInt(matcher.group(1));
-		}else {//IDのみが入力されている
-			return Integer.parseInt(company);
+	
+	public String getCompany() {
+		if(company == null)
+			return this.company;
+		else{
+			Integer output = getCompanyToInteger();
+			return output == null ? "" : output.toString();
 		}
+	}
+	
+	public Integer getCompanyToInteger() {
+		java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(RegexpPattern.ID_AND_NAME);
+		Matcher matcher = pattern.matcher(company);
+		
+		if(matcher.matches()) {//IDと名前がセットで入力されている
+			return Integer.parseInt(matcher.group(1));
+		}else if(company.matches(RegexpPattern.INTEGER)) {//IDのみが入力されている
+			return Integer.parseInt(company);
+		}else
+			return null;
 	}
 	public void setCompany(String company) {
 		this.company = company;
 	}
-	public Integer getMoney() {
-		return Integer.parseInt(money);
+	public String getMoney() {
+		return this.money;
 	}
 	public void setMoney(String money) {
 		this.money = money;

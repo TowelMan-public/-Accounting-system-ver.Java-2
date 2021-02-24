@@ -22,7 +22,7 @@ public class Control {
 	InsertDatabaseMapper insertMapper;
 	
 	@GetMapping()
-	public String showDisplay(@AuthenticationPrincipal UserDetailsImpl user, Model model) {		
+	public String showDisplay(@AuthenticationPrincipal UserDetailsImpl user, Model model,@ModelAttribute ExpensesItemForm form) {		
 		return "/insert/expensesItem";
 	}
 	
@@ -30,7 +30,7 @@ public class Control {
 	public String insert(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid ExpensesItemForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸ
 		if (bindingResult.hasErrors())
-			return "redirect:/result/expensesItem";
+			return "/insert/expensesItem";
 		
 		//formにcompanyAccountIdをセット
 		form.setCompanyAccountId(user.getCompanyId());

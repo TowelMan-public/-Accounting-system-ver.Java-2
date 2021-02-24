@@ -22,7 +22,7 @@
 				<div>会社ID：<input type="text" name="company" th:field="*{company}"list="datalist_company" />
 					<datalist id="datalist_company">
 						<div>もしくはリストから選択</div>
-						<select name="company" th:each="candidate : ${ComapnyCandidate}" th:object="${candidate}">
+						<select name="company" th:if="${companyCandidate}" th:each="candidate : ${companyCandidate}" th:object="${candidate}">
 							<option th:value="*{candidateStr}"></option>
 						</select>
 					</datalist>

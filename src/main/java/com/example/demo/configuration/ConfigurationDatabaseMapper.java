@@ -3,6 +3,7 @@ package com.example.demo.configuration;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface ConfigurationDatabaseMapper {
@@ -13,7 +14,7 @@ public interface ConfigurationDatabaseMapper {
 	List<CompanyUserForm> selectUsersByCompanyId(Integer companyId);
 
 	//指定されたユーザーIDが有効かどうかを調べる
-	boolean isEnabledUser(Integer userId);
+	boolean isEnabledUser(@Param("userId") Integer userId,@Param("companyId")Integer companyId);
 
 	//ユーザーの情報を更新する
 	void updateUser(CompanyUserForm form);

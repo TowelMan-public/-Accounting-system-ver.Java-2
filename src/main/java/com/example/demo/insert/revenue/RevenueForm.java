@@ -13,14 +13,17 @@ public class RevenueForm {
 	//CompanyAccountIdを、Controlクラスでセットする
 	private Integer companyAccountId;
 	
-	public Integer getEarningsId() {
+	public String getEarningsId() {
+		return earningsId;
+	}
+	public Integer getEarningsIdToInteger() {
 		return Integer.parseInt(earningsId);
 	}
 	public void setEarningsId(String earningsId) {
 		this.earningsId = earningsId;
 	}
-	public Integer getMoney() {
-		return Integer.parseInt(money);
+	public String getMoney() {
+		return money;
 	}
 	public void setMoney(String money) {
 		this.money = money;

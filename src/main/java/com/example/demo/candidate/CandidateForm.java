@@ -22,4 +22,7 @@ public class CandidateForm {
 		candidateStr = candidateId.toString() + ":" + candidateName;
 		return candidateStr;
 	}
+	public void setCandidateStr(String candidateStr) {
+		this.candidateStr = candidateStr;
+	}
 }

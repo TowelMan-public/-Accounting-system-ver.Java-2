@@ -30,23 +30,29 @@ public class Control {
 	CandidateDatabaseMapper candidateMapper;
 	
 	@GetMapping()
-	public String showDisplay(@AuthenticationPrincipal UserDetailsImpl user, Model model) {	
-		//候補を取得して、それをページにセット
-		model.addAttribute("CompanyCandidate",candidateMapper.getCandidateCompany( user.getCompanyId() ));		
+	public String showDisplay(@AuthenticationPrincipal UserDetailsImpl user, Model model,@ModelAttribute EarningsForm form) {	
+		setCandidate(user,model);
 		return "/insert/earnings";
+	}
+	
+	private void setCandidate(UserDetailsImpl user, Model model) {
+		//候補を取得して、それをページにセット
+		model.addAttribute("companyCandidate",candidateMapper.getCandidateCompany( user.getCompanyId() ));
 	}
 	
 	@PostMapping("insert")
 	public String insert(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid EarningsForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸ
-		if (bindingResult.hasErrors())
-			return "redirect:/result/earnings";
+		if (bindingResult.hasErrors()) {
+			setCandidate(user,model);
+			return "/insert/earnings";
+		}
 		
 		//formにcompanyAccountIdをセット
 		form.setCompanyAccountId(user.getCompanyId());
 		
 		//値の有効性をチェック
-		if( !verificationMapper.isEnabledCompanyId(user.getCompanyId(), form.getCompany())) {//有効でない
+		if( !verificationMapper.isEnabledCompanyId(user.getCompanyId(), form.getCompanyToInteger())) {//有効でない
 			FieldError error = new FieldError(bindingResult.getObjectName(), "company", Message.ID_ISNOT_ENABLED);
 			bindingResult.addError(error);
 		}

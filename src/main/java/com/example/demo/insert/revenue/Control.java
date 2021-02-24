@@ -30,7 +30,7 @@ public class Control {
 	CandidateDatabaseMapper candidateMapper;
 	
 	@GetMapping()
-	public String showDisplay(@AuthenticationPrincipal UserDetailsImpl user, Model model) {	
+	public String showDisplay(@AuthenticationPrincipal UserDetailsImpl user, Model model,@ModelAttribute RevenueForm form) {	
 		return "/insert/revenue";
 	}
 	
@@ -38,13 +38,13 @@ public class Control {
 	public String insert(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid RevenueForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸ
 		if (bindingResult.hasErrors())
-			return "redirect:/result/revenue";
+			return "/insert/revenue";
 		
 		//formにcompanyAccountIdをセット
 		form.setCompanyAccountId(user.getCompanyId());
 		
 		//値の有効性をチェック
-		if( !verificationMapper.isEnabledEarningsId(user.getCompanyId(), form.getEarningsId())) {//有効でない
+		if( !verificationMapper.isEnabledEarningsId(user.getCompanyId(), form.getEarningsIdToInteger())) {//有効でない
 			FieldError error = new FieldError(bindingResult.getObjectName(), "earningsId", Message.ID_ISNOT_ENABLED);
 			bindingResult.addError(error);
 		}

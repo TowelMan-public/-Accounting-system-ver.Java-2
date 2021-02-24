@@ -6,14 +6,14 @@
 	<select id="getCandidateExpensesItem" resultType="com.example.demo.candidate.CandidateForm">
 		SELECT
 			id		AS "candidateId",
-			name	AS "companyAccount"
+			name	AS "candidateName"
 		FROM expenses_item
 		WHERE company_id = #{companyAccountid}
 	</select>
 	<select id="getCandidateCompany" resultType="com.example.demo.candidate.CandidateForm">
 		SELECT
 			id		AS "candidateId",
-			name	AS "companyAccount"
+			name	AS "candidateName"
 		FROM suppliers
 		WHERE company_id = #{companyAccountid}
 	</select>

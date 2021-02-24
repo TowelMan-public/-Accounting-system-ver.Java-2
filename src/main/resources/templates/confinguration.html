@@ -8,7 +8,12 @@
 	</head>
 	<body>
 		<h1>簡易的な会計システム♪</h1>
-		a
+		<ul class="menu_outer">
+		    <li class="menu_inner"><a th:href="@{/home}">ホーム</a></li>
+		    <li class="menu_inner"><a th:href="@{/insert}">登録</a></li>
+		    <li class="menu_inner"><a th:href="@{/select}">検索</a></li>
+		    <li class="menu_inner" th:if="${isMASTER}"><a th:href="@{/confinguration}">設定</a></li>
+		</ul>
 		<main>
 			<h2>設定</h2>
 			<form th:action="@{/confinguration/taxRate/update}" method="post" action="#" th:object="${configurationTaxRateForm}">

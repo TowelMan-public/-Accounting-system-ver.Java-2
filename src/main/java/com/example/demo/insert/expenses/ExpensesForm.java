@@ -19,14 +19,24 @@ public class ExpensesForm {
 	//CompanyAccountIdを、Controlクラスでセットする
 	private Integer companyAccountId;
 	
-	public Integer getExpensesItem() {
-		if(expensesItem.matches(RegexpPattern.ID_AND_NAME)) {//IDと名前がセットで入力されている
-			java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(RegexpPattern.ID_AND_NAME);
-			Matcher matcher = pattern.matcher(expensesItem);
-			return Integer.parseInt(matcher.group(1));
-		}else {//IDのみが入力されている
-			return Integer.parseInt(expensesItem);
+	public String getExpensesItem() {
+		if(expensesItem == null) 
+			return "";
+		else {
+			Integer output = getExpensesItemToInteger();
+			return output == null ? "" : output.toString();
 		}
+	}
+	public Integer getExpensesItemToInteger() {
+		java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(RegexpPattern.ID_AND_NAME);
+		Matcher matcher = pattern.matcher(expensesItem);
+		
+		if(matcher.matches()) {//IDと名前がセットで入力されている
+			return Integer.parseInt(matcher.group(1));
+		}else if(expensesItem.matches(RegexpPattern.INTEGER)) {//IDのみが入力されている
+			return Integer.parseInt(expensesItem);
+		}else
+			return null;
 	}
 	public void setExpensesItem(String expensesItem) {
 		this.expensesItem = expensesItem;
@@ -37,8 +47,8 @@ public class ExpensesForm {
 	public void setExpensesDate(String expensesDate) {
 		this.expensesDate = expensesDate;
 	}
-	public Integer getMoney() {
-		return Integer.parseInt(money);
+	public String getMoney() {
+		return money;
 	}
 	public void setMoney(String money) {
 		this.money = money;

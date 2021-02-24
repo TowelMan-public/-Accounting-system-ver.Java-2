@@ -20,6 +20,7 @@
 		SELECT COUNT(*) > 0
 		FROM users
 		WHERE id = #{userId}
+		  AND company_id = #{companyId}
 	</select>
 	<update id="updateUser">
 		UPDATE users
