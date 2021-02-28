@@ -11,23 +11,23 @@
 			<if test="checkGroupYear or checkGroupMonth">
 				base.groupdate		AS "groupdate",
 			</if>
-			base.money				AS="money"
+			base.money				AS "money"
 		FROM(
 			SELECT 
 				<if test="checkGroupItem">
-					id										AS "groupitem_id",
+					suppliers_id							AS "groupitem_id",
 				</if>
 				<if test="checkGroupYear">
-					TIME_FORMAT(earnings_date,"%Y")			AS "groupdate",
+					DATE_FORMAT(earnings_date,"%Y")			AS "groupdate",
 				</if>
 				<if test="checkGroupMonth">
-					TIME_FORMAT(earnings_date,"m%")			AS "groupdate",
+					DATE_FORMAT(earnings_date,"%Y/%m")		AS "groupdate",
 				</if>
-				SUM(money * (1 + consumption_tax_rate))		AS "money",
+				SUM(money * (consumption_tax_rate))		AS "money",
 				company_id
 			FROM earnings
 			<where>
-				company_id = #{companyAccountId}
+				earnings.company_id = #{companyAccountId}
 				<if test="subject != null">
 					AND subject = #{subject}
 				</if>
@@ -56,13 +56,13 @@
 				</if>
 			</trim>
 		) base
-			INNER JOIN suppliers ON base.grouoitem_id = suppliers.id AND base.company_id = suppliers.company_id
+			INNER JOIN suppliers ON base.groupitem_id = suppliers.id AND base.company_id = suppliers.company_id
 		<where>
-			<if test="expensesName != null">
-				suppliers.name LIKE #{expensesName}
+			<if test="companyName != null">
+				suppliers.name LIKE #{companyName}
 			</if>
-			<if test="expensesId != null">
-				AND suppliers.id = #{expensesId}
+			<if test="companyId != null">
+				AND earnings.suppliers_id = #{companyId}
 			</if>
 			<if test="checkDisplayed">
 				AND suppliers.is_displayed = TRUE
@@ -80,12 +80,12 @@
 		FROM earnings
 			INNER JOIN suppliers ON earnings.suppliers_id = suppliers.id AND earnings.company_id = suppliers.company_id
 		<where>
-			company_id = #{companyAccountId}
-			<if test="earningsName != null">
-				AND suppliers.name LIKE #{earningsName}
+			earnings.company_id = #{companyAccountId}
+			<if test="companyName != null">
+				AND suppliers.name LIKE #{companyName}
 			</if>
-			<if test="earningsId != null">
-				AND earnings.suppliers_id = #{earningsId}
+			<if test="companyId != null">
+				AND earnings.suppliers_id = #{companyId}
 			</if>
 			<if test="subject != null">
 				AND earnings.subject = #{subject}

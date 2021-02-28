@@ -43,8 +43,8 @@ public class SelectForm {
 		}
 		
 		//文字列コピーのみ
-		this.subject = form.getSubject();
-		this.person = form.getPerson();
+		this.subject = form.getSubject().equals("") ? null : form.getSubject();
+		this.person = form.getPerson().equals("") ? null : form.getPerson();
 		
 		//companyDate
 		if(form.getEarningsDate().equals("")) {

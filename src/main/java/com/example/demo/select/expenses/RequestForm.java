@@ -43,25 +43,25 @@ public class RequestForm {
 		this.money = money;
 	}
 	public String getCheckDisplayed() {
-		return checkDisplayed;
+		return checkDisplayed == null ? "" : checkDisplayed;
 	}
 	public void setCheckDisplayed(String checkDisplayed) {
 		this.checkDisplayed = checkDisplayed;
 	}
 	public String getCheckGroupExpenses() {
-		return checkGroupExpenses;
+		return checkGroupExpenses == null ? "" : checkGroupExpenses;
 	}
 	public void setCheckGroupExpenses(String checkGroupExpenses) {
 		this.checkGroupExpenses = checkGroupExpenses;
 	}
 	public String getCheckGroupMonth() {
-		return checkGroupMonth;
+		return checkGroupMonth == null ? "" : checkGroupMonth;
 	}
 	public void setCheckGroupMonth(String checkGroupMonth) {
 		this.checkGroupMonth = checkGroupMonth;
 	}
 	public String getCheckGroupYear() {
-		return checkGroupYear;
+		return checkGroupYear == null ? "" : checkGroupYear;
 	}
 	public void setCheckGroupYear(String checkGroupYear) {
 		this.checkGroupYear = checkGroupYear;

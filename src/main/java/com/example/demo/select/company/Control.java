@@ -12,16 +12,29 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.result.DeleteForm;
+import com.example.demo.result.company.CompanyForm;
 import com.example.demo.security.login.UserDetailsImpl;
 
 @Controller
 @RequestMapping("/select/company")
 public class Control {
+	
+	@ModelAttribute
+	CompanyForm companyForm() {
+		return new CompanyForm();
+	}
+	
+	@ModelAttribute
+	DeleteForm deleteForm() {
+		return new DeleteForm();
+	}
+	
 	@Autowired
 	SelectCompanyDatabaseMapper mapper;
 	
 	@GetMapping
-	public String showDisplay() {
+	public String showDisplay(@ModelAttribute RequestForm form) {
 		return "/select/company";
 	}
 	
@@ -34,6 +47,6 @@ public class Control {
 		SelectForm select = new SelectForm(form,user.getCompanyId());
 		//今回は羅列検索のみ
 		model.addAttribute("ResultForm",mapper.selectList(select));
-		return "redirect:/result/company";
+		return "/result/company";
 	}
 }

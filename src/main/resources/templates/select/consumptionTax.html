@@ -23,7 +23,7 @@
 				<div>会社（名前orID）：<input type="text" name="company" th:field="*{company}"/></div> <div th:if="${#fields.hasErrors('company')}" th:errors="*{company}" /><br>
 				<div>件名：<input type="text" name="subject" /></div>
 				<div>個人名：<input type="text" name="person" /></div>
-				<div>日付：<input type="text" name="companyDate" th:field="*{companyDate}"/></div> <div th:if="${#fields.hasErrors('companyDate')}" th:errors="*{companyDate}" /><br>
+				<div>日付：<input type="text" name="earningsDate" th:field="*{earningsDate}"/></div> <div th:if="${#fields.hasErrors('earningsDate')}" th:errors="*{earningsDate}" /><br>
 				<div>金額：<input type="text" name="money" th:field="*{money}"/></div> <div th:if="${#fields.hasErrors('money')}" th:errors="*{money}" /><br>
 				<div><input type="checkbox" name="checkDisplayed" th:value="true">表示されている項目のみ</input> </div><br>
 				<div><input type="checkbox" name="checkGroupItem" th:value="true">経費ごとにグループ化する</input> </div><br>

@@ -46,7 +46,7 @@ public class SelectForm {
 		this.expensesName = expensesName;
 	}
 
-	public boolean isDisplayed() {
+	public boolean getIsDisplayed() {
 		return isDisplayed;
 	}
 

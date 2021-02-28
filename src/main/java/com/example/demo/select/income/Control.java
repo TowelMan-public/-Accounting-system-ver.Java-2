@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.result.revenue.RevenueForm;
 import com.example.demo.security.login.UserDetailsImpl;
 import com.example.demo.select.base.earningsGroup.BaseControl;
 import com.example.demo.select.base.earningsGroup.RequestForm;
@@ -23,8 +24,13 @@ public class Control extends BaseControl{
 	@Autowired
 	SelectIncomeDatabaseMapper mapper;
 	
+	@ModelAttribute
+	RevenueForm revenueForm() {
+		return new RevenueForm();
+	}
+	
 	@GetMapping
-	public String showDisplay() {
+	public String showDisplay(@ModelAttribute RequestForm form) {
 		return "/select/income";
 	}
 	

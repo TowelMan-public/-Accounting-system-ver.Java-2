@@ -6,24 +6,24 @@
 	<select id="getEarningsMonth" resultType="java.lang.Integer">
 		SELECT SUM(money) FROM earnings
 		WHERE	company_id = #{companyId}
-		AND 	TIME_FORMAT(earnings_date,"%m") = TIME_FORMAT(CURDATE(),"%m")
-		AND		TIME_FORMAT(earnings_date,"%y") = TIME_FORMAT(CURDATE(),"%y")
+		AND 	DATE_FORMAT(earnings_date,"%m") = DATE_FORMAT(CURDATE(),"%m")
+		AND		DATE_FORMAT(earnings_date,"%y") = DATE_FORMAT(CURDATE(),"%y")
 	</select>
 	<select id="getEexpensesMonth" resultType="java.lang.Integer">
 		SELECT SUM(money) FROM expenses
 		WHERE	company_id = #{companyId}
-		AND 	TIME_FORMAT(expenses_date,"%m") = TIME_FORMAT(CURDATE(),"%m")
-		AND		TIME_FORMAT(expenses_date,"%y") = TIME_FORMAT(CURDATE(),"%y")
+		AND 	DATE_FORMAT(expenses_date,"%m") = DATE_FORMAT(CURDATE(),"%m")
+		AND		DATE_FORMAT(expenses_date,"%y") = DATE_FORMAT(CURDATE(),"%y")
 	</select>
 	<select id="getEarningsYear" resultType="java.lang.Integer">
 		SELECT SUM(money) FROM earnings
 		WHERE	company_id = #{companyId}
-		AND 	TIME_FORMAT(earnings_date,"%y") = TIME_FORMAT(CURDATE(),"%y")
+		AND 	DATE_FORMAT(earnings_date,"%y") = DATE_FORMAT(CURDATE(),"%y")
 	</select>
 	<select id="getExpensesYear" resultType="java.lang.Integer">
 		SELECT SUM(money) FROM expenses
 		WHERE	company_id = #{companyId}
-		AND 	TIME_FORMAT(expenses_date,"%y") = TIME_FORMAT(CURDATE(),"%y")
+		AND 	DATE_FORMAT(expenses_date,"%y") = DATE_FORMAT(CURDATE(),"%y")
 	</select>
 	<select id="getNetIncomeYear" resultType="java.lang.Integer">
 		SELECT
@@ -32,7 +32,7 @@
 				 WHEN TRUNCATE(SUM(income_money),-3) > 6950000 THEN (0.23 * TRUNCATE(SUM(income_money),-3) - 636000) 
 				 WHEN TRUNCATE(SUM(income_money),-3) > 3300000 THEN (0.2 * TRUNCATE(SUM(income_money),-3) - 427500) 
 				 WHEN TRUNCATE(SUM(income_money),-3) > 1950000 THEN (0.1 * TRUNCATE(SUM(income_money),-3) - 97500) 
-				 WHEN SUM(income_money) > SUM(income_money) THEN 0.05 * TRUNCATE(SUM(income_money),-3) 
+				 WHEN SUM(income_money) > 0 THEN 0.05 * TRUNCATE(SUM(income_money),-3) 
 				 ELSE 0
 			END )								AS "money"
 		FROM(

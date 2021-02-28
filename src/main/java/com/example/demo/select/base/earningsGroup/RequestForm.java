@@ -12,8 +12,6 @@ public class RequestForm {
 	@Pattern(regexp = RegexpPattern.RANGE_DATE, message = RegexpMessage.RANGE_DATE)
 	private String earningsDate;
 	
-	@Pattern(regexp = RegexpPattern.RANGE_INTEGER, message = RegexpMessage.RANGE_INTEGER)
-	private String money;
 	private String checkDisplayed;
 	private String checkGroupItem;
 	private String checkGroupMonth;
@@ -31,32 +29,26 @@ public class RequestForm {
 	public void setEarningsDate(String earningsDate) {
 		this.earningsDate = earningsDate;
 	}
-	public String getMoney() {
-		return money;
-	}
-	public void setMoney(String money) {
-		this.money = money;
-	}
 	public String getCheckDisplayed() {
-		return checkDisplayed;
+		return checkDisplayed == null ? "" : checkDisplayed;
 	}
 	public void setCheckDisplayed(String checkDisplayed) {
 		this.checkDisplayed = checkDisplayed;
 	}
 	public String getCheckGroupItem() {
-		return checkGroupItem;
+		return checkGroupItem == null ? "" : checkGroupItem;
 	}
 	public void setCheckGroupItem(String checkGroupItem) {
 		this.checkGroupItem = checkGroupItem;
 	}
 	public String getCheckGroupMonth() {
-		return checkGroupMonth;
+		return checkGroupMonth == null ? "" : checkGroupMonth;
 	}
 	public void setCheckGroupMonth(String checkGroupMonth) {
 		this.checkGroupMonth = checkGroupMonth;
 	}
 	public String getCheckGroupYear() {
-		return checkGroupYear;
+		return checkGroupYear == null ? "" : checkGroupYear;
 	}
 	public void setCheckGroupYear(String checkGroupYear) {
 		this.checkGroupYear = checkGroupYear;

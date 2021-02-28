@@ -17,7 +17,7 @@ public class RequestForm {
 		this.company = company;
 	}
 	public String getIsDisplayed() {
-		return isDisplayed;
+		return isDisplayed == null ? "" : isDisplayed;
 	}
 	public void setIsDisplayed(String isDisplayed) {
 		this.isDisplayed = isDisplayed;

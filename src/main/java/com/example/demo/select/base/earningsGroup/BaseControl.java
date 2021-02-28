@@ -23,7 +23,7 @@ public class BaseControl {
 		this.checkInitialized();
 		//入力ﾁｪｯｸでエラーがある場合は、何もしないでこの関数を終わる
 		if (bindingResult.hasErrors())
-			return "redirect:/select/" + selectUrl;
+			return "/select/" + selectUrl;
 		//検索用フォーム作成
 		SelectForm select = new SelectForm(form,user.getCompanyId());
 		
@@ -42,7 +42,7 @@ public class BaseControl {
 			model.addAttribute("haveDateType","true");
 			model.addAttribute("dateType","年");
 		}
-		return "redirect:/result/group";
+		return "/result/group";
 	}
 	
 	private void checkInitialized() throws NullPointerException{

@@ -56,24 +56,6 @@ public class SelectForm {
 		this.earningsDateStart = start;
 		this.earningsDateFinish = finish;
 		
-		//money
-		if(form.getMoney().equals("")) {
-			//未指定
-			start = finish = null;
-		}else if(form.getMoney().matches(RegexpPattern.INTEGER)) {
-			//startのみに指定されていることが確実
-			start = form.getMoney();
-			finish = null;
-		}else {//「-」を使って表されている
-			//正規表現を作成
-			Pattern pattern = Pattern.compile(RegexpPattern.RANGE);
-			Matcher matcher = pattern.matcher(form.getMoney());
-			start = matcher.group(1);
-			finish = matcher.group(2);
-		}
-		this.moneyStart = (start==null ? null : Integer.parseInt(start));
-		this.moneyFinish = (finish==null ? null : Integer.parseInt(finish));
-		
 		//check系
 		this.checkDisplayed = form.getCheckDisplayed().equals("true");
 		this.checkGroupItem = form.getCheckGroupItem().equals("true");

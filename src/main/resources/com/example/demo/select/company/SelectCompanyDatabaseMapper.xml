@@ -5,7 +5,7 @@
 <mapper namespace="com.example.demo.select.company.SelectCompanyDatabaseMapper">
 	<select id="selectList" resultType="com.example.demo.select.company.ResultForm">
 		SELECT 
-			id			AS "companyNumber",
+			id				AS "companyNumber",
 			name			AS "companyName",
 			is_displayed	AS "isDisplayed"
 		FROM suppliers
@@ -16,7 +16,7 @@
 			</if>
 			<if test="companyName != null">
 				AND name LIKE #{companyName}
-			</if>>
+			</if>
 			<if test="isDisplayed">
 				AND is_displayed = TRUE
 			</if>

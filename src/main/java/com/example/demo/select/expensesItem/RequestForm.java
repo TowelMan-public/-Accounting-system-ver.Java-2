@@ -16,7 +16,7 @@ public class RequestForm {
 		this.expenses = expenses;
 	}
 	public String getCheckDisplayed() {
-		return checkDisplayed;
+		return checkDisplayed == null ? "" : checkDisplayed;
 	}
 	public void setCheckDisplayed(String checkDisplayed) {
 		this.checkDisplayed = checkDisplayed;

@@ -11,23 +11,24 @@
 			<if test="checkGroupYear or checkGroupMonth">
 				base.groupdate		AS "groupdate",
 			</if>
-			base.money				AS="money"
+			base.money				AS "money"
 		FROM(
 			SELECT 
 				<if test="checkGroupItem">
-					earnings.id									AS "groupitem_id",
+					suppliers_id							AS "groupitem_id",
 				</if>
 				<if test="checkGroupYear">
-					TIME_FORMAT(earnings.earnings_date,"%Y")	AS "groupdate",
+					DATE_FORMAT(earnings_date,"%Y")			AS "groupdate",
 				</if>
 				<if test="checkGroupMonth">
-					TIME_FORMAT(earnings.earnings_date,"m%")	AS "groupdate",
+					DATE_FORMAT(earnings_date,"%Y/%m")		AS "groupdate",
 				</if>
-				SUM(earnings.money - revenue.money)				AS "money"
+				SUM(earnings.money - revenue.money)			AS "money",
+				earnings.company_id							AS "company_id"
 			FROM earnings
 			INNER JOIN revenue ON earnings.id = revenue.earnings_id AND earnings.company_id = revenue.company_id
 			<where>
-				company_id = #{companyAccountId}
+				earnings.company_id = #{companyAccountId}
 				<if test="subject != null">
 					AND earnings.subject = #{subject}
 				</if>
@@ -56,13 +57,13 @@
 				</if>
 			</trim>
 		) base
-			INNER JOIN suppliers ON base.grouoitem_id = suppliers.id AND base.company_id = suppliers.company_id
+			INNER JOIN suppliers ON base.groupitem_id = suppliers.id AND base.company_id = suppliers.company_id
 		<where>
-			<if test="expensesName != null">
-				suppliers.name LIKE #{expensesName}
+			<if test="companyName != null">
+				suppliers.name LIKE #{companyName}
 			</if>
-			<if test="expensesId != null">
-				AND suppliers.id = #{expensesId}
+			<if test="companyId != null">
+				AND earnings.suppliers_id = #{companyId}
 			</if>
 			<if test="checkDisplayed">
 				AND suppliers.is_displayed = TRUE
@@ -72,8 +73,8 @@
 	<select id="selectList" resultType="com.example.demo.select.base.earnings.ResultForm">
 		SELECT 
 			earnings.id							AS "earningsNumber",
-			earnings.money - suppliers.name		AS "earningsItem",
-			revenue.money						AS "money",
+			suppliers.name						AS "earningsItem",
+			earnings.money - suppliers.name		AS "money",
 			earnings.consumption_tax_rate		AS "tax",
 			earnings.earnings_date				AS "earningsDate",
 			earnings.subject					AS "subject",
@@ -82,12 +83,12 @@
 			INNER JOIN suppliers ON earnings.suppliers_id = suppliers.id AND earnings.company_id = suppliers.company_id
 			INNER JOIN revenue ON earnings.id = revenue.earnings_id AND earnings.company_id = revenue.company_id
 		<where>
-			company_id = #{companyAccountId}
-			<if test="earningsName != null">
-				AND suppliers.name LIKE #{earningsName}
+			earnings.company_id = #{companyAccountId}
+			<if test="companyName != null">
+				AND suppliers.name LIKE #{companyName}
 			</if>
-			<if test="earningsId != null">
-				AND earnings.suppliers_id = #{earningsId}
+			<if test="companyId != null">
+				AND earnings.suppliers_id = #{companyId}
 			</if>
 			<if test="subject != null">
 				AND earnings.subject = #{subject}

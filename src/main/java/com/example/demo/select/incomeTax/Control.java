@@ -24,7 +24,7 @@ public class Control extends BaseControl{
 	SelectIncomeTaxDatabaseMapper mapper;
 	
 	@GetMapping
-	public String showDisplay() {
+	public String showDisplay(@ModelAttribute RequestForm form) {
 		return "/select/incomeTax";
 	}
 	

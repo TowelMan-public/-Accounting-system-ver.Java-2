@@ -6,24 +6,24 @@
 	<select id="selectGroup" resultType="com.example.demo.select.GroupResultForm">
 		SELECT 
 			<if test="checkGroupItem">
-				expenses.name			AS "groupitem",
+				expenses_item.name		AS "groupitem",
 			</if>
 			<if test="checkGroupYear or checkGroupMonth">
-				base.groupdate		AS "groupdate",
+				base.groupdate			AS "groupdate",
 			</if>
-			base.money				AS="money"
+			base.money					AS "money"
 		FROM(
 			SELECT 
 				<if test="checkGroupItem">
-					id							AS "groupitem_id",
+					id								AS "groupitem_id",
 				</if>
 				<if test="checkGroupYear">
-					TIME_FORMAT(expenses_date,"%Y")	AS "groupdate",
+					DATE_FORMAT(expenses_date,"%Y")	AS "groupdate",
 				</if>
 				<if test="checkGroupMonth">
-					TIME_FORMAT(expenses_date,"m%")	AS "groupdate",
+					DATE_FORMAT(expenses_date,"%Y/%m")	AS "groupdate",
 				</if>
-				SUM(money)								AS "money",
+				SUM(money)							AS "money",
 				company_id
 			FROM expenses
 			<where>
@@ -32,7 +32,7 @@
 					AND expenses_item_id = #{expensesId}
 				</if>
 				<if test="subject != null">
-					AND subject = #{subject}
+					AND subject LIKE #{subject}
 				</if>
 				<if test="expensesDateStart != null">
 					AND expenses_date >= #{expensesDateStart}
@@ -56,7 +56,9 @@
 				</if>
 			</trim>
 		) base
-			INNER JOIN expenses_item ON base.grouoitem_id = expenses_item.id AND base.company_id = expenses_item.company_id
+			<if test="checkGroupItem">
+				INNER JOIN expenses_item ON base.groupitem_id = expenses_item.id AND base.company_id = expenses_item.company_id
+			</if>
 		<where>
 			<if test="expensesName != null">
 				expenses_item.name LIKE #{expensesName}
@@ -79,7 +81,7 @@
 		FROM expenses
 			INNER JOIN expenses_item ON expenses.expenses_item_id = expenses_item.id AND expenses.company_id = expenses_item.company_id
 		<where>
-			company_id = #{companyAccountId}
+			expenses.company_id = #{companyAccountId}
 			<if test="expensesName != null">
 				AND expenses_item.name LIKE #{expensesName}
 			</if>

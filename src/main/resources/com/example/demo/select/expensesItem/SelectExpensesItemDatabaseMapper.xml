@@ -4,22 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.select.expensesItem.SelectExpensesItemDatabaseMapper">
 	<select id="selectList" resultType="com.example.demo.select.expensesItem.ResultForm">
-		SELECT 
+		SELECT
 			id				AS "expensesNumber",
 			name			AS "expensesName",
 			rate			AS "rate",
 			is_displayed	AS "checkDisplayed"
-		FROM expensesItem
+		FROM expenses_item
 		<where>
 			company_id = #{companyAccountId}
-			<if test="companyId != null">
-				AND id = #{companyId}
+			<if test="expensesId != null">
+				AND id = #{expensesId}
 			</if>
-			<if test="companyName != null">
-				AND name LIKE #{companyName}
-			</if>>
+			<if test="expensesName != null">
+				AND name LIKE #{expensesName}
+			</if>
 			<if test="isDisplayed">
-				AND is_displayed = TRUE
+				AND is_displayed = 1
 			</if>
 		</where>
 	</select>

@@ -29,6 +29,16 @@ public class Control {
 	@Autowired
 	VerificationDatabaseMapper verificationMapper;
 	
+	@ModelAttribute
+	CompanyForm companyForm() {
+		return new CompanyForm();
+	}
+	
+	@ModelAttribute
+	DeleteForm deleteForm() {
+		return new DeleteForm();
+	}
+	
 	@PostMapping("update")
 	public String select(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid CompanyForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸ

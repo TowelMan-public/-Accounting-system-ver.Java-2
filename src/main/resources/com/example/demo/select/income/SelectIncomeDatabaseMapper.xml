@@ -6,44 +6,56 @@
 	<select id="selectGroup" resultType="com.example.demo.select.GroupResultForm">
 		SELECT
 			<if test="checkGroupYear">
-				TIME_FORMAT(income_date,"%Y")	AS "groupdate",
+				DATE_FORMAT(income_date,"%Y")			AS "groupdate",
 			</if>
 			<if test="checkGroupMonth">
-				TIME_FORMAT(income_date,"m%")	AS "groupdate",
+				DATE_FORMAT(income_date,"%Y/%m")			AS "groupdate",
 			</if>
 			SUM(income_money)					AS "money"
 		FROM(
-			(SELECT
+			SELECT
 				earnings.earnings_date	AS "income_date",
 				earnings.money			AS "income_money"
 			FROM earnings
 				INNER JOIN suppliers ON earnings.suppliers_id = suppliers.id AND earnings.company_id = suppliers.company_id
 			<where>
-				company_id = #{companyAccountId}
-				<if test="earningsName != null">
-					AND suppliers.name LIKE #{earningsName}
+				earnings.company_id = #{companyAccountId}
+				<if test="companyName != null">
+					AND suppliers.name LIKE #{companyName}
 				</if>
-				<if test="earningsId != null">
-					AND earnings.suppliers_id = #{earningsId}
+				<if test="companyId != null">
+					AND earnings.suppliers_id = #{companyId}
 				</if>
 				<if test="checkDisplayed">
 					AND suppliers.is_displayed = TRUE
 				</if>
-			</where>)
-			UNION ALL 
-			(SELECT
-				expenses.expenses_date,
-				(0 - expenses.money)
-			FROM expenses
-				INNER JOIN expenses_item ON expenses.expenses_item_id = expenses_item.id AND expenses.company_id = expenses_item.company_id
-			<where>
-				company_id = #{companyAccountId}
-				<if test="checkDisplayed">
-					AND suppliers.is_displayed = TRUE
+				<if test="earningsDateStart != null">
+					income_date >= #{earningsDateStart}
+				</if>
+				<if test="earningsDateFinish != null">
+					AND #{earningsDateFinish} >= income_date
 				</if>
 			</where>
+			UNION ALL (
+				SELECT
+					expenses.expenses_date		AS "income_date",
+					(0 - expenses.money)		AS "income_money"
+				FROM expenses
+					INNER JOIN expenses_item ON expenses.expenses_item_id = expenses_item.id AND expenses.company_id = expenses_item.company_id
+				<where>
+					expenses.company_id = #{companyAccountId}
+					<if test="checkDisplayed">
+						AND expenses_item.is_displayed = TRUE
+					</if>
+					<if test="earningsDateStart != null">
+						income_date >= #{earningsDateStart}
+					</if>
+					<if test="earningsDateFinish != null">
+						AND #{earningsDateFinish} >= income_date
+					</if>
+				</where>
 			)
-		)
+		) income_sum
 		<where>
 			<if test="earningsDateStart != null">
 				income_date >= #{earningsDateStart}
@@ -52,6 +64,8 @@
 				AND #{earningsDateFinish} >= income_date
 			</if>
 		</where>
-		GROUP BY groupdate
+		<if test="checkGroupYear or checkGroupMonth">
+			GROUP BY groupdate
+		</if>
 	</select>
 </mapper>

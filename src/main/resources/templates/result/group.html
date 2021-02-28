@@ -24,8 +24,8 @@
 	  				<td>金額</td>
 	  			</tr>
 	  			<tr th:each="result : ${ResultForm}" th:object="${result}">
-			     	<td th:if="${haveDateType}" th:text="*{date}"></td>
-			     	<td th:if="${haveItemType}" th:text="*{item}"></td>
+			     	<td th:if="${haveDateType}" th:text="*{groupdate}"></td>
+			     	<td th:if="${haveItemType}" th:text="*{groupitem}"></td>
 			     	<td th:text="*{money}"></td>
 	  			</tr>
 	  		</table>

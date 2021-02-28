@@ -42,7 +42,7 @@ public class SelectForm {
 		}
 		
 		//文字列コピーのみ
-		this.subject = form.getSubject();
+		this.subject = form.getSubject().equals("") ? null : form.getSubject();
 		
 		//companyDate
 		if(form.getDate().equals("")) {

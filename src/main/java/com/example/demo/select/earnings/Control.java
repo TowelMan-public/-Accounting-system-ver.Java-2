@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.result.DeleteForm;
+import com.example.demo.result.earnings.EarningsForm;
 import com.example.demo.security.login.UserDetailsImpl;
 import com.example.demo.select.base.earnings.BaseControl;
 import com.example.demo.select.base.earnings.RequestForm;
@@ -23,8 +25,18 @@ public class Control extends BaseControl{
 	@Autowired
 	SelectEarningsDatabaseMapper mapper;
 	
+	@ModelAttribute
+	EarningsForm earningsForm() {
+		return new EarningsForm();
+	}
+	
+	@ModelAttribute
+	DeleteForm deleteForm() {
+		return new DeleteForm();
+	}
+	
 	@GetMapping
-	public String showDisplay() {
+	public String showDisplay(@ModelAttribute RequestForm form) {
 		return "/select/earnings";
 	}
 	

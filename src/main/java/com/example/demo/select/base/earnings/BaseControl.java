@@ -22,7 +22,7 @@ public class BaseControl {//extends
 		this.checkInitialized();
 		//入力ﾁｪｯｸでエラーがある場合は、何もしないでこの関数を終わる
 		if (bindingResult.hasErrors())
-			return "redirect:/select/" + selectUrl;
+			return "/select/" + selectUrl;
 		//検索用フォーム作成
 		SelectForm select = new SelectForm(form,user.getCompanyId());
 		
@@ -42,10 +42,10 @@ public class BaseControl {//extends
 				model.addAttribute("haveDateType","true");
 				model.addAttribute("dateType","年");
 			}
-			return "redirect:/result/group";
+			return "/result/group";
 		}else {//羅列検索
 			model.addAttribute("ResultForm",datebaceMapper.selectList(select));
-			return "redirect:/result/" + selectUrl;
+			return "/result/" + selectUrl;
 		}
 	}
 	
