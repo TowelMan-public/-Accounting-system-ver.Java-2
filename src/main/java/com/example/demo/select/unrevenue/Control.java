@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.result.earnings.EarningsForm;
 import com.example.demo.security.login.UserDetailsImpl;
 import com.example.demo.select.base.earnings.BaseControl;
 import com.example.demo.select.base.earnings.RequestForm;
@@ -22,7 +23,7 @@ public class Control extends BaseControl{
 	
 	@Autowired
 	SelectUnrevenueDatabaseMapper mapper;
-	
+		
 	@GetMapping
 	public String showDisplay(@ModelAttribute RequestForm form) {
 		return "/select/unrevenue";

@@ -73,7 +73,7 @@
 	<select id="selectList" resultType="com.example.demo.select.base.earnings.ResultForm">
 		SELECT 
 			earnings.id						AS "earningsNumber",
-			suppliers.name					AS "earningsItem",
+			suppliers.name					AS "company",
 			revenue.money					AS "money",
 			earnings.consumption_tax_rate	AS "tax",
 			earnings.earnings_date			AS "earningsDate",

@@ -6,15 +6,15 @@ import com.example.demo.RegexpMessage;
 import com.example.demo.RegexpPattern;
 
 public class EarningsForm {
-	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)//getterがInteger
+	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)
 	private String earningsId;
 	@Pattern(regexp = RegexpPattern.DATE, message = RegexpMessage.DATE)
 	private String earningsDate;
-	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)//TODO 候補付にする可能性あり //getterがInteger
+	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)//TODO 候補付にする可能性あり
 	private String company;
-	@Pattern(regexp = RegexpPattern.RATE, message = RegexpMessage.RATE)//getterがDouble
+	@Pattern(regexp = RegexpPattern.RATE, message = RegexpMessage.RATE)
 	private String taxRate;
-	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)//getterがInteger
+	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)
 	private String money;
 	//省略可
 	private String personName;
@@ -23,7 +23,10 @@ public class EarningsForm {
 	//CompanyAccountIdを、Controlクラスでセットする
 	private Integer companyAccountId;
 	
-	public Integer getEarningsId() {
+	public String getEarningsId() {
+		return earningsId;
+	}
+	public Integer getEarningsIdToInteger() {
 		return Integer.parseInt(earningsId);
 	}
 	public void setEarningsId(String earningsId) {
@@ -35,20 +38,23 @@ public class EarningsForm {
 	public void setEarningsDate(String earningsDate) {
 		this.earningsDate = earningsDate;
 	}
-	public Integer getCompany() {
+	public String getCompany() {
+		return company;
+	}
+	public Integer getCompanyToInteger() {
 		return Integer.parseInt(company);
 	}
 	public void setCompany(String company) {
 		this.company = company;
 	}
-	public Double getTaxRate() {
-		return Double.parseDouble(taxRate);
+	public String getTaxRate() {
+		return taxRate;
 	}
 	public void setTaxRate(String taxRate) {
 		this.taxRate = taxRate;
 	}
-	public Integer getMoney() {
-		return Integer.parseInt(money);
+	public String getMoney() {
+		return money;
 	}
 	public void setMoney(String money) {
 		this.money = money;

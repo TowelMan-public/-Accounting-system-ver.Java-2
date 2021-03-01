@@ -16,14 +16,17 @@ public class CompanyForm {
 	//CompanyAccountIdを、Controlクラスでセットする
 	private Integer companyAccountId;
 	
-	public Integer getCompanyId() {
+	public String getCompanyId() {
+		return companyId;
+	}
+	public Integer getCompanyIdToInteger() {
 		return Integer.parseInt(companyId);
 	}
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
 	}
-	public Integer getCompanyName() {
-		return Integer.parseInt(companyName);
+	public String getCompanyName() {
+		return companyName;
 	}
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;

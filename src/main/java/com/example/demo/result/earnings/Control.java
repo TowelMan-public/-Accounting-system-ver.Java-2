@@ -44,17 +44,17 @@ public class Control {
 	public String select(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid EarningsForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸ
 		if (bindingResult.hasErrors())
-			return "redirect:/result/earnings";
+			return "/result/earnings";
 		
 		//CompanyAccountIdをセットする
 		form.setCompanyAccountId(user.getCompanyId());
 		
 		//各IDが、有効かどうかをチェックする
-		if( !verificationMapper.isEnabledEarningsId(user.getCompanyId(), form.getEarningsId())) {//有効でない
+		if( !verificationMapper.isEnabledEarningsId(user.getCompanyId(), form.getEarningsIdToInteger())) {//有効でない
 			FieldError error = new FieldError(bindingResult.getObjectName(), "earningsId", Message.ID_ISNOT_ENABLED);
 			bindingResult.addError(error);
 		}
-		if( !verificationMapper.isEnabledCompanyId(user.getCompanyId(), form.getCompany())) {//有効でない
+		if( !verificationMapper.isEnabledCompanyId(user.getCompanyId(), form.getCompanyToInteger())) {//有効でない
 			FieldError error = new FieldError(bindingResult.getObjectName(), "company", Message.ID_ISNOT_ENABLED);
 			bindingResult.addError(error);
 		}
@@ -62,14 +62,14 @@ public class Control {
 		//更新して終了
 		if (!bindingResult.hasErrors())//エラーが発生してないときのみ処理を実行
 			updateMapper.updateEarnings(form);
-		return "redirect:/result/earnings";
+		return "/result/earnings";
 	}
 	
 	@PostMapping("delete")
 	public String select(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid DeleteForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸ
 		if (bindingResult.hasErrors())
-			return "redirect:/result/earnings";
+			return "/result/earnings";
 		
 		//各IDが、有効かどうかをチェックする
 		if( !verificationMapper.isEnabledEarningsId(user.getCompanyId(), form.getIdToInt())) {//有効でない
@@ -80,6 +80,6 @@ public class Control {
 		//削除して終了
 		if (!bindingResult.hasErrors())//エラーが発生してないときのみ処理を実行
 			deleteMapper.deleteEarnings(user.getCompanyId(), form.getIdToInt());
-		return "redirect:/result/earnings";
+		return "/result/earnings";
 	}
 }

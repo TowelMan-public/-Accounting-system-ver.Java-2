@@ -43,13 +43,13 @@ public class Control {
 	public String select(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid CompanyForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸ
 		if (bindingResult.hasErrors())
-			return "redirect:/result/company";
+			return "/result/company";
 		
 		//CompanyAccountIdをセットする
 		form.setCompanyAccountId(user.getCompanyId());
 		
 		//各IDが、有効かどうかをチェックする
-		if( !verificationMapper.isEnabledCompanyId(user.getCompanyId(), form.getCompanyId())) {//有効でない
+		if( !verificationMapper.isEnabledCompanyId(user.getCompanyId(), form.getCompanyIdToInteger())) {//有効でない
 			FieldError error = new FieldError(bindingResult.getObjectName(), "comapnyId", Message.ID_ISNOT_ENABLED);
 			bindingResult.addError(error);
 		}
@@ -57,14 +57,14 @@ public class Control {
 		//更新して終了
 		if (!bindingResult.hasErrors())//エラーが発生してないときのみ処理を実行
 			updateMapper.updateCompany(form);
-		return "redirect:/result/company";
+		return "/result/company";
 	}
 	
 	@PostMapping("delete")
 	public String select(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid DeleteForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸ
 		if (bindingResult.hasErrors())
-			return "redirect:/result/company";
+			return "/result/company";
 		
 		//各IDが、有効かどうかをチェックする
 		if( !verificationMapper.isEnabledCompanyId(user.getCompanyId(), form.getIdToInt())) {//有効でない
@@ -75,6 +75,6 @@ public class Control {
 		//削除して終了
 		if (!bindingResult.hasErrors())//エラーが発生してないときのみ処理を実行
 			deleteMapper.deleteCompany(user.getCompanyId(), form.getIdToInt());
-		return "redirect:/result/company";
+		return "/result/company";
 	}
 }

@@ -39,13 +39,13 @@ public class Control {
 	public String select(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid RevenueForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸ
 		if (bindingResult.hasErrors())
-			return "redirect:/result/revenue";
+			return "/result/revenue";
 		
 		//CompanyAccountIdをセットする
 		form.setCompanyAccountId(user.getCompanyId());
 		
 		//各IDが、有効かどうかをチェックする
-		if( !verificationMapper.isEnabledEarningsId(user.getCompanyId(), form.getEarningsId())) {//有効でない
+		if( !verificationMapper.isEnabledEarningsId(user.getCompanyId(), form.getEarningsIdToInteger())) {//有効でない
 			FieldError error = new FieldError(bindingResult.getObjectName(), "earningsId", Message.ID_ISNOT_ENABLED);
 			bindingResult.addError(error);
 		}
@@ -53,6 +53,6 @@ public class Control {
 		//更新して終了
 		if (!bindingResult.hasErrors())//エラーが発生してないときのみ処理を実行
 			updateMapper.updateRevenue(form);
-		return "redirect:/result/revenue";
+		return "/result/revenue";
 	}
 }

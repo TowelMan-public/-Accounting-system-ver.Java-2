@@ -7,17 +7,20 @@ import com.example.demo.RegexpMessage;
 import com.example.demo.RegexpPattern;
 
 public class ExpensesItemForm {
-	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)//getterがInteger
+	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)
 	private String expensesItemId;
 	@NotBlank(message = RegexpMessage.EMPTY)
 	private String expensesItemName;
-	@Pattern(regexp = RegexpPattern.RATE, message = RegexpMessage.RATE)//getterがDouble
+	@Pattern(regexp = RegexpPattern.RATE, message = RegexpMessage.RATE)
 	private String rate;
 	//setterが、加工必須
 	private String isDisplayed;
 	//CompanyAccountIdを、Controlクラスでセットする
 	private Integer companyAccountId;
-	public Integer getExpensesItemId() {
+	public String getExpensesItemId() {
+		return expensesItemId;
+	}
+	public Integer getExpensesItemIdToInteger() {
 		return Integer.parseInt(expensesItemId);
 	}
 	public void setExpensesItemId(String expensesItemId) {
@@ -29,8 +32,8 @@ public class ExpensesItemForm {
 	public void setExpensesItemName(String expensesItemName) {
 		this.expensesItemName = expensesItemName;
 	}
-	public Double getRate() {
-		return Double.parseDouble(rate);
+	public String getRate() {
+		return rate;
 	}
 	public void setRate(String rate) {
 		this.rate = rate;

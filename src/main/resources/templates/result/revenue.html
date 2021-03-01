@@ -39,7 +39,7 @@
 	  		</table>
 			
 			<h2>変更フォーム</h2>
-			<form th:action="@{/insert/revenue/insert}" method="post" action="#" th:object="${revenueForm}"> 
+			<form th:action="@{/result/revenue/update}" method="post" action="#" th:object="${revenueForm}"> 
 				<div>ID：<input type="text" name="earningsId" th:field="*{earningsId}"/></div> <div th:if="${#fields.hasErrors('earningsId')}" th:errors="*{earningsId}" /><br>
 				<div>金額：<input type="text" name="money" th:field="*{money}"/></div> <div th:if="${#fields.hasErrors('money')}" th:errors="*{money}" /><br>
 				<p><input type="submit" value="登録" /></p>

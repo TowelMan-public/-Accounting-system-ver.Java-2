@@ -42,7 +42,7 @@ public class Control {
 	public String select(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid RequestForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸでエラーがある場合は、何もしないでこの関数を終わる
 		if (bindingResult.hasErrors())
-			return "redirect:/select/company";
+			return "/select/company";
 		
 		SelectForm select = new SelectForm(form,user.getCompanyId());
 		//今回は羅列検索のみ
