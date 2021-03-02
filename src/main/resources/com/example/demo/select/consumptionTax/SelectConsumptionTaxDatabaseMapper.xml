@@ -29,10 +29,10 @@
 			<where>
 				earnings.company_id = #{companyAccountId}
 				<if test="subject != null">
-					AND subject = #{subject}
+					AND subject LIKE #{subject}
 				</if>
 				<if test="person != null">
-					AND person = #{person}
+					AND person LIKE #{person}
 				</if>
 				<if test="earningsDateStart != null">
 					AND earnings_date >= #{earningsDateStart}
@@ -43,8 +43,8 @@
 				<if test="moneyStart != null">
 					AND (earnings.money * earnings.consumption_tax_rate) >= #{moneyStart}
 				</if>
-				<if test="moneyStart != null">
-					AND #{moneyStart} >= (earnings.money * earnings.consumption_tax_rate)
+				<if test="moneyFinish != null">
+					AND #{moneyFinish} >= (earnings.money * earnings.consumption_tax_rate)
 				</if>
 			</where>
 			<trim prefix="GROUP BY" suffixOverrides=",">
@@ -88,10 +88,10 @@
 				AND earnings.suppliers_id = #{companyId}
 			</if>
 			<if test="subject != null">
-				AND earnings.subject = #{subject}
+				AND earnings.subject LIKE #{subject}
 			</if>
 			<if test="person != null">
-				AND earnings.person = #{person}
+				AND earnings.person LIKE #{person}
 			</if>
 			<if test="earningsDateStart != null">
 				AND earnings.earnings_date >= #{earningsDateStart}
@@ -102,8 +102,8 @@
 			<if test="moneyStart != null">
 				AND (earnings.money * earnings.consumption_tax_rate) >= #{moneyStart}
 			</if>
-			<if test="moneyStart != null">
-				AND #{moneyStart} >= (earnings.money * earnings.consumption_tax_rate)
+			<if test="moneyFinish != null">
+				AND #{moneyFinish} >= (earnings.money * earnings.consumption_tax_rate)
 			</if>
 			<if test="checkDisplayed">
 				AND suppliers.is_displayed = TRUE

@@ -39,7 +39,9 @@ public class SelectForm {
 	}
 
 	public String getExpensesName() {
-		return expensesName;
+		if(expensesName == null)
+			return null;
+		return "%" + expensesName + "%";
 	}
 
 	public void setExpensesName(String expensesName) {

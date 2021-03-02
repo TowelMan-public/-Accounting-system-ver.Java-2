@@ -30,10 +30,10 @@
 			<where>
 				earnings.company_id = #{companyAccountId}
 				<if test="subject != null">
-					AND earnings.subject = #{subject}
+					AND earnings.subject LIKE #{subject}
 				</if>
 				<if test="person != null">
-					AND earnings.person = #{person}
+					AND earnings.person LIKE #{person}
 				</if>
 				<if test="earningsDateStart != null">
 					AND earnings.earnings_date >= #{earningsDateStart}
@@ -44,8 +44,8 @@
 				<if test="moneyStart != null">
 					AND revenue.money >= #{moneyStart}
 				</if>
-				<if test="moneyStart != null">
-					AND #{moneyStart} >= revenue.money
+				<if test="moneyFinish != null">
+					AND #{moneyFinish} >= revenue.money
 				</if>
 			</where>
 			<trim prefix="GROUP BY" suffixOverrides=",">
@@ -91,10 +91,10 @@
 				AND earnings.suppliers_id = #{companyId}
 			</if>
 			<if test="subject != null">
-				AND earnings.subject = #{subject}
+				AND earnings.subject LIKE #{subject}
 			</if>
 			<if test="person != null">
-				AND earnings.person = #{person}
+				AND earnings.person LIKE #{person}
 			</if>
 			<if test="earningsDateStart != null">
 				AND earnings.earnings_date >= #{earningsDateStart}
@@ -105,8 +105,8 @@
 			<if test="moneyStart != null">
 				AND revenue.money >= #{moneyStart}
 			</if>
-			<if test="moneyStart != null">
-				AND #{moneyStart} >= revenue.money
+			<if test="moneyFinish != null">
+				AND #{moneyFinish} >= revenue.money
 			</if>
 			<if test="checkDisplayed">
 				AND suppliers.is_displayed = TRUE

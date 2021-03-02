@@ -58,6 +58,7 @@ public class SelectForm {
 			//正規表現を作成
 			Pattern pattern = Pattern.compile(RegexpPattern.RANGE);
 			Matcher matcher = pattern.matcher(form.getEarningsDate());
+			matcher.matches();
 			start = matcher.group(1);
 			finish = matcher.group(2);
 		}
@@ -76,6 +77,7 @@ public class SelectForm {
 			//正規表現を作成
 			Pattern pattern = Pattern.compile(RegexpPattern.RANGE);
 			Matcher matcher = pattern.matcher(form.getMoney());
+			matcher.matches();
 			start = matcher.group(1);
 			finish = matcher.group(2);
 		}
@@ -94,7 +96,9 @@ public class SelectForm {
 	}
 
 	public String getCompanyName() {
-		return companyName;
+		if(companyName == null)
+			return null;
+		return "%" + companyName + "%";
 	}
 
 	public void setCompanyName(String companyName) {
@@ -110,7 +114,9 @@ public class SelectForm {
 	}
 
 	public String getSubject() {
-		return subject;
+		if(subject == null)
+			return null;
+		return "%" + subject + "%";
 	}
 
 	public void setSubject(String subject) {
@@ -118,7 +124,9 @@ public class SelectForm {
 	}
 
 	public String getPerson() {
-		return person;
+		if(person == null)
+			return null;
+		return "%" + person + "%";
 	}
 
 	public void setPerson(String person) {

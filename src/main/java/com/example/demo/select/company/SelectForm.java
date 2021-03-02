@@ -39,7 +39,9 @@ public class SelectForm {
 	}
 
 	public String getCompanyName() {
-		return companyName;
+		if(companyName == null)
+			return null;
+		return "%" + companyName + "%";
 	}
 
 	public void setCompanyName(String companyName) {

@@ -43,8 +43,8 @@
 				<if test="moneyStart != null">
 					AND money >= #{moneyStart}
 				</if>
-				<if test="moneyStart != null">
-					AND #{moneyStart} >= money
+				<if test="moneyFinish != null">
+					AND #{moneyFinish} >= money
 				</if>
 			</where>
 			<trim prefix="GROUP BY" suffixOverrides=",">
@@ -89,7 +89,7 @@
 				AND expenses.expenses_item_id = #{expensesId}
 			</if>
 			<if test="subject != null">
-				AND expenses.subject = #{subject}
+				AND expenses.subject LIKE #{subject}
 			</if>
 			<if test="expensesDateStart != null">
 				AND expenses.expenses_date >= #{expensesDateStart}
@@ -100,8 +100,8 @@
 			<if test="moneyStart != null">
 				AND expenses.money >= #{moneyStart}
 			</if>
-			<if test="moneyStart != null">
-				AND #{moneyStart} >= expenses.money
+			<if test="moneyFinish != null">
+				AND #{moneyFinish} >= expenses.money
 			</if>
 			<if test="checkDisplayed">
 				AND expenses_item.is_displayed = TRUE

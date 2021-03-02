@@ -17,6 +17,9 @@ import com.example.demo.result.DeleteForm;
 import com.example.demo.result.UpdateDatabaseMapper;
 import com.example.demo.result.expenses.ExpensesForm;
 import com.example.demo.security.login.UserDetailsImpl;
+import com.example.demo.select.expensesItem.RequestForm;
+import com.example.demo.select.expensesItem.SelectExpensesItemDatabaseMapper;
+import com.example.demo.select.expensesItem.SelectForm;
 import com.example.demo.verification.Message;
 import com.example.demo.verification.VerificationDatabaseMapper;
 
@@ -29,6 +32,8 @@ public class Control {
 	DeleteDatabaseMapper deleteMapper;
 	@Autowired
 	VerificationDatabaseMapper verificationMapper;
+	@Autowired
+	SelectExpensesItemDatabaseMapper selectMapper;
 	
 	@ModelAttribute
 	ExpensesItemForm expensesItemForm() {
@@ -76,6 +81,10 @@ public class Control {
 		//削除して終了
 		if (!bindingResult.hasErrors())//エラーが発生してないときのみ処理を実行
 			deleteMapper.deleteExpensesItem(user.getCompanyId(), form.getIdToInt());
+		
+		SelectForm select = new SelectForm(new RequestForm(),user.getCompanyId());
+		model.addAttribute("ResultForm",selectMapper.selectList(select));
+		
 		return "/result/expensesItem";
 	}
 }
