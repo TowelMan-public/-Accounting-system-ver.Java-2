@@ -22,8 +22,10 @@ import com.example.demo.verification.Message;
 import com.example.demo.verification.VerificationDatabaseMapper;
 
 @Controller
-@RequestMapping("/result/revenue")
+@RequestMapping(Control.PAGE_URL)
 public class Control {
+	public static final String PAGE_URL = "/result/revenue";
+	
 	@Autowired
 	UpdateDatabaseMapper updateMapper;
 	@Autowired
@@ -42,7 +44,7 @@ public class Control {
 	public String select(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid RevenueForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸ
 		if (bindingResult.hasErrors())
-			return "/result/revenue";
+			return PAGE_URL;
 		
 		//CompanyAccountIdをセットする
 		form.setCompanyAccountId(user.getCompanyId());
@@ -60,6 +62,6 @@ public class Control {
 		SelectForm select = new SelectForm(new RequestForm(),user.getCompanyId());
 		model.addAttribute("ResultForm",selectMapper.selectList(select));
 		
-		return "/result/revenue";
+		return PAGE_URL;
 	}
 }

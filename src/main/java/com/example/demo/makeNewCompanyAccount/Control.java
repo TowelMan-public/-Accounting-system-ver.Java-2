@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.security.Authority;
 
 @Controller
-@RequestMapping("/makeNewCompanyAccount")
+@RequestMapping(Control.PAGE_URL)
 public class Control {	
 	//定数群
-	private final String defaultAuthority = Authority.master;
+	private final String defaultAuthority = Authority.MASTER;
+	public static final String PAGE_URL = "/makeNewCompanyAccount";
 	
 	@Autowired
 	MakeNewCompanyAccountDatabaseMapper mapper;
@@ -27,13 +28,13 @@ public class Control {
 	
 	@GetMapping
 	public String showDisplay( MakeNewComanyAccountForm form,Model model) {
-		return "/makeNewCompanyAccount";
+		return PAGE_URL;
 	}
 	@PostMapping("make")
 	public String insertCompanyAccount(@Valid MakeNewComanyAccountForm form,BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸでエラーがある場合は、何もしないでこの関数を終わる
 		if (bindingResult.hasErrors())
-			return "/makeNewCompanyAccount";
+			return PAGE_URL;
 		
 		//各種Formオブジェクト作成
 		UserForm user = new UserForm(form,encoder);

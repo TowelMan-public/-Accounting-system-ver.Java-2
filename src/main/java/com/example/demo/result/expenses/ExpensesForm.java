@@ -8,7 +8,7 @@ import com.example.demo.RegexpPattern;
 public class ExpensesForm {
 	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)
 	private String expensesId;
-	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)//TODO 候補付にする可能性あり
+	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)
 	private String expensesItem;
 	@Pattern(regexp = RegexpPattern.DATE, message = RegexpMessage.DATE)
 	private String expensesDate;

@@ -13,7 +13,7 @@
 		    <li class="menu_inner"><a th:href="@{/home}">ホーム</a></li>
 		    <li class="menu_inner"><a th:href="@{/insert}">登録</a></li>
 		    <li class="menu_inner"><a th:href="@{/select}">検索</a></li>
-		    <li class="menu_inner"><a th:href="@{/confinguration}">設定</a></li>
+		    <li class="menu_inner" th:if="${isMASTER}"><a th:href="@{/confinguration}">設定</a></li>
 		</ul>
 		<main>
 			<h2>未収入の検索フォーム</h2>

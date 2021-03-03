@@ -8,7 +8,7 @@ import com.example.demo.result.expenses.ExpensesForm;
 import com.example.demo.result.expensesItem.ExpensesItemForm;
 import com.example.demo.result.revenue.RevenueForm;
 
-@Mapper //TODO
+@Mapper
 public interface UpdateDatabaseMapper {
 	void updateCompany(CompanyForm form);
 	void updateExpensesItem(ExpensesItemForm form);

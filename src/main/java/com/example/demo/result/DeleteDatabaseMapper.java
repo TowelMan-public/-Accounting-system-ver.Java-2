@@ -3,7 +3,7 @@ package com.example.demo.result;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-@Mapper //TODO
+@Mapper
 public interface DeleteDatabaseMapper {
 	void deleteCompany(@Param("companyAccountId") int companyAccountId, @Param("id") int id);
 	void deleteExpensesItem(@Param("companyAccountId") int companyAccountId, @Param("id") int id);

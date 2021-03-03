@@ -1,6 +1,8 @@
 package com.example.demo.security;
 
 public class Authority {
-	static public final String master = "MASTER";
-	static public final String user = "USER";
+	public static final String MASTER = "MASTER";
+	public static final String USER = "USER";
+	
+	private Authority() {}
 }

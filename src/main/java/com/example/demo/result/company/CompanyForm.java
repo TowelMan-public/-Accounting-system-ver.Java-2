@@ -7,7 +7,7 @@ import com.example.demo.RegexpMessage;
 import com.example.demo.RegexpPattern;
 
 public class CompanyForm {
-	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)//getterがInteger
+	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)
 	private String companyId;
 	@NotBlank(message = RegexpMessage.EMPTY)
 	private String companyName;

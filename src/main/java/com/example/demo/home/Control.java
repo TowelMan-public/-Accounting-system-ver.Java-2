@@ -7,17 +7,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.security.Authority;
 import com.example.demo.security.login.UserDetailsImpl;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping(Control.PAGE_URL)
 public class Control {
+	public static final String PAGE_URL = "/home";
+	
 	@Autowired
 	HomeDatabaseMapper mapper;
 	
 	@GetMapping
-	public String showDisplay(@AuthenticationPrincipal UserDetailsImpl user, Model model) {
+	public String showDisplay(@AuthenticationPrincipal UserDetailsImpl user, Model model) {		
 		//最初の案内文セット
 		model.addAttribute("companyName",user.getCompanyName());
 		model.addAttribute("userName",user.getAccountUserName());
@@ -31,9 +32,6 @@ public class Control {
 		model.addAttribute("expensesYear", mapper.getExpensesYear( user.getCompanyId() ) );
 		model.addAttribute("netIncomeRateYear", mapper.getNetIncomeYear( user.getCompanyId() ) );
 		
-		//MASTER権限があるかどうかのセット
-		model.addAttribute("isMASTER", user.getAuthoritie().equals(Authority.master));
-		
-		return "/home";
+		return PAGE_URL;
 	}
 }

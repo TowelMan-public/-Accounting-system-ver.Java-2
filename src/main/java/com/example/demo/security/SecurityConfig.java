@@ -17,6 +17,7 @@ import com.example.demo.security.login.SecurityService;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	private static final String LOGIN_PAGE = "/login";
 
 	@Autowired
 	private SecurityService userDetailsService;
@@ -38,19 +39,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
                 //ログイン不要でアクセス可能に設定
-                .antMatchers("/login","/makeNewCompanyAccount","/makeNewCompanyAccount/make").permitAll()
+                .antMatchers(LOGIN_PAGE,"/makeNewCompanyAccount","/makeNewCompanyAccount/make").permitAll()
                 //さらにマスター権限（MASTER）がないとアクセスできない
-                .antMatchers("/confinguration","/makeNewUser","/resultMakeNewUser").hasAuthority(Authority.master)
+                .antMatchers("/confinguration","/makeNewUser","/resultMakeNewUser").hasAuthority(Authority.MASTER)
                 //上記以外は直リンク禁止
                 .anyRequest().authenticated()
             .and()
             .formLogin()
                 //ログイン処理のパス
-                .loginProcessingUrl("/login")
+                .loginProcessingUrl(LOGIN_PAGE)
                 //ログインページ
-                .loginPage("/login")
+                .loginPage(LOGIN_PAGE)
                 //ログインエラー時の遷移先 ※パラメーターに「error」を付与
-                .failureUrl("/login?error")
+                .failureUrl(LOGIN_PAGE)
                 //ログイン成功時の遷移先
                 .defaultSuccessUrl("/home",true)
                 //ログイン時のキー：ユーザーID テスト時コメントアウトする
@@ -60,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .logout()
                 //ログアウト時の遷移先 POSTでアクセス
-                .logoutSuccessUrl("/login");
+                .logoutSuccessUrl(LOGIN_PAGE);
     }
 
     //パスワードのアルゴリズムをBCryptに設定

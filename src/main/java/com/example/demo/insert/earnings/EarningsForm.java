@@ -10,9 +10,9 @@ import com.example.demo.RegexpPattern;
 public class EarningsForm {
 	@Pattern(regexp = RegexpPattern.DATE, message = RegexpMessage.DATE)
 	private String earningsDate;
-	@Pattern(regexp = RegexpPattern.ID_OR_ID_AND_NAME, message = RegexpMessage.ID_OR_ID_AND_NAME)//getterがInteger
+	@Pattern(regexp = RegexpPattern.ID_OR_ID_AND_NAME, message = RegexpMessage.ID_OR_ID_AND_NAME)
 	private String company;
-	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)//getterがInteger
+	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)
 	private String money;
 	//省略可
 	private String personName;

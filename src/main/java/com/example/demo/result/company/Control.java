@@ -23,8 +23,10 @@ import com.example.demo.verification.Message;
 import com.example.demo.verification.VerificationDatabaseMapper;
 
 @Controller
-@RequestMapping("/result/company")
+@RequestMapping(Control.PAGE_URL)
 public class Control {
+	public static final String PAGE_URL = "/result/company";
+	
 	@Autowired
 	UpdateDatabaseMapper updateMapper;
 	@Autowired
@@ -48,7 +50,7 @@ public class Control {
 	public String select(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid CompanyForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸ
 		if (bindingResult.hasErrors())
-			return "/result/company";
+			return PAGE_URL;
 		
 		//CompanyAccountIdをセットする
 		form.setCompanyAccountId(user.getCompanyId());
@@ -66,14 +68,14 @@ public class Control {
 		//検索
 		SelectForm select = new SelectForm(new RequestForm(),user.getCompanyId());
 		model.addAttribute("ResultForm",selectMapper.selectList(select));
-		return "/result/company";
+		return PAGE_URL;
 	}
 	
 	@PostMapping("delete")
 	public String select(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid DeleteForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸ
 		if (bindingResult.hasErrors())
-			return "/result/company";
+			return PAGE_URL;
 		
 		//各IDが、有効かどうかをチェックする
 		if( !verificationMapper.isEnabledCompanyId(user.getCompanyId(), form.getIdToInt())) {//有効でない
@@ -88,6 +90,6 @@ public class Control {
 		//検索
 		SelectForm select = new SelectForm(new RequestForm(),user.getCompanyId());
 		model.addAttribute("ResultForm",selectMapper.selectList(select));
-		return "/result/company";
+		return PAGE_URL;
 	}
 }

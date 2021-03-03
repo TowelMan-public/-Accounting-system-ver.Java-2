@@ -17,8 +17,10 @@ import com.example.demo.result.expenses.ExpensesForm;
 import com.example.demo.security.login.UserDetailsImpl;
 
 @Controller
-@RequestMapping("/select/expenses")
+@RequestMapping(Control.PAGE_URL)
 public class Control {
+	public static final String PAGE_URL = "/select/expenses";
+	
 	@Autowired
 	SelectExpensesDatabaseMapper mapper;
 	
@@ -34,14 +36,14 @@ public class Control {
 	
 	@GetMapping
 	public String showDisplay(@ModelAttribute RequestForm form) {
-		return "/select/expenses";
+		return PAGE_URL;
 	}
 	
 	@PostMapping("result")
 	public String select(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid RequestForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸでエラーがある場合は、何もしないでこの関数を終わる
 		if (bindingResult.hasErrors())
-			return "/select/expenses";
+			return PAGE_URL;
 		//検索用フォーム作成
 		SelectForm select = new SelectForm(form,user.getCompanyId());
 		
@@ -61,10 +63,9 @@ public class Control {
 				model.addAttribute("haveDateType",true);
 				model.addAttribute("dateType","年");
 			}
-			return "/result/group";
 		}else {//羅列検索
 			model.addAttribute("ResultForm",mapper.selectList(select));
-			return "/result/expenses";
 		}
+		return PAGE_URL;
 	}
 }

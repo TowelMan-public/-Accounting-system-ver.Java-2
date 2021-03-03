@@ -16,27 +16,30 @@ import com.example.demo.insert.InsertDatabaseMapper;
 import com.example.demo.security.login.UserDetailsImpl;
 
 @Controller
-@RequestMapping("/insert/expensesItem")
+@RequestMapping(Control.PAGE_URL)
 public class Control {
+	public static final String PAGE_URL = "/insert/expensesItem";
+	private static final String REDIRECT_URL = "redirect;" + PAGE_URL;
+	
 	@Autowired
 	InsertDatabaseMapper insertMapper;
 	
 	@GetMapping()
 	public String showDisplay(@AuthenticationPrincipal UserDetailsImpl user, Model model,@ModelAttribute ExpensesItemForm form) {		
-		return "/insert/expensesItem";
+		return PAGE_URL;
 	}
 	
 	@PostMapping("insert")
 	public String insert(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid ExpensesItemForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸ
 		if (bindingResult.hasErrors())
-			return "/insert/expensesItem";
+			return PAGE_URL;
 		
 		//formにcompanyAccountIdをセット
 		form.setCompanyAccountId(user.getCompanyId());
 		
 		//追加
 		insertMapper.insertExpensesItem(form);
-		return "/insert/expensesItem";
+		return REDIRECT_URL;
 	}
 }

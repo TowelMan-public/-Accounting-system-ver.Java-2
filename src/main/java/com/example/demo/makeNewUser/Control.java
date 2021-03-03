@@ -17,11 +17,12 @@ import com.example.demo.security.Authority;
 import com.example.demo.security.login.UserDetailsImpl;
 
 @Controller
-@RequestMapping("/makeNewUser")
+@RequestMapping(Control.PAGE_URL)
 public class Control {	
 	
 	//定数群
-	private final String defaultAuthority = Authority.user;
+	private final String defaultAuthority = Authority.USER;
+	public static final String PAGE_URL = "/makeNewUser";
 	
 	@Autowired
 	MakeNewUserDatabaseMapper mapper;
@@ -30,14 +31,14 @@ public class Control {
 	
 	@GetMapping
 	public String showDisplay(@ModelAttribute MakeNewUserForm form, Model model) {
-		return "/makeNewUser";
+		return PAGE_URL;
 	}
 	
 	@PostMapping
 	public String insertCompanyAccount(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid MakeNewUserForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸでエラーがある場合は、何もしないでこの関数を終わる
 		if (bindingResult.hasErrors())
-			return "/makeNewUser";
+			return PAGE_URL;
 		
 		//ユーザーの登録
 		UserForm newUser = new UserForm(form,encoder);

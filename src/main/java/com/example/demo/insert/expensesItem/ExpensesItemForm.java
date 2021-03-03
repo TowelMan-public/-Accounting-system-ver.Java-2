@@ -9,7 +9,7 @@ import com.example.demo.RegexpPattern;
 public class ExpensesItemForm {
 	@NotBlank(message = RegexpMessage.EMPTY)
 	private String expensesItemName;
-	@Pattern(regexp = RegexpPattern.RATE, message = RegexpMessage.RATE)//getterがDouble
+	@Pattern(regexp = RegexpPattern.RATE, message = RegexpMessage.RATE)
 	private String rate;
 	//CompanyAccountIdを、Controlクラスでセットする
 	private Integer companyAccountId;

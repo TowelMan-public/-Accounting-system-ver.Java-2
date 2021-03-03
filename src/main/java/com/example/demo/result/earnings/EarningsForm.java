@@ -10,7 +10,7 @@ public class EarningsForm {
 	private String earningsId;
 	@Pattern(regexp = RegexpPattern.DATE, message = RegexpMessage.DATE)
 	private String earningsDate;
-	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)//TODO 候補付にする可能性あり
+	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)
 	private String company;
 	@Pattern(regexp = RegexpPattern.RATE, message = RegexpMessage.RATE)
 	private String taxRate;

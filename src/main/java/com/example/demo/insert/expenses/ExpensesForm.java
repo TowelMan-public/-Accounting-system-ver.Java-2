@@ -8,11 +8,11 @@ import com.example.demo.RegexpMessage;
 import com.example.demo.RegexpPattern;
 
 public class ExpensesForm {
-	@Pattern(regexp = RegexpPattern.ID_OR_ID_AND_NAME, message = RegexpMessage.ID_OR_ID_AND_NAME)//getterがInteger
+	@Pattern(regexp = RegexpPattern.ID_OR_ID_AND_NAME, message = RegexpMessage.ID_OR_ID_AND_NAME)
 	private String expensesItem;
 	@Pattern(regexp = RegexpPattern.DATE, message = RegexpMessage.DATE)
 	private String expensesDate;
-	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)//getterがInteger
+	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)
 	private String money;
 	//省略可
 	private String subject;

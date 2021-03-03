@@ -20,8 +20,11 @@ import com.example.demo.verification.Message;
 import com.example.demo.verification.VerificationDatabaseMapper;
 
 @Controller
-@RequestMapping("/insert/earnings")
+@RequestMapping(Control.PAGE_URL)
 public class Control {
+	public static final String PAGE_URL = "/insert/earnings";
+	private static final String REDIRECT_URL = "redirect;" + PAGE_URL;
+	
 	@Autowired
 	InsertDatabaseMapper insertMapper;
 	@Autowired
@@ -32,7 +35,7 @@ public class Control {
 	@GetMapping()
 	public String showDisplay(@AuthenticationPrincipal UserDetailsImpl user, Model model,@ModelAttribute EarningsForm form) {	
 		setCandidate(user,model);
-		return "/insert/earnings";
+		return PAGE_URL;
 	}
 	
 	private void setCandidate(UserDetailsImpl user, Model model) {
@@ -45,7 +48,7 @@ public class Control {
 		//入力ﾁｪｯｸ
 		if (bindingResult.hasErrors()) {
 			setCandidate(user,model);
-			return "/insert/earnings";
+			return PAGE_URL;
 		}
 		
 		//formにcompanyAccountIdをセット
@@ -61,6 +64,6 @@ public class Control {
 		if (!bindingResult.hasErrors()) {//値がすべて有効
 			insertMapper.insertEarnings(form);
 		}
-		return "/insert/earnings";
+		return REDIRECT_URL;
 	}
 }

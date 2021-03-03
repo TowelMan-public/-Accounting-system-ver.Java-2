@@ -6,9 +6,9 @@ import com.example.demo.RegexpMessage;
 import com.example.demo.RegexpPattern;
 
 public class RevenueForm {
-	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)//getterがInteger
+	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)
 	private String earningsId;
-	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)//getterがInteger
+	@Pattern(regexp = RegexpPattern.INTEGER, message = RegexpMessage.INTEGER)
 	private String money;
 	//CompanyAccountIdを、Controlクラスでセットする
 	private Integer companyAccountId;

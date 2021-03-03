@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.security.Authority;
 import com.example.demo.security.login.UserDetailsImpl;
+import com.example.demo.verification.Message;
 
 @Controller()
-@RequestMapping("/confinguration")
-public class Control {	
-	//定数群
-	private final String isnotEnabledUserMessage = "IDが有効じゃないです";
+@RequestMapping(Control.PAGE_URL)
+public class Control {
+	public static final String PAGE_URL = "/confinguration";
+	private static final String REDIRECT_URL = "redirect;" + PAGE_URL;
 	
 	@Autowired
 	ConfigurationDatabaseMapper mapper;
@@ -47,14 +48,13 @@ public class Control {
 	@GetMapping
 	public String showDisplay(@AuthenticationPrincipal UserDetailsImpl user, Model model) {
 		setAll(user,model);
-		return "/confinguration";
+		return PAGE_URL;
 	}
 	
 	private void setAll(UserDetailsImpl user, Model model) {
 		setTaxRate(user,model);
 		setCompany(user,model);
 		setUserListInCompany(user,model);
-		setAuthority(user,model);
 	}
 	
 	private void setTaxRate(UserDetailsImpl user, Model model) {
@@ -62,10 +62,6 @@ public class Control {
 		var taxForm = new ConfigurationTaxRateForm();
 		taxForm.setAfterConsumptionTax(mapper.getConsumptionTax(user.getCompanyId()).toString());
 		model.addAttribute("configurationTaxRateForm",taxForm);
-	}
-	
-	private void setAuthority(UserDetailsImpl user, Model model) {
-		model.addAttribute("isMASTER", user.getAuthoritie().equals(Authority.master));
 	}
 	
 	private void setCompany(UserDetailsImpl user, Model model) {
@@ -86,26 +82,26 @@ public class Control {
 		//入力ﾁｪｯｸでエラーがある場合は、何もしないでこの関数を終わる
 		if (bindingResult.hasErrors()) {
 			setAll(user,model);
-			return "/confinguration";
+			return PAGE_URL;
 		}
 		
 		//有効でないユーザーであればエラーメッセージをセットしてこの関数を終了
 		if(!mapper.isEnabledUser(form.getUserIdToInteger(),user.getCompanyId())) {
 			model.addAttribute("isErrorUserUpdate", true);
-			model.addAttribute("errorUserUpdate", isnotEnabledUserMessage);
+			model.addAttribute("errorUserUpdate", Message.ID_ISNOT_ENABLED);
 			setAll(user,model);
-			return "/confinguration";
+			return PAGE_URL;
 		}
 		
 		//対象のユーザーが変更できるかを判定
 		if(enableUpdate(user,form)) {
 			mapper.updateUser(form);
-			return "redirect:/confinguration";
+			return REDIRECT_URL;
 		}else {//エラーメッセージ
 			model.addAttribute("isErrorUserUpdate", true);
 			model.addAttribute("errorUserUpdate", "この変更は、マスター権限者が無くなってしまうのでできません");
 			setAll(user,model);
-			return "/confinguration";
+			return PAGE_URL;
 		}
 	}
 
@@ -114,26 +110,26 @@ public class Control {
 		//入力ﾁｪｯｸでエラーがある場合は、何もしないでこの関数を終わる
 		if (bindingResult.hasErrors()) {
 			setAll(user,model);
-			return "/confinguration";
+			return PAGE_URL;
 		}
 		
 		//有効でないユーザーであればエラーメッセージをセットしてこの関数を終了
 		if(!mapper.isEnabledUser(form.getIdToInt(),user.getCompanyId())) {
 			model.addAttribute("isErrorUserDelete", true);
-			model.addAttribute("errorUserDelete", isnotEnabledUserMessage);
+			model.addAttribute("errorUserDelete", Message.ID_ISNOT_ENABLED);
 			setAll(user,model);
-			return "/confinguration";
+			return PAGE_URL;
 		}
 		
 		//対象のユーザーが削除できるかを判定
 		if(enableDelete(user,form)) {
 			mapper.deleteUser(form);
-			return "redirect:/confinguration";
+			return REDIRECT_URL;
 		}else {//エラーメッセージ
 			model.addAttribute("isErrorUserDelete", true);
 			model.addAttribute("errorUserDelete", "このユーザーを削除するとマスター権限者が無くなってしまうのでできません");
 			setAll(user,model);
-			return "/confinguration";
+			return PAGE_URL;
 		}
 	}
 
@@ -143,13 +139,12 @@ public class Control {
 		if (bindingResult.hasErrors()) {
 			setCompany(user,model);
 			setUserListInCompany(user,model);
-			setAuthority(user,model);
-			return "/confinguration";
+			return PAGE_URL;
 		}
 		
 		form.setCompanyId(user.getCompanyId());
 		mapper.updateConsumptionTaxRate(form);
-		return "redirect:/confinguration";
+		return REDIRECT_URL;
 	}
 	
 	@PostMapping("company/update")
@@ -158,30 +153,27 @@ public class Control {
 		if (bindingResult.hasErrors()) {
 			setTaxRate(user,model);
 			setUserListInCompany(user,model);
-			setAuthority(user,model);
-			return "/confinguration";
+			return PAGE_URL;
 		}
 		
 		form.setCompanyId(user.getCompanyId());
 		mapper.updateCompanyName(form);
 		user.setCompanyName(form.getAfterCompanyName());
-		return "redirect:/confinguration";
+		return REDIRECT_URL;
 	}
 	
 	private boolean enableUpdate(UserDetailsImpl user, CompanyUserForm form) {
-		if(form.getUserAuthority().equals(Authority.user) && mapper.getAuthorityByUserId(form.getUserIdToInteger()).equals(Authority.master)) {
-			//削除可能か判定し、削除不可能ならここでfalseを返す
-			if(mapper.getMasterAuthorityCountInCompany(user.getCompanyId()) <= 1)
-				return false;
+		if(form.getUserAuthority().equals(Authority.USER) && mapper.getAuthorityByUserId(form.getUserIdToInteger()).equals(Authority.MASTER)) {
+			//変更可能か判定し、削除不可能ならここでfalseを返す
+			return mapper.getMasterAuthorityCountInCompany(user.getCompanyId()) <= 1;
 		}
 		return true;
 	}
 	
 	private boolean enableDelete(UserDetailsImpl user, IdForm form) {
-		if(mapper.getAuthorityByUserId(form.getIdToInt()).equals(Authority.master)) {
+		if(mapper.getAuthorityByUserId(form.getIdToInt()).equals(Authority.MASTER)) {
 			//削除可能か判定し、削除不可能ならここでfalseを返す
-			if(mapper.getMasterAuthorityCountInCompany(user.getCompanyId()) <= 1)
-				return false;
+			return mapper.getMasterAuthorityCountInCompany(user.getCompanyId()) <= 1;
 		}
 		return true;
 	}

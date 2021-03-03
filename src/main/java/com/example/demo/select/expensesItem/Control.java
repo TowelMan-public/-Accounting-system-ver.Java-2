@@ -17,8 +17,10 @@ import com.example.demo.result.expensesItem.ExpensesItemForm;
 import com.example.demo.security.login.UserDetailsImpl;
 
 @Controller
-@RequestMapping("/select/expensesItem")
+@RequestMapping(Control.PAGE_URL)
 public class Control {
+	public static final String PAGE_URL = "/select/expensesItem";
+	
 	@Autowired
 	SelectExpensesItemDatabaseMapper mapper;
 	
