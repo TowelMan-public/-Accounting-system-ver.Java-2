@@ -1,6 +1,6 @@
 package com.example.demo.makeNewCompanyAccount;
 
-import com.example.demo.security.SecurityRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class UserForm {
 	private Integer userid;
@@ -9,10 +9,10 @@ public class UserForm {
 	private Integer companyId;
 	private String authority;
 	
-	public UserForm(MakeNewComanyAccountForm form) {
+	public UserForm(MakeNewComanyAccountForm form,PasswordEncoder encoder) {
 		this.userName = form.getUserName();
 		//パスワードを暗号化して取得
-		this.password = SecurityRepository.encryption(form.getPassword());
+		this.password = encoder.encode(form.getPassword());
 	}
 
 	public Integer getUserid() {

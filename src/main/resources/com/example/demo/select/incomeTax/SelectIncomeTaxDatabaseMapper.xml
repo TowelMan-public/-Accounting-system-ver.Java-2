@@ -40,8 +40,8 @@
 			UNION ALL 
 			(
 				SELECT
-					expenses.expenses_date		AS "income_date",
-					(0 - expenses.money)		AS "income_money"
+					expenses.expenses_date						AS "income_date",
+					(0 - expenses.money * expenses_item.rate)	AS "income_money"
 				FROM expenses
 					INNER JOIN expenses_item ON expenses.expenses_item_id = expenses_item.id AND expenses.company_id = expenses_item.company_id
 				<where>

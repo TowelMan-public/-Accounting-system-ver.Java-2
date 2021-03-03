@@ -9,17 +9,12 @@
 	</head>
 	<body>
 		<h1>簡易的な会計システム♪</h1>
-		<ul class="menu_outer">
-		    <li class="menu_inner"><a href="@{/home}">ホーム</a></li>
-		    <li class="menu_inner"><a href="@{/insert}">登録</a></li>
-		    <li class="menu_inner"><a href="@{/select}">検索</a></li>
-		    <li class="menu_inner"><a href="@{/configuration}">設定</a></li>
-		</ul>
 		<main>
 			<h2>ユーザーの新規登録の結果</h2>
 			<p>
 				あなたはユーザー登録に成功しました。<br>
-				あなたが登録したユーザーのIDは「<div th:text="${userId}"></div>」、あなたが登録した会社IDは「<div th:text="${companyId}"></div>」になりました。
+				<div th:text="'あなたが登録したユーザーのIDは' + ${userId} + 'になりました。'"></div>
+				<div th:text="'あなたが登録した会社IDは' + ${companyId} + 'になりました。'"></div>
 			</p>
 		</main>
 	</body>

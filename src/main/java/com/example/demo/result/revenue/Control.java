@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.result.DeleteDatabaseMapper;
-import com.example.demo.result.DeleteForm;
 import com.example.demo.result.UpdateDatabaseMapper;
-import com.example.demo.result.expensesItem.ExpensesItemForm;
 import com.example.demo.security.login.UserDetailsImpl;
 import com.example.demo.select.base.earnings.RequestForm;
 import com.example.demo.select.base.earnings.SelectForm;

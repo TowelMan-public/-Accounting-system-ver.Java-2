@@ -17,7 +17,7 @@ public class MakeNewUserForm {
 	
 	@AssertTrue(message = "2つのパスワードが合致しません。もう一度お確かめください")
 	public boolean isNotMatchesPassword() {
-		return password.equals(oneMorePassword);
+		return (password == null || oneMorePassword == null) || (password.equals(oneMorePassword));
 	}
 
 	public String getUserName() {

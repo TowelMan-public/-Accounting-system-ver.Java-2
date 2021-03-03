@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.result.DeleteDatabaseMapper;
 import com.example.demo.result.DeleteForm;
 import com.example.demo.result.UpdateDatabaseMapper;
-import com.example.demo.result.earnings.EarningsForm;
 import com.example.demo.security.login.UserDetailsImpl;
 import com.example.demo.select.expenses.RequestForm;
 import com.example.demo.select.expenses.SelectExpensesDatabaseMapper;

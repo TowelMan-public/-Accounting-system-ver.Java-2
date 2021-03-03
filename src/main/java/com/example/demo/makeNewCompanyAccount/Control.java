@@ -1,7 +1,9 @@
 package com.example.demo.makeNewCompanyAccount;
 
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +22,9 @@ public class Control {
 	@Autowired
 	MakeNewCompanyAccountDatabaseMapper mapper;
 	
+	@Autowired
+	PasswordEncoder encoder;
+	
 	@GetMapping
 	public String showDisplay( MakeNewComanyAccountForm form,Model model) {
 		return "/makeNewCompanyAccount";
@@ -31,7 +36,7 @@ public class Control {
 			return "/makeNewCompanyAccount";
 		
 		//各種Formオブジェクト作成
-		UserForm user = new UserForm(form);
+		UserForm user = new UserForm(form,encoder);
 		CompanyAccountForm company = new CompanyAccountForm(form);
 		
 		//会社の登録
@@ -46,6 +51,6 @@ public class Control {
 		//結果のセット
 		model.addAttribute("userId",user.getUserid());
 		model.addAttribute("companyId",user.getCompanyId());
-		return "redirect:/resultMakeNewCompanyAccount";
+		return "/resultMakeNewCompanyAccount";
 	}
 }

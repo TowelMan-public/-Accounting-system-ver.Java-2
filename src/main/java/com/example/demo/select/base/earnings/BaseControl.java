@@ -2,6 +2,7 @@ package com.example.demo.select.base.earnings;
 
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+
 import com.example.demo.security.login.UserDetailsImpl;
 
 public class BaseControl {//extends

@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,9 +25,11 @@ public class Control {
 	
 	@Autowired
 	MakeNewUserDatabaseMapper mapper;
+	@Autowired
+	PasswordEncoder encoder;
 	
 	@GetMapping
-	public String showDisplay(Model model) {
+	public String showDisplay(@ModelAttribute MakeNewUserForm form, Model model) {
 		return "/makeNewUser";
 	}
 	
@@ -34,16 +37,16 @@ public class Control {
 	public String insertCompanyAccount(@AuthenticationPrincipal UserDetailsImpl user, @ModelAttribute @Valid MakeNewUserForm form, BindingResult bindingResult, Model model) {
 		//入力ﾁｪｯｸでエラーがある場合は、何もしないでこの関数を終わる
 		if (bindingResult.hasErrors())
-			return "redirect:/makeNewUser";
+			return "/makeNewUser";
 		
 		//ユーザーの登録
-		UserForm newUser = new UserForm(form);
+		UserForm newUser = new UserForm(form,encoder);
 		newUser.setAuthority(defaultAuthority);
 		newUser.setCompanyId( user.getCompanyId() );
 		mapper.insertUser(newUser);
 		
 		//結果のセット
 		model.addAttribute("id",newUser.getUserid());
-		return "redirect:/resultMakeNewUser";
+		return "/resultMakeNewUser";
 	}
 }

@@ -1,12 +1,8 @@
-/*<link rel="stylesheet" type="text/css" th:href="@{style.css}">*/
-
 body{
-	/*蜈ｨ菴薙ｒ讓ｪ譁ｹ蜷代↓荳ｭ螟ｮ縺槭ｍ縺医ｒ縺吶ｋ*/
 	text-align: center;
 }
 
 form , .infomation, table{
-	/*逶ｸ蟇ｾ逧�縺ｫ蟾ｦ蟇�縺帙☆繧�*/
 	width: 80%;
 	margin: 0 auto;
 	max-width: 500px;
@@ -36,13 +32,11 @@ input[type="password"]:focus{
 }
 
 input[type="submit"]{
-	/*荳ｭ螟ｮ縺ｫ*/
 	width: 80%;
 	margin: 0 auto;
 	max-width: 500px;
 	display: inline-brock;
 	text-align: center;
-	/*繝�繧ｶ繧､繝ｳ*/
 	border-radius: 0;   
     background: -moz-linear-gradient(top, #FFF 0%, #EEE);
     background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#EEE));
@@ -71,5 +65,33 @@ input[type="submit"]:hover{
 }
 
 .menu_outer{
-		background-color: #35a2ee;
+	background-color: #35a2ee;
+}
+
+.menu_select{
+	display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction:row;
+    -webkit-justify-content: center;
+    justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+    align-items: center;
+    height: 200px;
+    width: 50% ;
+    margin: 0 auto 0 auto;
+}
+
+.menu_list{
+	margin       : auto;
+	width        : 150px;
+	height       : 150px;
+	background   : linear-gradient(to bottom, #ff7f7f, #ffff1a);
+	line-height: 160px;
+}
+
+.home_infomation{
+	background   : rgba(255, 127, 127, 0.45);
+	font-size    : 28px; 
 }

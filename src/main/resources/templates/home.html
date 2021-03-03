@@ -24,26 +24,26 @@
 			<div class="infomation">
 				<p>
 					<div>売り上げ（掛け売り）</div>
-					<div th:text="${earningsMonth}"></div><br>
+					<div class="home_infomation" th:text="'￥' + ${earningsMonth} + '円'"></div><br>
 				</p>
 				<p>
 					<div>経費</div>
-					<div th:text="${expensesMonth}"></div><br>
+					<div class="home_infomation" th:text="'￥' + ${expensesMonth} + '円'"></div><br>
 				</p>
 			</div>
 			<h3>今年</h3>
 			<div class="infomation">
 				<p>
 					<div>売り上げ（掛け売り）</div>
-					<div th:text="${earningsYear}"></div><br>
+					<div class="home_infomation" th:text="'￥' + ${earningsYear} + '円'"></div><br>
 				</p>
 				<p>
 					<div>経費</div>
-					<div th:text="${expensesYear}"></div><br>
+					<div class="home_infomation" th:text="'￥' + ${expensesYear} + '円'"></div><br>
 				</p>
 				<p>
 					<div>純利益</div>
-					<div th:text="${netIncomeRateYear}"></div><br>
+					<div class="home_infomation" th:text="'￥' + ${netIncomeRateYear} + '円'"></div><br>
 				</p>
 			</div>
 		</main>

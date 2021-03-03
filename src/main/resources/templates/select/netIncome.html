@@ -17,8 +17,7 @@
 		</ul>
 		<main>
 			<h2>純利益の検索フォーム</h2>
-			<p>金額、日付は「2002/9/2-2002/9/30」、「200-9000」のように入力してください。基本「A-B」とした場合、AからBまでの範囲という意味になります。
-			また、A、Bのどちらか一方だけならその一方を省略してください。</p>
+			<p>金額、日付は「2002/9/2-2002/9/30」、「200-9000」のように入力してください。基本「A-B」とした場合、AからBまでの範囲という意味になります。</p>
 			<form th:action="@{/select/netIncome/result}" method="post" action="#" th:object="${requestForm}"> 
 				<div>会社（名前orID）：<input type="text" name="company" th:field="*{company}"/></div> <div th:if="${#fields.hasErrors('company')}" th:errors="*{company}" /><br>
 				<div>日付：<input type="text" name="earningsDate" th:field="*{earningsDate}"/></div> <div th:if="${#fields.hasErrors('earningsDate')}" th:errors="*{earningsDate}" /><br>

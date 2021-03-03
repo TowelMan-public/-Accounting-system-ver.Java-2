@@ -5,7 +5,7 @@
 		<title>簡易的な会計システム♪</title>
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="stylesheet" type="text/css" th:href="@{/style.css}">yyy
+		<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 	</head>
 	<body>
 		<h1>簡易的な会計システム♪</h1>
@@ -17,9 +17,7 @@
 		</ul>
 		<main>
 			<h2>未収入の検索フォーム</h2>
-			<p>金額、日付は「2002/9/2-2002/9/30」、「200-9000」のように入力してください。基本「A-B」とした場合、AからBまでの範囲という意味になります。
-			また、A、Bのどちらか一方だけならその一方を省略してください。また、その月の末日を表す場合、「2002/9/00」と、その年の最後の日を表す場合、「2002/00」
-			とご入力ください。</p>
+			<p>金額、日付は「2002/9/2-2002/9/30」、「200-9000」のように入力してください。基本「A-B」とした場合、AからBまでの範囲という意味になります。</p>
 			<form th:action="@{/select/unrevenue/result}" method="post" action="#" th:object="${requestForm}"> 
 				<div>会社（名前orID）：<input type="text" name="company" th:field="*{company}"/></div> <div th:if="${#fields.hasErrors('company')}" th:errors="*{company}" /><br>
 				<div>件名：<input type="text" name="subject" /></div>

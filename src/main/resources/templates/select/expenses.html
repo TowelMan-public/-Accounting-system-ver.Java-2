@@ -5,7 +5,7 @@
 		<title>簡易的な会計システム♪</title>
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="stylesheet" type="text/css" th:href="@{/style.css}">yyy
+		<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 	</head>
 	<body>
 		<h1>簡易的な会計システム♪</h1>
@@ -17,8 +17,7 @@
 		</ul>
 		<main>
 			<h2>経費の検索フォーム</h2>
-			<p>金額、日付は「2002/9/2-2002/9/30」、「200-9000」のように入力してください。基本「A-B」とした場合、AからBまでの範囲という意味になります。
-			また、A、Bのどちらか一方だけならその一方を省略してください。</p>]
+			<p>金額、日付は「2002/9/2-2002/9/30」、「200-9000」のように入力してください。基本「A-B」とした場合、AからBまでの範囲という意味になります。</p>
 			<form th:action="@{/select/expenses/result}" method="post" action="#" th:object="${requestForm}"> 
 				<div>件名：<input type="text" name="subject" th:field="*{subject}"/></div> <div th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" /><br>
 				<div>経費（名前orID）：<input type="text" name="expenses" th:field="*{expenses}"/></div> <div th:if="${#fields.hasErrors('expenses')}" th:errors="*{expenses}" /><br>

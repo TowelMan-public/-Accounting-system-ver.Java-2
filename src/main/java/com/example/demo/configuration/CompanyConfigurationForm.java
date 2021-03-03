@@ -1,6 +1,7 @@
 package com.example.demo.configuration;
 
 import javax.validation.constraints.NotBlank;
+
 import com.example.demo.RegexpMessage;
 
 public class CompanyConfigurationForm {

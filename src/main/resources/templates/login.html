@@ -17,5 +17,6 @@
 			<div class="input_label">パスワード：<input type="password" name="password" th:field="*{password}"/></div><div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div><br>
 			<p><input type="submit" value="ログイン" /></p>
 		</form>
+		<a th:href="@{/makeNewCompanyAccount}">会社を作る</a>
 	</body>
 </html>

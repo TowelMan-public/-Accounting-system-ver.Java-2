@@ -171,7 +171,7 @@ public class Control {
 	private boolean enableUpdate(UserDetailsImpl user, CompanyUserForm form) {
 		if(form.getUserAuthority().equals(Authority.user) && mapper.getAuthorityByUserId(form.getUserIdToInteger()).equals(Authority.master)) {
 			//削除可能か判定し、削除不可能ならここでfalseを返す
-			if(mapper.getMasterAuthorityCountInCompany(user.getCompanyId()) <= 0)
+			if(mapper.getMasterAuthorityCountInCompany(user.getCompanyId()) <= 1)
 				return false;
 		}
 		return true;
@@ -180,7 +180,7 @@ public class Control {
 	private boolean enableDelete(UserDetailsImpl user, IdForm form) {
 		if(mapper.getAuthorityByUserId(form.getIdToInt()).equals(Authority.master)) {
 			//削除可能か判定し、削除不可能ならここでfalseを返す
-			if(mapper.getMasterAuthorityCountInCompany(user.getCompanyId()) <= 0)
+			if(mapper.getMasterAuthorityCountInCompany(user.getCompanyId()) <= 1)
 				return false;
 		}
 		return true;
