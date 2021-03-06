@@ -54,7 +54,7 @@
 			</form><br>
 			
 			<h4>ユーザー削除</h4><div th:if="${isErrorUserDelete}" th:text="${errorUserDelete}"></div>
-			<form th:action="@{/confinguration/user/delete}" method="post" th:object="${idForm}"> 
+			<form th:action="@{/confinguration/user/delete}" method="post" th:object="${DeleteForm}"> 
 				<div></div>
 				<div>ID：<input type="text" name="id" th:field="*{id}"/></div> <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" /><br>
 				<input type="submit" value="削除" />

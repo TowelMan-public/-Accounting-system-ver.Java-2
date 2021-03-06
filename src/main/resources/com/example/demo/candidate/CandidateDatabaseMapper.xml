@@ -2,15 +2,15 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.candidate.CandidateDatabaseMapper">
-	<select id="getCandidateExpensesItem" resultType="com.example.demo.candidate.CandidateForm">
+<mapper namespace="repository.CandidateDatabaseMapper">
+	<select id="getCandidateExpensesItem" resultType="entity.CandidateEntity">
 		SELECT
 			id		AS "candidateId",
 			name	AS "candidateName"
 		FROM expenses_item
 		WHERE company_id = #{companyAccountid}
 	</select>
-	<select id="getCandidateCompany" resultType="com.example.demo.candidate.CandidateForm">
+	<select id="getCandidateCompany" resultType="entity.CandidateEntity">
 		SELECT
 			id		AS "candidateId",
 			name	AS "candidateName"

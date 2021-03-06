@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.security.login.LoginDatabaseMapper">
-	<select id="selectById" resultType="com.example.demo.security.login.Form">
+<mapper namespace="repository.LoginDatabaseMapper">
+	<select id="selectById" resultType="form.LoginForm">
 		SELECT
 			 users.id						AS "userId",
 			 users.name						AS "userName",

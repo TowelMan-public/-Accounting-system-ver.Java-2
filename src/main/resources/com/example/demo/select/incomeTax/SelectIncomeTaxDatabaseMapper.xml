@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.select.incomeTax.SelectIncomeTaxDatabaseMapper">
-	<select id="selectGroup" resultType="com.example.demo.select.GroupResultForm">
+<mapper namespace="repository.select.base.earnings.group.SelectIncomeTaxDatabaseMapper">
+	<select id="selectGroup" resultType="entity.select.GroupResultEntity">
 		SELECT
 			<if test="checkGroupYear">
 				DATE_FORMAT(earnings_date,"%Y")			AS "groupdate",
