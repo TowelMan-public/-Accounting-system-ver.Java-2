@@ -12,9 +12,9 @@
 		<h1>簡易的な会計システム♪</h1>
 		<h2>ログイン</h2>
 		<div th:if="${loginError}" th:text="${error}" ></div>
-		<form th:action="@{/login}" method="post" action="#" th:object="${form}"> 
-			<div class="input_label">ユーザーID：<input type="text" name="userId" th:field="*{userId}"/></div><div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" ></div><br>
-			<div class="input_label">パスワード：<input type="password" name="password" th:field="*{password}"/></div><div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div><br>
+		<form th:action="@{/login}" method="post" action="#"> 
+			<div class="input_label">ユーザーID：<input type="text" name="userId" th:field="*{userId}"/></div><br>
+			<div class="input_label">パスワード：<input type="password" name="password" th:field="*{password}"/></div><br>
 			<p><input type="submit" value="ログイン" /></p>
 		</form>
 		<a th:href="@{/makeNewCompanyAccount}">会社を作る</a>

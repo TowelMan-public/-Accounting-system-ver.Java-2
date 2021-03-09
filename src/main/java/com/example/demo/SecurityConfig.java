@@ -12,8 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import constant.Authority;
-import service.SecurityService;
+import com.example.demo.constant.Authority;
+import com.example.demo.service.SecurityService;
 
 @Configuration
 @EnableWebSecurity
